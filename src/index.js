@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import PerfectScrollbar from "react-perfect-scrollbar";
+// import PerfectScrollbar from "react-perfect-scrollbar";
 
 import AuthLayout from "./layouts/Auth/Auth.js";
 import AdminLayout from "./layouts/Admin/Admin.js";
