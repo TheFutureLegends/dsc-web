@@ -1,31 +1,31 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import {
-  Badge,
+  // Badge,
   Button,
-  ButtonGroup,
+  // ButtonGroup,
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
-  CardTitle,
-  CardImg,
-  CardText,
-  ListGroup,
-  ListGroupItem,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  FormGroup,
-  Input,
-  Progress,
-  Table,
+  // CardFooter,
+  // CardTitle,
+  // CardImg,
+  // CardText,
+  // ListGroup,
+  // ListGroupItem,
+  // DropdownToggle,
+  // DropdownMenu,
+  // DropdownItem,
+  // UncontrolledDropdown,
+  // Label,
+  // FormGroup,
+  // Input,
+  // Progress,
+  // Table,
   Row,
   Col,
   Collapse,
-  UncontrolledTooltip,
+  // UncontrolledTooltip,
 } from "reactstrap";
 
 // javascript plugin used to create scrollbars on windows
@@ -49,19 +49,19 @@ const SidebarLeft__ = (props) => {
   };
 
   useEffect(() => {
-    if (navigator.platform.indexOf("Win") > -1) {
-      perfectScrollbar = new PerfectScrollbar(sidebarLeftRef.current, {
-        suppressScrollX: true,
-        suppressScrollY: false,
-      });
-    }
-    return function cleanup() {
-      // we need to destroy the false scrollbar when we navigate
-      // to a page that doesn't have this component rendered
-      if (navigator.platform.indexOf("Win") > -1) {
-        perfectScrollbar.destroy();
-      }
-    };
+    // if (navigator.platform.indexOf("Win") > -1) {
+    //   perfectScrollbar = new PerfectScrollbar(sidebarLeftRef.current, {
+    //     suppressScrollX: true,
+    //     suppressScrollY: false,
+    //   });
+    // }
+    // return function cleanup() {
+    //   // we need to destroy the false scrollbar when we navigate
+    //   // to a page that doesn't have this component rendered
+    //   if (navigator.platform.indexOf("Win") > -1) {
+    //     perfectScrollbar.destroy();
+    //   }
+    // };
   }, [openedCollapses]);
 
   return (
