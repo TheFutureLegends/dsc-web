@@ -55,35 +55,35 @@ const GeneralLayout__ = (props) => {
     //   document.body.classList.toggle("sidebar-mini");
     // }
 
-    let innerMainPanelRef = mainPanelRef;
+    // let innerMainPanelRef = mainPanelRef;
 
-    if (navigator.platform.indexOf("Win") > -1) {
-      document.documentElement.classList.add("perfect-scrollbar-on");
-      document.documentElement.classList.remove("perfect-scrollbar-off");
-      ps = new PerfectScrollbar(mainPanelRef.current);
-      mainPanelRef.current &&
-        mainPanelRef.current.addEventListener("ps-scroll-y", showNavbarButton);
-      let tables = document.querySelectorAll(".table-responsive");
-      for (let i = 0; i < tables.length; i++) {
-        ps = new PerfectScrollbar(tables[i]);
-      }
-    }
+    // if (navigator.platform.indexOf("Win") > -1) {
+    //   document.documentElement.classList.add("perfect-scrollbar-on");
+    //   document.documentElement.classList.remove("perfect-scrollbar-off");
+    //   ps = new PerfectScrollbar(mainPanelRef.current);
+    //   mainPanelRef.current &&
+    //     mainPanelRef.current.addEventListener("ps-scroll-y", showNavbarButton);
+    //   let tables = document.querySelectorAll(".table-responsive");
+    //   for (let i = 0; i < tables.length; i++) {
+    //     ps = new PerfectScrollbar(tables[i]);
+    //   }
+    // }
 
-    window.addEventListener("scroll", showNavbarButton);
+    // window.addEventListener("scroll", showNavbarButton);
 
-    return function cleanup() {
-      if (navigator.platform.indexOf("Win") > -1) {
-        ps.destroy();
-        document.documentElement.classList.add("perfect-scrollbar-off");
-        document.documentElement.classList.remove("perfect-scrollbar-on");
-        innerMainPanelRef.current &&
-          innerMainPanelRef.current.removeEventListener(
-            "ps-scroll-y",
-            showNavbarButton
-          );
-      }
-      window.removeEventListener("scroll", showNavbarButton);
-    };
+    // return function cleanup() {
+    //   if (navigator.platform.indexOf("Win") > -1) {
+    //     ps.destroy();
+    //     document.documentElement.classList.add("perfect-scrollbar-off");
+    //     document.documentElement.classList.remove("perfect-scrollbar-on");
+    //     innerMainPanelRef.current &&
+    //       innerMainPanelRef.current.removeEventListener(
+    //         "ps-scroll-y",
+    //         showNavbarButton
+    //       );
+    //   }
+    //   window.removeEventListener("scroll", showNavbarButton);
+    // };
   }, []);
   const showNavbarButton = () => {
     if (
