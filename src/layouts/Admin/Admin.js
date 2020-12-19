@@ -12,7 +12,7 @@ import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Footer from "../../components/Footer/Footer.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 // import { Row } from "reactstrap";
-// import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 // import { IsContentLightMode, IsSidebarMini } from "logic/fixedPlugin.js";
 import { logoutUser } from "../../core/redux/actions/user.action.js";
 
@@ -43,32 +43,32 @@ const AdminLayout__ = (props) => {
     //   document.body.classList.toggle("white-content");
     // }
 
-    // let innerMainPanelRef = mainPanelRef;
-    // if (navigator.platform.indexOf("Win") > -1) {
-    //   document.documentElement.classList.add("perfect-scrollbar-on");
-    //   document.documentElement.classList.remove("perfect-scrollbar-off");
-    //   ps = new PerfectScrollbar(mainPanelRef.current);
-    //   mainPanelRef.current &&
-    //     mainPanelRef.current.addEventListener("ps-scroll-y", showNavbarButton);
-    //   let tables = document.querySelectorAll(".table-responsive");
-    //   for (let i = 0; i < tables.length; i++) {
-    //     ps = new PerfectScrollbar(tables[i]);
-    //   }
-    // }
-    // window.addEventListener("scroll", showNavbarButton);
-    // return function cleanup() {
-    //   if (navigator.platform.indexOf("Win") > -1) {
-    //     ps.destroy();
-    //     document.documentElement.classList.add("perfect-scrollbar-off");
-    //     document.documentElement.classList.remove("perfect-scrollbar-on");
-    //     innerMainPanelRef.current &&
-    //       innerMainPanelRef.current.removeEventListener(
-    //         "ps-scroll-y",
-    //         showNavbarButton
-    //       );
-    //   }
-    //   window.removeEventListener("scroll", showNavbarButton);
-    // };
+    let innerMainPanelRef = mainPanelRef;
+    if (navigator.platform.indexOf("Win") > -1) {
+      document.documentElement.classList.add("perfect-scrollbar-on");
+      document.documentElement.classList.remove("perfect-scrollbar-off");
+      ps = new PerfectScrollbar(mainPanelRef.current);
+      mainPanelRef.current &&
+        mainPanelRef.current.addEventListener("ps-scroll-y", showNavbarButton);
+      let tables = document.querySelectorAll(".table-responsive");
+      for (let i = 0; i < tables.length; i++) {
+        ps = new PerfectScrollbar(tables[i]);
+      }
+    }
+    window.addEventListener("scroll", showNavbarButton);
+    return function cleanup() {
+      if (navigator.platform.indexOf("Win") > -1) {
+        ps.destroy();
+        document.documentElement.classList.add("perfect-scrollbar-off");
+        document.documentElement.classList.remove("perfect-scrollbar-on");
+        innerMainPanelRef.current &&
+          innerMainPanelRef.current.removeEventListener(
+            "ps-scroll-y",
+            showNavbarButton
+          );
+      }
+      window.removeEventListener("scroll", showNavbarButton);
+    };
   }, []);
   const showNavbarButton = () => {
     if (
@@ -205,12 +205,12 @@ const AdminLayout__ = (props) => {
           )
         }
       </div>
-      {/* <FixedPlugin
+      <FixedPlugin
         activeColor={activeColor}
         sidebarMini={sidebarMini}
         handleActiveClick={handleActiveClick}
         handleMiniClick={handleMiniClick}
-      /> */}
+      />
     </div>
   );
 };

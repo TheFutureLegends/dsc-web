@@ -85,7 +85,7 @@ const LoginContainer__ = ({ ...props }) => {
       setPasswordState("has-danger");
     }
 
-    if (email != "" && password != "") {
+    if (email !== "" && password !== "") {
       // console.log(props);
       props.loginUser({ email: email, password: password }, props.history);
     }

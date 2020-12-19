@@ -7,15 +7,15 @@ import classNames from "classnames";
 import {
   Button,
   Collapse,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
+  // DropdownToggle,
+  // DropdownMenu,
+  // DropdownItem,
+  // UncontrolledDropdown,
   Input,
   InputGroup,
-  NavbarBrand,
+  // NavbarBrand,
   Navbar,
-  NavLink,
+  // NavLink,
   Nav,
   Container,
   Modal,
@@ -23,7 +23,7 @@ import {
 } from "reactstrap";
 
 // cookie component
-import Cookie from "universal-cookie";
+// import Cookie from "universal-cookie";
 
 // middleware
 import IsUserAuthenticated from "../../middleware/IsUserAuthenticated.js";
@@ -31,10 +31,10 @@ import IsUserAuthenticated from "../../middleware/IsUserAuthenticated.js";
 // logout func
 import { logoutUser } from "../../core/redux/actions/user.action.js";
 
-const cookies = new Cookie();
+// const cookies = new Cookie();
 
 const AdminNavbar__ = ({ ...props }) => {
-  const [userState, setUserState] = useState(props.user);
+  // const [userState, setUserState] = useState(props.user);
 
   const [collapseOpen, setCollapseOpen] = useState(false);
 
@@ -47,7 +47,7 @@ const AdminNavbar__ = ({ ...props }) => {
     return function cleanup() {
       window.removeEventListener("resize", updateColor);
     };
-  }, [userState]);
+  });
 
   // function that adds color white/transparent to the navbar on resize (this is for the collapse)
   const updateColor = () => {
@@ -121,9 +121,9 @@ const AdminNavbar__ = ({ ...props }) => {
                 <span className="navbar-toggler-bar bar3" />
               </button>
             </div>
-            <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
+            {/* <NavbarBrand href="#pablo" onClick={(e) => e.preventDefault()}>
               {props.brandText}
-            </NavbarBrand>
+            </NavbarBrand> */}
           </div>
           <button
             className="navbar-toggler"
@@ -152,97 +152,11 @@ const AdminNavbar__ = ({ ...props }) => {
                   <span className="d-lg-none d-md-block">Search</span>
                 </Button>
               </InputGroup>
-              <UncontrolledDropdown nav>
-                <DropdownToggle
-                  caret
-                  color="default"
-                  data-toggle="dropdown"
-                  nav
-                >
-                  <div className="notification d-none d-lg-block d-xl-block" />
-                  <i className="tim-icons icon-sound-wave" />
-                  <p className="d-lg-none">Notifications</p>
-                </DropdownToggle>
-                <DropdownMenu className="dropdown-navbar" right tag="ul">
-                  <NavLink tag="li" onClick={() => console.log(props.user)}>
-                    <DropdownItem className="nav-item">
-                      Mike John responded to your email
-                    </DropdownItem>
-                  </NavLink>
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      You have 5 more tasks
-                    </DropdownItem>
-                  </NavLink>
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      Your friend Michael is in town
-                    </DropdownItem>
-                  </NavLink>
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      Another notification
-                    </DropdownItem>
-                  </NavLink>
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">
-                      Another one
-                    </DropdownItem>
-                  </NavLink>
-                </DropdownMenu>
-              </UncontrolledDropdown>
               <IsUserAuthenticated
                 user={props.user}
                 logout={handleLogout}
                 {...props}
               />
-              {/* <NavLink href="/auth/login">
-                <Button className="btn-default" color="primary">
-                  Login
-                </Button>
-              </NavLink>
-              <NavLink href="/auth/register">
-                <Button className="btn-default" color="primary">
-                  Register
-                </Button>
-              </NavLink>
-              <UncontrolledDropdown nav>
-                <DropdownToggle
-                  caret
-                  color="default"
-                  data-toggle="dropdown"
-                  nav
-                  onClick={(e) => e.preventDefault()}
-                >
-                  <div className="photo">
-                    <img
-                      alt="..."
-                      src={require("../../assets/img/mike.jpg").default}
-                    />
-                  </div>
-                  <b className="caret d-none d-lg-block d-xl-block" />
-                  <p className="d-lg-none">Log out</p>
-                </DropdownToggle>
-                <DropdownMenu className="dropdown-navbar" right tag="ul">
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">Profile</DropdownItem>
-                  </NavLink>
-                  <NavLink tag="li">
-                    <DropdownItem className="nav-item">Settings</DropdownItem>
-                  </NavLink>
-                  <DropdownItem divider tag="li" />
-                  <NavLink
-                    tag="li"
-                    onClick={(e) => {
-                      e.preventDefault();
-
-                      handleLogout();
-                    }}
-                  >
-                    <DropdownItem className="nav-item">Log out</DropdownItem>
-                  </NavLink>
-                </DropdownMenu>
-              </UncontrolledDropdown> */}
               <li className="separator d-lg-none" />
             </Nav>
           </Collapse>

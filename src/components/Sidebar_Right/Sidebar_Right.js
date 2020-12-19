@@ -34,7 +34,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 var perfectScrollbar;
 
 const SidebarLeft__ = (props) => {
-  const sidebarLeftRef = useRef(null);
+  const sidebarRightRef = useRef(null);
 
   const [openedCollapses, setOpenedCollapses] = useState([]);
 
@@ -49,8 +49,9 @@ const SidebarLeft__ = (props) => {
   };
 
   useEffect(() => {
+    let innerMainPanelRef = sidebarRightRef;
     // if (navigator.platform.indexOf("Win") > -1) {
-    //   perfectScrollbar = new PerfectScrollbar(sidebarLeftRef.current, {
+    //   perfectScrollbar = new PerfectScrollbar(sidebarRightRef.current, {
     //     suppressScrollX: true,
     //     suppressScrollY: false,
     //   });

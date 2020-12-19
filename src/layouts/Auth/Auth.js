@@ -15,9 +15,9 @@ import NotificationAlert from "react-notification-alert";
 import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Footer from "../../components/Footer/Footer.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
-import SidebarLeft from "../../components/Sidebar_Left/Sidebar_Left.js";
+import SidebarRight from "../../components/Sidebar_Right/Sidebar_Right.js";
 import { Row } from "reactstrap";
-// import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
+import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 import { IsSidebarMini } from "../../logic/fixedPlugin.js";
 // import { IsContentLightMode } from "../../logic/fixedPlugin.js";
 // import { cookies, sidebarMiniCookieName } from "../../variables/cookie.js";
@@ -63,35 +63,35 @@ const AuthLayout__ = (props) => {
     //   document.body.classList.toggle("sidebar-mini");
     // }
 
-    // let innerMainPanelRef = mainPanelRef;
+    let innerMainPanelRef = mainPanelRef;
 
-    // if (navigator.platform.indexOf("Win") > -1) {
-    //   document.documentElement.classList.add("perfect-scrollbar-on");
-    //   document.documentElement.classList.remove("perfect-scrollbar-off");
-    //   ps = new PerfectScrollbar(mainPanelRef.current);
-    //   mainPanelRef.current &&
-    //     mainPanelRef.current.addEventListener("ps-scroll-y", showNavbarButton);
-    //   let tables = document.querySelectorAll(".table-responsive");
-    //   for (let i = 0; i < tables.length; i++) {
-    //     ps = new PerfectScrollbar(tables[i]);
-    //   }
-    // }
+    if (navigator.platform.indexOf("Win") > -1) {
+      document.documentElement.classList.add("perfect-scrollbar-on");
+      document.documentElement.classList.remove("perfect-scrollbar-off");
+      ps = new PerfectScrollbar(mainPanelRef.current);
+      mainPanelRef.current &&
+        mainPanelRef.current.addEventListener("ps-scroll-y", showNavbarButton);
+      let tables = document.querySelectorAll(".table-responsive");
+      for (let i = 0; i < tables.length; i++) {
+        ps = new PerfectScrollbar(tables[i]);
+      }
+    }
 
-    // window.addEventListener("scroll", showNavbarButton);
+    window.addEventListener("scroll", showNavbarButton);
 
-    // return function cleanup() {
-    //   if (navigator.platform.indexOf("Win") > -1) {
-    //     ps.destroy();
-    //     document.documentElement.classList.add("perfect-scrollbar-off");
-    //     document.documentElement.classList.remove("perfect-scrollbar-on");
-    //     innerMainPanelRef.current &&
-    //       innerMainPanelRef.current.removeEventListener(
-    //         "ps-scroll-y",
-    //         showNavbarButton
-    //       );
-    //   }
-    //   window.removeEventListener("scroll", showNavbarButton);
-    // };
+    return function cleanup() {
+      if (navigator.platform.indexOf("Win") > -1) {
+        ps.destroy();
+        document.documentElement.classList.add("perfect-scrollbar-off");
+        document.documentElement.classList.remove("perfect-scrollbar-on");
+        innerMainPanelRef.current &&
+          innerMainPanelRef.current.removeEventListener(
+            "ps-scroll-y",
+            showNavbarButton
+          );
+      }
+      window.removeEventListener("scroll", showNavbarButton);
+    };
   }, []);
 
   const showNavbarButton = () => {
@@ -155,11 +155,9 @@ const AuthLayout__ = (props) => {
     return activeRoute;
   };
 
-  // Un-comment when added FixedPlugin
-
-  // const handleActiveClick = (color) => {
-  //   setActiveColor(color);
-  // };
+  const handleActiveClick = (color) => {
+    setActiveColor(color);
+  };
 
   const handleMiniClick = () => {
     let notifyMessage = "Sidebar mini ";
@@ -233,7 +231,7 @@ const AuthLayout__ = (props) => {
               {getRoutes(routes)}
               {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
             </Switch>
-            <SidebarLeft></SidebarLeft>
+            <SidebarRight></SidebarRight>
           </Row>
         </div>
 
@@ -244,12 +242,12 @@ const AuthLayout__ = (props) => {
           )
         }
       </div>
-      {/* <FixedPlugin
+      <FixedPlugin
         activeColor={activeColor}
         sidebarMini={sidebarMini}
         handleActiveClick={handleActiveClick}
         handleMiniClick={handleMiniClick}
-      /> */}
+      />
     </div>
   );
 };
