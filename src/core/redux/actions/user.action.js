@@ -57,12 +57,23 @@ export const getAuthUserData = () => async (dispatch) => {
 export const signupUser = (userData, history) => async (dispatch) => {
   dispatch({ type: LOADING_UI });
 
-  let keys = Object.keys(userData);
+  Swal.fire({
+    position: "center",
+    title: "Send data to server",
+    showConfirmButton: false,
+    didOpen: () => {
+      Swal.showLoading();
+    },
+  });
 
-  delete userData[keys[keys.length - 1]];
+  // let keys = Object.keys(userData);
+
+  // delete userData[keys[keys.length - 1]];
 
   try {
     await axios.post(`/auth/signup`, userData);
+
+    Swal.close();
 
     Swal.fire({
       position: "center",
@@ -73,11 +84,13 @@ export const signupUser = (userData, history) => async (dispatch) => {
       timer: 2000,
     });
 
-    dispatch({ type: STOP_LOADING_UI });
-
-    history.push("/login");
+    setInterval(() => {
+      history.push("/auth/login");
+    }, 1900);
   } catch (error) {
-    console.log(error.response.data.message);
+    // console.log(error.response.data.message);
+
+    dispatch({ type: STOP_LOADING_UI });
 
     Swal.fire({
       position: "center",

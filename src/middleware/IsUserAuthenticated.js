@@ -3,14 +3,14 @@ import React from "react";
 // reactstrap components
 import {
   Button,
-  Collapse,
+  // Collapse,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
-  InputGroup,
+  // InputGroup,
   NavLink,
-  Nav,
+  // Nav,
 } from "reactstrap";
 
 const IsUserAuthenticated__ = ({ user, ...props }) => {
@@ -92,20 +92,12 @@ const IsUserAuthenticated__ = ({ user, ...props }) => {
       ) : (
         <>
           <NavLink href="/auth/login">
-            <Button
-              className="btn-default"
-              color="success"
-              className="animation-on-hover"
-            >
+            <Button className="btn-default animation-on-hover" color="success">
               Login
             </Button>
           </NavLink>
           <NavLink href="/auth/register">
-            <Button
-              className="btn-default"
-              color="success"
-              className="animation-on-hover"
-            >
+            <Button className="btn-default animation-on-hover" color="success">
               Register
             </Button>
           </NavLink>

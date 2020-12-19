@@ -223,12 +223,12 @@ const GeneralLayout__ = (props) => {
           )
         }
       </div>
-      <FixedPlugin
+      {/* <FixedPlugin
         activeColor={activeColor}
         sidebarMini={sidebarMini}
         handleActiveClick={handleActiveClick}
         handleMiniClick={handleMiniClick}
-      />
+      /> */}
     </div>
   );
 };

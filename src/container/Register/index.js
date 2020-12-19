@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import classnames from "classnames";
+import React, { useState, useEffect, useRef } from "react";
+// import classnames from "classnames";
 // reactstrap components
 import {
   Button,
@@ -17,12 +17,18 @@ import {
   Col,
 } from "reactstrap";
 
-const Register = () => {
-  const [state, setState] = useState({});
-  // register button
-  const [disableButton, setDisableButton] = useState(true);
+const Register = ({ ...props }) => {
+  let btnRef = useRef();
 
-  // register form
+  // register button
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const [disabledButton, setDisabledButton] = useState("disabled");
+
+  // checkbox state
+  const [isChecked, setIsChecked] = useState(false);
+
+  // register form state
   const [fullName, setFullName] = useState("");
   const [fullNameState, setFullNameState] = useState("");
 
@@ -37,11 +43,15 @@ const Register = () => {
 
   const stateFunctions = {
     setFullName: (value) => setFullName(value),
+    setFullNameState: (value) => setFullNameState(value),
+
     setEmail: (value) => setEmail(value),
-    setPassword: (value) => setPassword(value),
-    setConfirmPassword: (value) => setConfirmPassword(value),
     setEmailState: (value) => setEmailState(value),
+
+    setPassword: (value) => setPassword(value),
     setPasswordState: (value) => setPasswordState(value),
+
+    setConfirmPassword: (value) => setConfirmPassword(value),
     setConfirmPasswordState: (value) => setConfirmPasswordState(value),
   };
 
@@ -74,7 +84,9 @@ const Register = () => {
         if (verifyLength(event.target.value, 6)) {
           stateFunctions["set" + stateName + "State"]("has-success");
         } else {
-          stateFunctions["set" + stateName + "State"]("has-danger");
+          stateFunctions["set" + stateName + "State"](
+            "has-danger length-not-match"
+          );
         }
         break;
       case "email":
@@ -88,7 +100,9 @@ const Register = () => {
         if (verifyLength(event.target.value, 1)) {
           stateFunctions["set" + stateName + "State"]("has-success");
         } else {
-          stateFunctions["set" + stateName + "State"]("has-danger");
+          stateFunctions["set" + stateName + "State"](
+            "has-danger length-not-match"
+          );
         }
         break;
       case "equalTo":
@@ -111,26 +125,68 @@ const Register = () => {
   };
 
   const handleRegister = () => {
-    if (fullNameState === "") {
-      setFullNameState("has-danger");
-    }
+    const userData = {
+      username: fullName,
+      email: email,
+      password: password,
+    };
 
-    if (emailState === "") {
-      setEmailState("has-danger");
-    }
+    props.signupUser(userData, props.history);
 
-    if (passwordState === "" || confirmPasswordState === "") {
-      setPasswordState("has-danger");
-      setConfirmPasswordState("has-danger");
+    setIsSubmit(props.ui.loading);
+
+    setDisabledButton("disabled");
+
+    console.log(props);
+  };
+
+  const handleCheckboxChange = () => {
+    return setIsChecked(!isChecked);
+  };
+
+  const handleEnableButton = () => {
+    if (props.ui.loading === false) {
+      if (
+        fullName === "" ||
+        email === "" ||
+        password === "" ||
+        confirmPassword === "" ||
+        isChecked === false
+      ) {
+        return setDisabledButton("disabled");
+      } else if (
+        fullNameState.includes("has-danger") ||
+        emailState.includes("has-danger") ||
+        passwordState.includes("has-danger") ||
+        confirmPasswordState.includes("has-danger")
+      ) {
+        return setDisabledButton("disabled");
+      } else {
+        return setDisabledButton("");
+      }
     }
   };
 
   useEffect(() => {
+    handleEnableButton();
+
     document.body.classList.toggle("register-page");
+
     return function cleanup() {
+      // handleEnableButton();
+
       document.body.classList.toggle("register-page");
     };
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    fullName,
+    email,
+    password,
+    confirmPassword,
+    disabledButton,
+    isChecked,
+    isSubmit,
+  ]);
 
   return (
     <Col>
@@ -148,6 +204,24 @@ const Register = () => {
             </CardHeader>
             <CardBody>
               <Form className="form">
+                {/* Full name */}
+                <FormGroup className={`has-label ${fullNameState}`}>
+                  <label>Full name *</label>
+                  <Input
+                    name="fullName"
+                    type="text"
+                    onChange={(e) => handleChange(e, "FullName", "fullName")}
+                  />
+                  {fullNameState === "has-danger" ? (
+                    <label className="error">This field is required.</label>
+                  ) : null}
+                  {fullNameState.includes("length-not-match") ? (
+                    <label className="error">
+                      Full name field cannot be less than 6 characters.
+                    </label>
+                  ) : null}
+                </FormGroup>
+                {/* Email */}
                 <FormGroup className={`has-label ${emailState}`}>
                   <label>Email Address *</label>
                   <Input
@@ -161,6 +235,7 @@ const Register = () => {
                     </label>
                   ) : null}
                 </FormGroup>
+                {/* Password */}
                 <FormGroup className={`has-label ${passwordState}`}>
                   <label>Password *</label>
                   <Input
@@ -179,6 +254,7 @@ const Register = () => {
                     </label>
                   ) : null}
                 </FormGroup>
+                {/* Confirm Password */}
                 <FormGroup className={`has-label ${confirmPasswordState}`}>
                   <label>Confirm Password *</label>
                   <Input
@@ -206,7 +282,11 @@ const Register = () => {
                 <div className="category form-category">* Required fields</div>
                 <FormGroup check className="text-left">
                   <Label check>
-                    <Input type="checkbox" />
+                    <Input
+                      type="checkbox"
+                      onChange={handleCheckboxChange}
+                      checked={isChecked}
+                    />
                     <span className="form-check-sign" />I agree to the{" "}
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       terms and conditions
@@ -219,14 +299,15 @@ const Register = () => {
             <CardFooter>
               <Button
                 block
+                disabled={disabledButton}
                 className="btn-round mb-3"
                 color="primary"
-                href="#pablo"
                 onClick={(e) => {
-                  e.preventDefault();
+                  // e.preventDefault();
                   handleRegister();
                 }}
                 size="lg"
+                ref={btnRef}
               >
                 REGISTER
               </Button>
