@@ -12,11 +12,12 @@ import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Footer from "../../components/Footer/Footer.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 // import { Row } from "reactstrap";
-import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
+// import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 // import { IsContentLightMode, IsSidebarMini } from "logic/fixedPlugin.js";
 import { logoutUser } from "../../core/redux/actions/user.action.js";
 
 import routes from "../../routes.js";
+import { protectedRoutes } from "../../routes.js";
 
 import logo from "../../assets/img/react-logo.png";
 
@@ -42,6 +43,10 @@ const AdminLayout__ = (props) => {
     // if (!IsContentLightMode()) {
     //   document.body.classList.toggle("white-content");
     // }
+
+    if (!props.user.authenticated) {
+      return <Redirect to="/auth/login" />;
+    }
 
     let innerMainPanelRef = mainPanelRef;
     if (navigator.platform.indexOf("Win") > -1) {
@@ -90,6 +95,7 @@ const AdminLayout__ = (props) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
+
       if (prop.layout === "/control-panel") {
         return (
           <Route
@@ -106,7 +112,6 @@ const AdminLayout__ = (props) => {
 
   const getBrandText = () => {
     let pathName = window.location.pathname;
-    console.log(props);
   };
 
   const getActiveRoute = (routes) => {
@@ -177,6 +182,7 @@ const AdminLayout__ = (props) => {
       <Sidebar
         {...props}
         routes={routes}
+        protectedRoutes={protectedRoutes}
         activeColor={activeColor}
         logo={{
           outterLink: "/",
@@ -193,10 +199,14 @@ const AdminLayout__ = (props) => {
           sidebarOpened={sidebarOpened}
           toggleSidebar={toggleSidebar}
         />
-        <Switch>
-          {getRoutes(routes)}
-          <Redirect from="/control-panel" to="/control-panel/dashboard" />
-        </Switch>
+        {props.user.authenticated ? (
+          <Switch>
+            {getRoutes(protectedRoutes)}
+            {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
+          </Switch>
+        ) : (
+          <Redirect to="/auth/login" />
+        )}
 
         {
           // we don't want the Footer to be rendered on full screen maps page

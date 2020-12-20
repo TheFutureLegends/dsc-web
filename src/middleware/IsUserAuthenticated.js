@@ -21,8 +21,8 @@ const IsUserAuthenticated__ = ({ user, ...props }) => {
           <UncontrolledDropdown nav>
             <DropdownToggle caret color="default" data-toggle="dropdown" nav>
               <div className="notification d-none d-lg-block d-xl-block" />
-              <i className="tim-icons icon-simple-add" />
-              <p className="d-lg-none">Add</p>
+              <i className="tim-icons icon-bell-55" />
+              <p className="d-lg-none">Notification</p>
             </DropdownToggle>
             <DropdownMenu className="dropdown-navbar" right tag="ul">
               <NavLink tag="li" onClick={() => console.log(props.user)}>
@@ -48,6 +48,40 @@ const IsUserAuthenticated__ = ({ user, ...props }) => {
               <NavLink tag="li">
                 <DropdownItem className="nav-item">Another one</DropdownItem>
               </NavLink>
+            </DropdownMenu>
+          </UncontrolledDropdown>
+          {/* Add dropdown */}
+          <UncontrolledDropdown nav>
+            <DropdownToggle caret color="default" data-toggle="dropdown" nav>
+              <div className="notification d-none d-lg-block d-xl-block" />
+              <i className="tim-icons icon-simple-add" />
+              <p className="d-lg-none">Add</p>
+            </DropdownToggle>
+            <DropdownMenu className="dropdown-navbar" right tag="ul">
+              <NavLink tag="li" className="mb-2">
+                <DropdownItem className="nav-item">
+                  <i className="tim-icons icon-notes mt-n2" />
+                  Create new post
+                </DropdownItem>
+              </NavLink>
+              {/* <NavLink tag="li">
+                <DropdownItem className="nav-item">
+                  You have 5 more tasks
+                </DropdownItem>
+              </NavLink>
+              <NavLink tag="li">
+                <DropdownItem className="nav-item">
+                  Your friend Michael is in town
+                </DropdownItem>
+              </NavLink>
+              <NavLink tag="li">
+                <DropdownItem className="nav-item">
+                  Another notification
+                </DropdownItem>
+              </NavLink>
+              <NavLink tag="li">
+                <DropdownItem className="nav-item">Another one</DropdownItem>
+              </NavLink> */}
             </DropdownMenu>
           </UncontrolledDropdown>
           <UncontrolledDropdown nav>

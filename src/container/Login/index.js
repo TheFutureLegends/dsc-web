@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import classnames from "classnames";
 // reactstrap components
 import {
   Button,
@@ -18,8 +16,6 @@ import {
   Container,
   Col,
 } from "reactstrap";
-
-import { loginUser } from "../../core/redux/actions/user.action.js";
 
 const LoginContainer__ = ({ ...props }) => {
   // login form
@@ -86,11 +82,8 @@ const LoginContainer__ = ({ ...props }) => {
     }
 
     if (email !== "" && password !== "") {
-      // console.log(props);
       props.loginUser({ email: email, password: password }, props.history);
     }
-
-    console.log(props);
   };
 
   useEffect(() => {
@@ -188,8 +181,4 @@ const LoginContainer__ = ({ ...props }) => {
   );
 };
 
-const mapDispatchToProps = {
-  loginUser,
-};
-
-export default connect(null, mapDispatchToProps)(LoginContainer__);
+export default LoginContainer__;

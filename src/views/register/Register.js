@@ -9,6 +9,7 @@ const Register = ({ ...props }) => {
 
 const mapStateToProps = (state) => ({
   ui: state.ui,
+  user: state.user,
 });
 
 const mapDispatchToProps = {

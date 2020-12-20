@@ -36,12 +36,12 @@ ReactDOM.render(
       <Redirect from="/" to="/admin/dashboard" /> */}
         <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
         <Route
-          path="/control-panel"
+          path="/control-panel/post-list"
           render={(props) => <AdminLayout {...props} />}
         />
         <Route path="/" render={(props) => <GeneralLayout {...props} />} />
 
-        <Redirect from="/control-panel" to="/control-panel/dashboard" />
+        {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
       </Switch>
     </BrowserRouter>
   </Provider>,

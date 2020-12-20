@@ -24,6 +24,7 @@ import { IsContentLightMode, IsSidebarMini } from "../../logic/fixedPlugin.js";
 import { logoutUser } from "../../core/redux/actions/user.action.js";
 
 import routes from "../../routes.js";
+import { protectedRoutes } from "../../routes.js";
 
 import logo from "../../assets/img/react-logo.png";
 
@@ -190,6 +191,7 @@ const GeneralLayout__ = (props) => {
       <Sidebar
         {...props}
         routes={routes}
+        protectedRoutes={protectedRoutes}
         activeColor={activeColor}
         logo={{
           outterLink: "/",

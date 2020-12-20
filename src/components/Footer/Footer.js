@@ -24,7 +24,7 @@ const Footer__ = (props) => {
   return (
     <footer className={"footer" + (props.default ? " footer-default" : "")}>
       <Container fluid={props.fluid ? true : false}>
-        <ul className="nav">
+        {/* <ul className="nav">
           <li className="nav-item">
             <a className="nav-link" href="https://www.creative-tim.com">
               Creative Tim
@@ -43,14 +43,14 @@ const Footer__ = (props) => {
               Blog
             </a>
           </li>
-        </ul>
+        </ul> */}
         <div className="copyright">
           © {new Date().getFullYear()} made with{" "}
           <i className="tim-icons icon-heart-2" /> by{" "}
-          <a href="https://www.creative-tim.com/" target="_blank">
-            Creative Tim
+          <a href="https://www.facebook.com/leonguyen020/" target="_blank">
+            Tri Nguyen
           </a>{" "}
-          for a better web.
+          for a better RMIT community.
         </div>
       </Container>
     </footer>

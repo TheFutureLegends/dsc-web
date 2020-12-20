@@ -16,13 +16,15 @@
 */
 /*eslint-disable*/
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, Redirect, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
 // reactstrap components
 import { Nav, Collapse } from "reactstrap";
+
+import { protectedRoutes } from "../../routes.js";
 
 var ps;
 
@@ -34,6 +36,7 @@ const Sidebar = (props) => {
     setState(getCollapseStates(props.routes));
   }, []);
   useEffect(() => {
+    // console.log(props.user);
     // if you are using a Windows Machine, the scrollbars will have a Mac look
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(sidebarRef.current, {
@@ -85,6 +88,11 @@ const Sidebar = (props) => {
       if (prop.redirect) {
         return null;
       }
+
+      if (prop.authenticated && !props.user.authenticated) {
+        return null;
+      }
+
       if (prop.invisible) {
         return null;
       }
@@ -224,7 +232,16 @@ const Sidebar = (props) => {
           </div>
         ) : null}
         <Nav>{createLinks(props.routes)}</Nav>
+
         <hr style={{ width: "80%", backgroundColor: "white" }} />
+
+        {/* Authenticate Routes Only */}
+        <Nav>{createLinks(props.protectedRoutes)}</Nav>
+        {/* {props.user.authenticatedauthenticatedauthenticated ? (
+          <Nav>{createLinks(props.protectedRoutes)}</Nav>
+        ) : (
+          <Redirect to="/auth/login" />
+        )} */}
       </div>
     </div>
   );
@@ -234,6 +251,7 @@ Sidebar.propTypes = {
   activeColor: PropTypes.oneOf(["primary", "blue", "green", "orange", "red"]),
   rtlActive: PropTypes.bool,
   routes: PropTypes.array.isRequired,
+  protectedRoutes: PropTypes.array.isRequired,
   logo: PropTypes.oneOfType([
     PropTypes.shape({
       innerLink: PropTypes.string.isRequired,

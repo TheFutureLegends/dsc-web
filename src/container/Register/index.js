@@ -136,8 +136,6 @@ const Register = ({ ...props }) => {
     setIsSubmit(props.ui.loading);
 
     setDisabledButton("disabled");
-
-    console.log(props);
   };
 
   const handleCheckboxChange = () => {

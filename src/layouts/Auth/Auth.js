@@ -1,10 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  Route,
-  Switch,
-  Redirect,
-  useLocation,
-} from "react-router-dom";
+import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
@@ -17,13 +12,13 @@ import Footer from "../../components/Footer/Footer.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import SidebarRight from "../../components/Sidebar_Right/Sidebar_Right.js";
 import { Row } from "reactstrap";
-import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
+// import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 import { IsSidebarMini } from "../../logic/fixedPlugin.js";
 // import { IsContentLightMode } from "../../logic/fixedPlugin.js";
-// import { cookies, sidebarMiniCookieName } from "../../variables/cookie.js";
+import { cookies, authorizationCookieName } from "../../variables/cookie.js";
 import { logoutUser } from "../../core/redux/actions/user.action.js";
 
-import routes from "../../routes.js";
+import routes, { protectedRoutes } from "../../routes.js";
 
 import logo from "../../assets/img/react-logo.png";
 
@@ -116,7 +111,7 @@ const AuthLayout__ = (props) => {
         return getRoutes(prop.views);
       }
 
-      if (props.user.authenticated) {
+      if (props.user.authenticated && prop.layout !== "/auth") {
         return <Redirect to="/" key={key} />;
       }
 
@@ -209,6 +204,7 @@ const AuthLayout__ = (props) => {
       <Sidebar
         {...props}
         routes={routes}
+        protectedRoutes={protectedRoutes}
         activeColor={activeColor}
         logo={{
           outterLink: "/",
@@ -227,13 +223,22 @@ const AuthLayout__ = (props) => {
         />
         <div className="content">
           <Row>
-            <Switch>
-              {getRoutes(routes)}
-              {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
-            </Switch>
-            <SidebarRight></SidebarRight>
+            <Switch>{getRoutes(routes)}</Switch>
+            <SidebarRight />
           </Row>
         </div>
+        {/* {props.user.authenticated ? (
+          <Redirect to="/" />
+        ) : (
+          <div className="content">
+            <Row>
+              <Switch>
+                {getRoutes(routes)}
+              </Switch>
+              <SidebarRight />
+            </Row>
+          </div>
+        )} */}
 
         {
           // we don't want the Footer to be rendered on full screen maps page

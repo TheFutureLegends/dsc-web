@@ -40,14 +40,53 @@
 // import Rtl from "views/pages/Rtl.js";
 // import Lock from "views/pages/Lock.js";
 
-import ReactTables from "./views/tables/ReactTables.js";
+// import ReactTables from "./views/tables/ReactTables.js";
 // import Calendar from "./views/Calendar.js";
 // import Widgets from "./views/Widgets.js";
 // import Charts from "./views/Charts.js";
 import Homepage from "./views/homepage/Homepage.js";
-import Panels from "./views/components/Panels.js";
+import PostList from "./views/postList/PostList.js";
+// import Panels from "./views/components/Panels.js";
 import Login from "./views/login/Login.js";
 import Register from "./views/register/Register.js";
+
+export const protectedRoutes = [
+  {
+    path: "/post-list",
+    name: "Post List",
+    rtlName: "رد فعل الطاولة",
+    icon: "tim-icons icon-tablet-2",
+    rtlMini: "در",
+    component: PostList,
+    layout: "/control-panel",
+    authenticated: true,
+    // redirect: "/auth/login",
+    // invisible: true,
+  },
+];
+
+export const authRoutes = [
+  {
+    path: "/login",
+    name: "Login",
+    rtlName: "هعذاتسجيل الدخول",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Login,
+    layout: "/auth",
+    authenticated: false,
+    invisible: true,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    rtlName: "هعذاتسجيل الدخول",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Register,
+    layout: "/auth",
+    authenticated: false,
+    invisible: true,
+  },
+];
 
 const routes = [
   {
@@ -57,30 +96,29 @@ const routes = [
     icon: "tim-icons icon-chart-pie-36",
     component: Homepage,
     layout: "",
-    authenticated: false,
-    invisible: false,
-  },
-
-  {
-    path: "/post-list",
-    name: "Post List",
-    rtlName: "رد فعل الطاولة",
-    icon: "tim-icons icon-tablet-2",
-    rtlMini: "در",
-    component: ReactTables,
-    layout: "/control-panel",
-    authenticated: true,
-    invisible: false,
-  },
-  {
-    path: "/panels",
-    name: "Panels",
-    rtlName: "لوحات",
-    icon: "tim-icons icon-tablet-2",
-    component: Panels,
-    layout: "/control-panel",
     // authenticated: false,
+    // invisible: false,
   },
+  // {
+  //   path: "/post-list",
+  //   name: "Post List",
+  //   rtlName: "رد فعل الطاولة",
+  //   icon: "tim-icons icon-tablet-2",
+  //   rtlMini: "در",
+  //   component: ReactTables,
+  //   layout: "/control-panel",
+  //   // authenticated: true,
+  //   invisible: false,
+  // },
+  // {
+  //   path: "/panels",
+  //   name: "Panels",
+  //   rtlName: "لوحات",
+  //   icon: "tim-icons icon-tablet-2",
+  //   component: Panels,
+  //   layout: "/control-panel",
+  //   // authenticated: false,
+  // },
   // {
   //   collapse: true,
   //   name: "Pages",

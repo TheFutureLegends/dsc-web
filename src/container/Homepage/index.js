@@ -9,7 +9,7 @@ import MainBlogSection from "./MainBlogSection.js";
 const DashboardContainer__ = (props) => {
   return (
     <Col md="9">
-      <MainBlogSection posts={props.posts} />
+      <MainBlogSection posts={props.posts} {...props} />
     </Col>
   );
 };

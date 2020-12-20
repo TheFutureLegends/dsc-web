@@ -78,7 +78,7 @@ export const postNewPost = (
       timer: 3000,
     });
 
-    getListOfPost();
+    getPostListDataTable();
 
     setInterval(() => history.push("/post-list"), 2900);
   } catch (error) {
@@ -86,7 +86,7 @@ export const postNewPost = (
   }
 };
 
-export const getListOfPost = () => async (dispatch) => {
+export const getPostListDataTable = () => async (dispatch) => {
   try {
     let res = await axios.get(`/posts/read`, getAuthorizationHeaders());
 
