@@ -29,7 +29,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
 
     setAuthorizationHeader(res.data.accessToken.token);
 
-    getPostListDataTable();
+    // getPostListDataTable();
 
     dispatch({ type: SET_USER, payload: { credential: res.data } });
 
@@ -77,6 +77,8 @@ export const getAuthUserData = () => async (dispatch) => {
     let res = await axios.get(`/users/profile`, getAuthorizationHeaders());
 
     if (res) {
+      // getPostListDataTable();
+
       dispatch({
         type: SET_USER,
         payload: { credential: res.data },

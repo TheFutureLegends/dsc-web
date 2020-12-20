@@ -1,24 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
-  getMostPopularPosts,
+  // getMostPopularPosts,
   getLatestPost,
-  // getPostsWithPagination,
+  getPostsWithPagination,
 } from "../../core/redux/actions/post.action.js";
 import HomepageContainer from "../../container/Homepage/index.js";
 
 const Homepage = ({ ...props }) => {
-  props.getMostPopularPosts(4, false);
+  // props.getLatestPost(4, true);
 
-  props.getLatestPost(4, true);
+  useEffect(() => {
+    if (props.loading) {
+      props.getPostsWithPagination(10, 1);
+    }
+  });
 
-  return <HomepageContainer />;
+  return <HomepageContainer {...props} />;
 };
+
+const mapStateToProps = (state) => ({
+  loading: state.post.loading,
+  posts: state.post.posts,
+});
 
 const mapDispatchToProps = {
-  getMostPopularPosts,
   getLatestPost,
-  // getPostsWithPagination,
+  getPostsWithPagination,
 };
 
-export default connect(null, mapDispatchToProps)(Homepage);
+export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

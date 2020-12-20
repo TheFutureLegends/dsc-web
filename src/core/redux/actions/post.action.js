@@ -4,6 +4,8 @@ import {
   SET_POPULAR_POSTS,
   SET_LATEST_POSTS,
   SET_LIST_OF_POST,
+  LOADING_POST,
+  STOP_LOADING_POST,
   // DELETE_POST,
 } from "../types/post.types";
 import axios from "axios";
@@ -21,16 +23,19 @@ export const getPost = (slug, history) => async (dispatch) => {
 };
 
 export const getPostsWithPagination = (limit, page) => async (dispatch) => {
+  dispatch({ type: LOADING_POST });
   try {
-    let res = await axios.get(`/posts?limit=${limit}&page=${page}`);
+    let res = await axios.get(`/posts?latest=true?limit=${limit}&page=${page}`);
 
     dispatch({ type: SET_POSTS, payload: res.data.posts });
   } catch (error) {
     console.log(error);
   }
+  dispatch({ type: STOP_LOADING_POST });
 };
 
 export const getLatestPost = (limit, asc) => async (dispatch) => {
+  dispatch({ type: LOADING_POST });
   try {
     let res = await axios.get(`/posts?latest=true&limit=${limit}&asc=${asc}`);
 
@@ -38,9 +43,11 @@ export const getLatestPost = (limit, asc) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+  dispatch({ type: STOP_LOADING_POST });
 };
 
 export const getMostPopularPosts = (limit, asc) => async (dispatch) => {
+  dispatch({ type: LOADING_POST });
   try {
     let res = await axios.get(
       `/posts?latest=true?sortBy=visit&limit=${limit}&asc=${asc}`
@@ -50,6 +57,7 @@ export const getMostPopularPosts = (limit, asc) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+  dispatch({ type: STOP_LOADING_POST });
 };
 
 export const postNewPost = (
@@ -80,13 +88,14 @@ export const postNewPost = (
 
     getPostListDataTable();
 
-    setInterval(() => history.push("/post-list"), 2900);
+    setInterval(() => history.push("/control-panel/post-list"), 2900);
   } catch (error) {
     console.log(error);
   }
 };
 
 export const getPostListDataTable = () => async (dispatch) => {
+  dispatch({ type: LOADING_POST });
   try {
     let res = await axios.get(`/posts/read`, getAuthorizationHeaders());
 
@@ -94,6 +103,7 @@ export const getPostListDataTable = () => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+  dispatch({ type: STOP_LOADING_POST });
 };
 
 export const deletePost = (item) => async (dispatch) => {

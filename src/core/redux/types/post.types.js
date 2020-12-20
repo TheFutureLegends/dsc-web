@@ -1,3 +1,5 @@
+export const LOADING_POST = "LOADING_POST";
+export const STOP_LOADING_POST = "STOP_LOADING_POST";
 export const SET_POST = "SET_POST";
 export const SET_POSTS = "SET_POSTS";
 export const SET_POPULAR_POSTS = "SET_POPULAR_POST";

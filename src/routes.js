@@ -45,23 +45,59 @@
 // import Widgets from "./views/Widgets.js";
 // import Charts from "./views/Charts.js";
 import Homepage from "./views/homepage/Homepage.js";
-import PostList from "./views/postList/PostList.js";
-// import Panels from "./views/components/Panels.js";
+
+/**
+ * Authentication Page
+ */
 import Login from "./views/login/Login.js";
 import Register from "./views/register/Register.js";
 
+/**
+ * Protected Page
+ */
+// import Dashboard from "./views/dashboard/Dashboard.js";
+import PostList from "./views/postList/PostList.js";
+import PostForm from "./views/postForm/PostForm.js";
+
 export const protectedRoutes = [
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   rtlName: "رد فعل الطاولة",
+  //   icon: "tim-icons icon-app",
+  //   rtlMini: "در",
+  //   component: Dashboard,
+  //   layout: "/control-panel",
+  //   authenticated: true,
+  //   // redirect: "/auth/login",
+  //   invisible: true,
+  // },
+  /**
+   * Post Section
+   */
   {
     path: "/post-list",
     name: "Post List",
     rtlName: "رد فعل الطاولة",
-    icon: "tim-icons icon-tablet-2",
+    icon: "tim-icons icon-notes",
     rtlMini: "در",
     component: PostList,
     layout: "/control-panel",
     authenticated: true,
     // redirect: "/auth/login",
     // invisible: true,
+  },
+  {
+    path: "/post/create",
+    name: "Create",
+    rtlName: "رد فعل الطاولة",
+    icon: "tim-icons icon-notes",
+    rtlMini: "در",
+    component: PostForm,
+    layout: "/control-panel",
+    authenticated: true,
+    // redirect: "/auth/login",
+    invisible: true,
   },
 ];
 
@@ -93,7 +129,7 @@ const routes = [
     path: "/",
     name: "Home page",
     rtlName: "لوحة القيادة",
-    icon: "tim-icons icon-chart-pie-36",
+    icon: "tim-icons icon-bank",
     component: Homepage,
     layout: "",
     // authenticated: false,
@@ -135,15 +171,15 @@ const routes = [
   //       component: Pricing,
   //       layout: "/home",
   //     },
-  //     // {
-  //     //   path: "/rtl-support",
-  //     //   name: "RTL Support",
-  //     //   rtlName: "صودعم رتل",
-  //     //   mini: "RS",
-  //     //   rtlMini: "صو",
-  //     //   component: Rtl,
-  //     //   layout: "/rtl",
-  //     // },
+  // {
+  //   path: "/rtl-support",
+  //   name: "RTL Support",
+  //   rtlName: "صودعم رتل",
+  //   mini: "RS",
+  //   rtlMini: "صو",
+  //   component: Rtl,
+  //   layout: "/rtl",
+  // },
   //     {
   //       path: "/timeline",
   //       name: "Timeline",

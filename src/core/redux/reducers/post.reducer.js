@@ -1,4 +1,6 @@
 import {
+  LOADING_POST,
+  STOP_LOADING_POST,
   SET_LATEST_POSTS,
   SET_POPULAR_POSTS,
   SET_POST,
@@ -8,6 +10,7 @@ import {
 } from "../types/post.types";
 
 const initialState = {
+  loading: true,
   mostPopularPosts: [],
   latestPosts: [],
   posts: [],
@@ -17,6 +20,16 @@ const initialState = {
 
 export function PostReducer(state = initialState, action) {
   switch (action.type) {
+    case LOADING_POST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case STOP_LOADING_POST:
+      return {
+        ...state,
+        loading: false,
+      };
     case SET_LATEST_POSTS:
       return {
         ...state,

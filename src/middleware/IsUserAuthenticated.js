@@ -25,7 +25,7 @@ const IsUserAuthenticated__ = ({ user, ...props }) => {
               <p className="d-lg-none">Notification</p>
             </DropdownToggle>
             <DropdownMenu className="dropdown-navbar" right tag="ul">
-              <NavLink tag="li" onClick={() => console.log(props.user)}>
+              <NavLink tag="li" onClick={() => console.log(props)}>
                 <DropdownItem className="nav-item">
                   Mike John responded to your email
                 </DropdownItem>
@@ -58,7 +58,13 @@ const IsUserAuthenticated__ = ({ user, ...props }) => {
               <p className="d-lg-none">Add</p>
             </DropdownToggle>
             <DropdownMenu className="dropdown-navbar" right tag="ul">
-              <NavLink tag="li" className="mb-2">
+              <NavLink
+                tag="li"
+                className="mb-2"
+                onClick={() => {
+                  props.history.push("/control-panel/post/create");
+                }}
+              >
                 <DropdownItem className="nav-item">
                   <i className="tim-icons icon-notes mt-n2" />
                   Create new post

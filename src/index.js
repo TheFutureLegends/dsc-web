@@ -12,6 +12,7 @@ import store from "./core/redux/store";
 import { Provider } from "react-redux";
 import { cookies, authorizationCookieName } from "./variables/cookie.js";
 import { logoutUser, getAuthUserData } from "./core/redux/actions/user.action";
+import { getPostListDataTable } from "./core/redux/actions/post.action";
 
 // Styling
 import "./assets/css/nucleo-icons.css";
@@ -22,6 +23,8 @@ const cookie = cookies.get(authorizationCookieName);
 
 if (cookie) {
   store.dispatch(getAuthUserData(cookie));
+
+  store.dispatch(getPostListDataTable());
 } else {
   store.dispatch(logoutUser());
 }
@@ -34,12 +37,17 @@ ReactDOM.render(
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Route path="/rtl" render={(props) => <RTLLayout {...props} />} />
       <Redirect from="/" to="/admin/dashboard" /> */}
+        {/* <Route render={(props) => <AuthLayout {...props} />}></Route> */}
         <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
         <Route
-          path="/control-panel/post-list"
+          path="/control-panel"
           render={(props) => <AdminLayout {...props} />}
         />
-        <Route path="/" render={(props) => <GeneralLayout {...props} />} />
+        <Route
+          exact
+          path="/"
+          render={(props) => <GeneralLayout {...props} />}
+        />
 
         {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
       </Switch>

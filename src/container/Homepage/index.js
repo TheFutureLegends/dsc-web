@@ -15,7 +15,7 @@ const DashboardContainer__ = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  posts: state.post.mostPopularPosts,
+  posts: state.post.posts,
 });
 
 export default connect(mapStateToProps, null)(DashboardContainer__);

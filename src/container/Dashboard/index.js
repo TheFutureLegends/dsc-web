@@ -54,9 +54,9 @@ import {
   chartExample2,
   chartExample3,
   chartExample4,
-} from "variables/charts.js";
+} from "../../variables/charts.js";
 
-import { mapData } from "variables/maps.js";
+import { mapData } from "../../variables/maps.js";
 
 const DashboardContainer__ = (props) => {
   const [bigChartData, setbigChartData] = useState("data1");
@@ -70,7 +70,7 @@ const DashboardContainer__ = (props) => {
   };
 
   return (
-    <Col md="9">
+    <>
       <Row>
         <Col xs="12">
           <Card className="card-chart">
@@ -630,7 +630,7 @@ const DashboardContainer__ = (props) => {
                       <div className="photo">
                         <img
                           alt="..."
-                          src={require("assets/img/tania.jpg").default}
+                          src={require("../../assets/img/tania.jpg").default}
                         />
                       </div>
                     </td>
@@ -679,7 +679,7 @@ const DashboardContainer__ = (props) => {
                       <div className="photo">
                         <img
                           alt="..."
-                          src={require("assets/img/robi.jpg").default}
+                          src={require("../../assets/img/robi.jpg").default}
                         />
                       </div>
                     </td>
@@ -728,7 +728,7 @@ const DashboardContainer__ = (props) => {
                       <div className="photo">
                         <img
                           alt="..."
-                          src={require("assets/img/lora.jpg").default}
+                          src={require("../../assets/img/lora.jpg").default}
                         />
                       </div>
                     </td>
@@ -777,7 +777,7 @@ const DashboardContainer__ = (props) => {
                       <div className="photo">
                         <img
                           alt="..."
-                          src={require("assets/img/jana.jpg").default}
+                          src={require("../../assets/img/jana.jpg").default}
                         />
                       </div>
                     </td>
@@ -826,7 +826,7 @@ const DashboardContainer__ = (props) => {
                       <div className="photo">
                         <img
                           alt="..."
-                          src={require("assets/img/mike.jpg").default}
+                          src={require("../../assets/img/mike.jpg").default}
                         />
                       </div>
                     </td>
@@ -875,7 +875,7 @@ const DashboardContainer__ = (props) => {
                       <div className="photo">
                         <img
                           alt="..."
-                          src={require("assets/img/emilyz.jpg").default}
+                          src={require("../../assets/img/emilyz.jpg").default}
                         />
                       </div>
                     </td>
@@ -940,7 +940,7 @@ const DashboardContainer__ = (props) => {
                           <div className="flag">
                             <img
                               alt="..."
-                              src={require("assets/img/US.png").default}
+                              src={require("../../assets/img/US.png").default}
                             />
                           </div>
                         </td>
@@ -953,7 +953,7 @@ const DashboardContainer__ = (props) => {
                           <div className="flag">
                             <img
                               alt="..."
-                              src={require("assets/img/DE.png").default}
+                              src={require("../../assets/img/DE.png").default}
                             />
                           </div>
                         </td>
@@ -966,7 +966,7 @@ const DashboardContainer__ = (props) => {
                           <div className="flag">
                             <img
                               alt="..."
-                              src={require("assets/img/AU.png").default}
+                              src={require("../../assets/img/AU.png").default}
                             />
                           </div>
                         </td>
@@ -979,7 +979,7 @@ const DashboardContainer__ = (props) => {
                           <div className="flag">
                             <img
                               alt="..."
-                              src={require("assets/img/GB.png").default}
+                              src={require("../../assets/img/GB.png").default}
                             />
                           </div>
                         </td>
@@ -992,7 +992,7 @@ const DashboardContainer__ = (props) => {
                           <div className="flag">
                             <img
                               alt="..."
-                              src={require("assets/img/RO.png").default}
+                              src={require("../../assets/img/RO.png").default}
                             />
                           </div>
                         </td>
@@ -1005,7 +1005,7 @@ const DashboardContainer__ = (props) => {
                           <div className="flag">
                             <img
                               alt="..."
-                              src={require("assets/img/BR.png").default}
+                              src={require("../../assets/img/BR.png").default}
                             />
                           </div>
                         </td>
@@ -1050,7 +1050,7 @@ const DashboardContainer__ = (props) => {
           </Card>
         </Col>
       </Row>
-    </Col>
+    </>
   );
 };
 

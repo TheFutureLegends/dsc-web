@@ -200,10 +200,12 @@ const AdminLayout__ = (props) => {
           toggleSidebar={toggleSidebar}
         />
         {props.user.authenticated ? (
-          <Switch>
-            {getRoutes(protectedRoutes)}
-            {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
-          </Switch>
+          <div className="content">
+            <Switch>
+              {getRoutes(protectedRoutes)}
+              {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
+            </Switch>
+          </div>
         ) : (
           <Redirect to="/auth/login" />
         )}
