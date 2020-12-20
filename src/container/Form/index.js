@@ -1,15 +1,12 @@
 /* eslint-disable no-unused-vars*/
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // reactstrap components
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
-  CardTitle,
-  Label,
   FormGroup,
   Form,
   Input,
@@ -17,97 +14,43 @@ import {
   Col,
 } from "reactstrap";
 
+import { Editor } from "@tinymce/tinymce-react";
+
 const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
-  // register form
-  const [registerEmail, setregisterEmail] = useState("");
-  const [registerPassword, setregisterPassword] = useState("");
-  const [registerConfirmPassword, setregisterConfirmPassword] = useState("");
-  const [registerEmailState, setregisterEmailState] = useState("");
-  const [registerPasswordState, setregisterPasswordState] = useState("");
-  const [
-    registerConfirmPasswordState,
-    setregisterConfirmPasswordState,
-  ] = useState("");
-  // login form
-  const [loginFullName, setloginFullName] = useState("");
-  const [loginEmail, setloginEmail] = useState("");
-  const [loginPassword, setloginPassword] = useState("");
-  const [loginFullNameState, setloginFullNameState] = useState("");
-  const [loginEmailState, setloginEmailState] = useState("");
-  const [loginPasswordState, setloginPasswordState] = useState("");
-  // type validation form
-  const [required, setrequired] = useState("");
-  const [email, setemail] = useState("");
-  const [number, setnumber] = useState("");
-  const [url, seturl] = useState("");
-  const [source, setsource] = useState("");
-  const [destination, setdestination] = useState("");
-  const [requiredState, setrequiredState] = useState("");
-  const [emailState, setemailState] = useState("");
-  const [numberState, setnumberState] = useState("");
-  const [urlState, seturlState] = useState("");
-  const [sourceState, setsourceState] = useState("");
-  const [destinationState, setdestinationState] = useState("");
-  // range validation form
-  const [minLength, setminLength] = useState("");
-  const [maxLength, setmaxLength] = useState("");
-  const [range, setrange] = useState("");
-  const [min, setmin] = useState("");
-  const [max, setmax] = useState("");
-  const [minLengthState, setminLengthState] = useState("");
-  const [maxLengthState, setmaxLengthState] = useState("");
-  const [rangeState, setrangeState] = useState("");
-  const [minState, setminState] = useState("");
-  const [maxState, setmaxState] = useState("");
+  /**
+   * TinyMCE Key
+   */
+  // Preview button
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [disabledButton, setDisabledButton] = useState("");
+
+  // form
+  const [title, setTitle] = useState("");
+  const [titleState, setTitleState] = useState("");
+
+  const [category, setCategory] = useState("");
+  const [categoryState, setCategoryState] = useState("");
+
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrlState, setImageUrlState] = useState("");
+
+  const [description, setDescription] = useState("");
+  const [descriptionState, setDescriptionState] = useState("");
+
   const stateFunctions = {
-    // register form
-    setregisterEmail: (value) => setregisterEmail(value),
-    setregisterPassword: (value) => setregisterPassword(value),
-    setregisterConfirmPassword: (value) => setregisterConfirmPassword(value),
-    setregisterEmailState: (value) => setregisterEmailState(value),
-    setregisterPasswordState: (value) => setregisterPasswordState(value),
-    setregisterConfirmPasswordState: (value) =>
-      setregisterConfirmPasswordState(value),
-    // login form
-    setloginFullName: (value) => setloginFullName(value),
-    setloginEmail: (value) => setloginEmail(value),
-    setloginPassword: (value) => setloginPassword(value),
-    setloginFullNameState: (value) => setloginFullNameState(value),
-    setloginEmailState: (value) => setloginEmailState(value),
-    setloginPasswordState: (value) => setloginPasswordState(value),
-    // type validation form
-    setrequired: (value) => setrequired(value),
-    setemail: (value) => setemail(value),
-    setnumber: (value) => setnumber(value),
-    seturl: (value) => seturl(value),
-    setsource: (value) => setsource(value),
-    setdestination: (value) => setdestination(value),
-    setrequiredState: (value) => setrequiredState(value),
-    setemailState: (value) => setemailState(value),
-    setnumberState: (value) => setnumberState(value),
-    seturlState: (value) => seturlState(value),
-    setsourceState: (value) => setsourceState(value),
-    setdestinationState: (value) => setdestinationState(value),
-    // range validation form
-    setminLength: (value) => setminLength(value),
-    setmaxLength: (value) => setmaxLength(value),
-    setrange: (value) => setrange(value),
-    setmin: (value) => setmin(value),
-    setmax: (value) => setmax(value),
-    setminLengthState: (value) => setminLengthState(value),
-    setmaxLengthState: (value) => setmaxLengthState(value),
-    setrangeState: (value) => setrangeState(value),
-    setminState: (value) => setminState(value),
-    setmaxState: (value) => setmaxState(value),
+    setTitle: (value) => setTitle(value),
+    setTitleState: (value) => setTitleState(value),
+
+    setCategory: (value) => setCategory(value),
+    setCategoryState: (value) => setCategoryState(value),
+
+    setImageUrl: (value) => setImageUrl(value),
+    setImageUrlState: (value) => setImageUrlState(value),
+
+    setDescription: (value) => setDescription(value),
+    setDescriptionState: (value) => setDescriptionState(value),
   };
-  // function that returns true if value is email, false otherwise
-  const verifyEmail = (value) => {
-    var emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (emailRex.test(value)) {
-      return true;
-    }
-    return false;
-  };
+
   // function that verifies if a string has a given length or not
   const verifyLength = (value, length) => {
     if (value.length >= length) {
@@ -115,21 +58,7 @@ const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
     }
     return false;
   };
-  // function that verifies if two strings are equal
-  const compare = (string1, string2) => {
-    if (string1 === string2) {
-      return true;
-    }
-    return false;
-  };
-  // function that verifies if value contains only numbers
-  const verifyNumber = (value) => {
-    var numberRex = new RegExp("^[0-9]+$");
-    if (numberRex.test(value)) {
-      return true;
-    }
-    return false;
-  };
+
   // verifies if value is a valid URL
   const verifyUrl = (value) => {
     try {
@@ -139,56 +68,36 @@ const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
       return false;
     }
   };
+
+  const verifyEditorContentLength = (value, length) => {
+    const regex = /(<([^>]+)>)/gi;
+
+    const result = value.replace(regex, "");
+
+    if (verifyLength(result, length)) {
+      return true;
+    }
+
+    return false;
+  };
+
   const change = (event, stateName, type, stateNameEqualTo, maxValue) => {
     switch (type) {
-      case "email":
-        if (verifyEmail(event.target.value)) {
+      /**
+       * Title Validate
+       */
+      case "title":
+        if (verifyLength(event.target.value, 10)) {
           stateFunctions["set" + stateName + "State"]("has-success");
         } else {
-          stateFunctions["set" + stateName + "State"]("has-danger");
-        }
-        break;
-      case "password":
-        if (verifyLength(event.target.value, 1)) {
-          stateFunctions["set" + stateName + "State"]("has-success");
-        } else {
-          stateFunctions["set" + stateName + "State"]("has-danger");
-        }
-        break;
-      case "equalTo":
-        if (compare(event.target.value, stateNameEqualTo.value)) {
-          stateFunctions["set" + stateName + "State"]("has-success");
-          stateFunctions["set" + stateNameEqualTo.stateName + "State"](
-            "has-success"
-          );
-        } else {
-          stateFunctions["set" + stateName + "State"]("has-danger");
-          stateFunctions["set" + stateNameEqualTo.stateName + "State"](
-            "has-danger"
+          stateFunctions["set" + stateName + "State"](
+            "has-danger length-not-match"
           );
         }
         break;
-      case "number":
-        if (verifyNumber(event.target.value)) {
-          stateFunctions["set" + stateName + "State"]("has-success");
-        } else {
-          stateFunctions["set" + stateName + "State"]("has-danger");
-        }
-        break;
-      case "length":
-        if (verifyLength(event.target.value, stateNameEqualTo)) {
-          stateFunctions["set" + stateName + "State"]("has-success");
-        } else {
-          stateFunctions["set" + stateName + "State"]("has-danger");
-        }
-        break;
-      case "max-length":
-        if (!verifyLength(event.target.value, stateNameEqualTo + 1)) {
-          stateFunctions["set" + stateName + "State"]("has-success");
-        } else {
-          stateFunctions["set" + stateName + "State"]("has-danger");
-        }
-        break;
+      /**
+       * Image URL validation
+       */
       case "url":
         if (verifyUrl(event.target.value)) {
           stateFunctions["set" + stateName + "State"]("has-success");
@@ -196,97 +105,73 @@ const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
           stateFunctions["set" + stateName + "State"]("has-danger");
         }
         break;
-      case "min-value":
-        if (
-          verifyNumber(event.target.value) &&
-          event.target.value >= stateNameEqualTo
-        ) {
+      /**
+       * Category validation
+       */
+      case "category":
+        if (verifyLength(event.target.value, 1)) {
           stateFunctions["set" + stateName + "State"]("has-success");
         } else {
           stateFunctions["set" + stateName + "State"]("has-danger");
         }
         break;
-      case "max-value":
-        if (
-          verifyNumber(event.target.value) &&
-          event.target.value <= stateNameEqualTo
-        ) {
+      /**
+       * TinyMCE Editor Content Verify
+       */
+      case "description":
+        if (verifyEditorContentLength(event, 100)) {
           stateFunctions["set" + stateName + "State"]("has-success");
         } else {
-          stateFunctions["set" + stateName + "State"]("has-danger");
-        }
-        break;
-      case "range":
-        if (
-          verifyNumber(event.target.value) &&
-          event.target.value >= stateNameEqualTo &&
-          event.target.value <= maxValue
-        ) {
-          stateFunctions["set" + stateName + "State"]("has-success");
-        } else {
-          stateFunctions["set" + stateName + "State"]("has-danger");
+          stateFunctions["set" + stateName + "State"](
+            "has-danger length-not-match"
+          );
         }
         break;
       default:
         break;
     }
-    stateFunctions["set" + stateName](event.target.value);
-  };
-  const registerClick = () => {
-    if (registerEmailState === "") {
-      setregisterEmailState("has-danger");
-    }
-    if (registerPasswordState === "" || registerConfirmPasswordState === "") {
-      setregisterPasswordState("has-danger");
-      setregisterConfirmPasswordState("has-danger");
+
+    if (type === "description") {
+      stateFunctions["set" + stateName](event);
+    } else {
+      stateFunctions["set" + stateName](event.target.value);
     }
   };
-  const loginClick = () => {
-    if (loginFullNameState === "") {
-      setloginFullNameState("has-danger");
-    }
-    if (loginEmailState === "") {
-      setloginEmailState("has-danger");
-    }
-    if (loginPasswordState === "") {
-      setloginPasswordState("has-danger");
-    }
+
+  const handleEnableButton = () => {
+    // if (props.ui.loading === false) {
+    //   if (
+    //     title === "" ||
+    //     category === "" ||
+    //     imageUrl === "" ||
+    //     description === ""
+    //   ) {
+    //     return setDisabledButton("disabled");
+    //   } else if (
+    //     titleState.includes("has-danger") ||
+    //     categoryState.includes("has-danger") ||
+    //     imageUrlState.includes("has-danger") ||
+    //     descriptionState.includes("has-danger")
+    //   ) {
+    //     return setDisabledButton("disabled");
+    //   } else {
+    //     return setDisabledButton("");
+    //   }
+    // }
   };
-  const typeClick = () => {
-    if (requiredState === "") {
-      setrequiredState("has-danger");
-    }
-    if (emailState === "") {
-      setemailState("has-danger");
-    }
-    if (numberState === "") {
-      setnumberState("has-danger");
-    }
-    if (urlState === "") {
-      seturlState("has-danger");
-    }
-    if (sourceState === "" || destinationState === "") {
-      setsourceState("has-danger");
-      setdestinationState("has-danger");
-    }
+
+  const handlePreview = () => {
+    console.log(props);
   };
-  const rangeClick = () => {
-    if (minLengthState === "") {
-      setminLengthState("has-danger");
-    }
-    if (maxLengthState === "") {
-      setmaxLengthState("has-danger");
-    }
-    if (rangeState === "") {
-      setrangeState("has-danger");
-    }
-    if (minState === "") {
-      setminState("has-danger");
-    }
-    if (maxState === "") {
-      setmaxState("has-danger");
-    }
-  };
+
+  useEffect(() => {
+    handleEnableButton();
+
+    return () => {
+      handleEnableButton();
+    };
+  }, [disabledButton, isSubmit]);
+
   return (
     <>
       <Row className="mb-3">
@@ -304,385 +189,103 @@ const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
         </Col>
       </Row>
       <Row>
-        <Col md="6">
+        <Col md="12">
           <Form id="RegisterValidation">
             <Card>
-              <CardHeader>
-                <CardTitle tag="h4">Register Form</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <FormGroup className={`has-label ${registerEmailState}`}>
-                  <label>Email Address *</label>
-                  <Input
-                    name="email"
-                    type="email"
-                    onChange={(e) => change(e, "registerEmail", "email")}
-                  />
-                  {registerEmailState === "has-danger" ? (
-                    <label className="error">
-                      Please enter a valid email address.
-                    </label>
-                  ) : null}
-                </FormGroup>
-                <FormGroup className={`has-label ${registerPasswordState}`}>
-                  <label>Password *</label>
-                  <Input
-                    id="registerPassword"
-                    name="password"
-                    type="password"
-                    autoComplete="off"
-                    onChange={(e) => change(e, "registerPassword", "password")}
-                  />
-                  {registerPasswordState === "has-danger" ? (
-                    <label className="error">This field is required.</label>
-                  ) : null}
-                </FormGroup>
-                <FormGroup
-                  className={`has-label ${registerConfirmPasswordState}`}
-                >
-                  <label>Confirm Password *</label>
-                  <Input
-                    equalto="#registerPassword"
-                    id="registerPasswordConfirmation"
-                    name="password_confirmation"
-                    type="password"
-                    autoComplete="off"
-                    onChange={(e) =>
-                      change(e, "registerConfirmPassword", "equalTo", {
-                        value: registerPassword,
-                        stateName: "registerPassword",
-                      })
-                    }
-                  />
-                  {registerConfirmPasswordState === "has-danger" ? (
-                    <label className="error">This field is required.</label>
-                  ) : null}
-                </FormGroup>
-                <div className="category form-category">* Required fields</div>
-              </CardBody>
-              <CardFooter className="text-right">
-                <FormGroup check className="pull-left">
-                  <Label check>
-                    <Input name="optionCheckboxes" type="checkbox" />
-                    <span className="form-check-sign" />
-                    Accept the terms and conditions
-                  </Label>
-                </FormGroup>
-                <Button color="primary" onClick={registerClick}>
-                  Register
-                </Button>
-              </CardFooter>
-            </Card>
-          </Form>
-        </Col>
-        <Col md="6">
-          <Form id="LoginValidation">
-            <Card>
-              <CardHeader>
-                <CardTitle tag="h4">Login Form</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <FormGroup className={`has-label ${loginFullNameState}`}>
-                  <label>Full Name *</label>
-                  <Input
-                    name="fullname"
-                    type="text"
-                    onChange={(e) => change(e, "loginFullName", "length", 1)}
-                  />
-                  {loginFullNameState === "has-danger" ? (
-                    <label className="error">This field is required.</label>
-                  ) : null}
-                </FormGroup>
-                <FormGroup className={`has-label ${loginEmailState}`}>
-                  <label>Email Address *</label>
-                  <Input
-                    name="email"
-                    type="email"
-                    onChange={(e) => change(e, "loginEmail", "email")}
-                  />
-                  {loginEmailState === "has-danger" ? (
-                    <label className="error">
-                      Please enter a valid email address.
-                    </label>
-                  ) : null}
-                </FormGroup>
-                <FormGroup className={`has-label ${loginPasswordState}`}>
-                  <label>Password *</label>
-                  <Input
-                    name="password"
-                    type="password"
-                    autoComplete="off"
-                    onChange={(e) => change(e, "loginPassword", "password")}
-                  />
-                  {loginPasswordState === "has-danger" ? (
-                    <label className="error">This field is required.</label>
-                  ) : null}
-                </FormGroup>
-                <div className="category form-category">* Required fields</div>
-              </CardBody>
-              <CardFooter className="text-left">
-                <Button color="primary" onClick={loginClick}>
-                  Login
-                </Button>
-                <a
-                  href="#pablo"
-                  className="pull-right"
-                  onClick={(e) => e.preventDefault}
-                >
-                  Forgot password?
-                </a>
-              </CardFooter>
-            </Card>
-          </Form>
-        </Col>
-        <Col md="12">
-          <Form className="form-horizontal" id="TypeValidation">
-            <Card>
-              <CardHeader>
-                <CardTitle tag="h4">Type Validation</CardTitle>
-              </CardHeader>
               <CardBody>
                 <Row>
-                  <Label sm="2">Required Text</Label>
-                  <Col sm="7">
-                    <FormGroup className={requiredState}>
+                  <Col md="6">
+                    <FormGroup className={`has-label ${titleState}`}>
+                      <label>Title *</label>
                       <Input
-                        name="required"
+                        name="title"
                         type="text"
-                        onChange={(e) => change(e, "required", "length", 1)}
+                        onChange={(e) => change(e, "Title", "title")}
                       />
-                      {requiredState === "has-danger" ? (
-                        <label className="error">This field is required.</label>
-                      ) : null}
-                    </FormGroup>
-                  </Col>
-                  <Col className="label-on-right" tag="label" sm="3">
-                    <code>required</code>
-                  </Col>
-                </Row>
-                <Row>
-                  <Label sm="2">Email</Label>
-                  <Col sm="7">
-                    <FormGroup className={emailState}>
-                      <Input
-                        name="email"
-                        type="text"
-                        onChange={(e) => change(e, "email", "email")}
-                      />
-                      {emailState === "has-danger" ? (
-                        <label className="error">
-                          Please enter a valid email address.
+                      {titleState.includes("length-not-match") ? (
+                        <label className="error text-danger">
+                          Title field must be at least 10 characters.
                         </label>
                       ) : null}
                     </FormGroup>
                   </Col>
-                  <Col className="label-on-right" tag="label" sm="3">
-                    <code>type="email"</code>
-                  </Col>
-                </Row>
-                <Row>
-                  <Label sm="2">Number</Label>
-                  <Col sm="7">
-                    <FormGroup className={numberState}>
+
+                  {/* Category Selection */}
+                  <Col md="6">
+                    <FormGroup className={`has-label ${categoryState}`}>
+                      <label>Category *</label>
                       <Input
-                        name="number"
+                        id="category"
+                        name="category"
                         type="text"
-                        onChange={(e) => change(e, "number", "number")}
+                        autoComplete="off"
+                        onChange={(e) => change(e, "Category", "category")}
                       />
-                      {numberState === "has-danger" ? (
-                        <label className="error">
-                          Please enter a valid number.
+                      {categoryState === "has-danger" ? (
+                        <label className="error text-danger">
+                          This field is required.
                         </label>
                       ) : null}
                     </FormGroup>
                   </Col>
-                  <Col className="label-on-right" tag="label" sm="3">
-                    <code>type="number"</code>
-                  </Col>
                 </Row>
                 <Row>
-                  <Label sm="2">Url</Label>
-                  <Col sm="7">
-                    <FormGroup className={urlState}>
+                  <Col md="12">
+                    <FormGroup className={`has-label ${imageUrlState}`}>
+                      <label>Image URL *</label>
                       <Input
-                        name="url"
+                        name="imageUrl"
                         type="text"
-                        onChange={(e) => change(e, "url", "url")}
+                        onChange={(e) => change(e, "ImageUrl", "url")}
                       />
-                      {urlState === "has-danger" ? (
-                        <label className="error">
+                      {imageUrlState === "has-danger" ? (
+                        <label className="error text-danger">
                           Please enter a valid URL.
                         </label>
                       ) : null}
                     </FormGroup>
                   </Col>
-                  <Col className="label-on-right" tag="label" sm="3">
-                    <code>type="url"</code>
-                  </Col>
                 </Row>
                 <Row>
-                  <Label sm="2">Equal to</Label>
-                  <Col sm="3">
-                    <FormGroup className={sourceState}>
-                      <Input
-                        id="idSource"
-                        placeholder="#idSource"
-                        type="text"
-                        onChange={(e) =>
-                          change(e, "source", "equalTo", {
-                            value: destination,
-                            stateName: "destination",
-                          })
-                        }
-                      />
-                    </FormGroup>
-                  </Col>
-                  <Col sm="3">
-                    <FormGroup className={destinationState}>
-                      <Input
-                        id="idDestination"
-                        placeholder="#idDestination"
-                        type="text"
-                        onChange={(e) =>
-                          change(e, "destination", "equalTo", {
-                            value: source,
-                            stateName: "source",
-                          })
-                        }
-                      />
-                      {destinationState === "has-danger" ? (
-                        <label className="error">
-                          Please enter the same value.
+                  <Col md="12">
+                    <FormGroup className={`has-label ${descriptionState}`}>
+                      <label>Description *</label>&nbsp;&nbsp;
+                      {descriptionState === "has-danger" ? (
+                        <label className="error text-danger">
+                          Content is required.
                         </label>
                       ) : null}
+                      {descriptionState.includes("length-not-match") ? (
+                        <label className="error text-danger">
+                          Content must be at least 100 characters.
+                        </label>
+                      ) : null}
+                      <Editor
+                        initialValue={initialValue.description}
+                        id="uuid"
+                        apiKey="slyingz9myqi7fv31jkg1mx9m2jrq1gt4tdrw9z0gqzbfgy0"
+                        init={{
+                          height: 500,
+                          branding: false,
+                        }}
+                        onEditorChange={(e) =>
+                          change(e, "Description", "description")
+                        }
+                      />
                     </FormGroup>
                   </Col>
-                  <Col className="label-on-right" tag="label" sm="4">
-                    <code>equalTo="#idSource"</code>
-                  </Col>
                 </Row>
+
+                <div className="category form-category">* Required fields</div>
               </CardBody>
-              <CardFooter className="text-center">
-                <Button color="primary" onClick={typeClick}>
-                  Validate Inputs
-                </Button>
-              </CardFooter>
-            </Card>
-          </Form>
-        </Col>
-        <Col md="12">
-          <Form className="form-horizontal" id="RangeValidation">
-            <Card>
-              <CardHeader>
-                <CardTitle tag="h4">Range Validation</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <Row>
-                  <Label sm="2">Min Length</Label>
-                  <Col sm="7">
-                    <FormGroup className={minLengthState}>
-                      <Input
-                        name="min_length"
-                        type="text"
-                        onChange={(e) => change(e, "minLength", "length", 5)}
-                      />
-                      {minLengthState === "has-danger" ? (
-                        <label className="error">
-                          Please enter at least 5 characters.
-                        </label>
-                      ) : null}
-                    </FormGroup>
-                  </Col>
-                  <Col className="label-on-right" tag="label" sm="3">
-                    <code>minLength="5"</code>
-                  </Col>
-                </Row>
-                <Row>
-                  <Label sm="2">Max Length</Label>
-                  <Col sm="7">
-                    <FormGroup className={maxLengthState}>
-                      <Input
-                        name="max_length"
-                        type="text"
-                        onChange={(e) =>
-                          change(e, "maxLength", "max-length", 5)
-                        }
-                      />
-                      {maxLengthState === "has-danger" ? (
-                        <label className="error">
-                          Please enter 5 or less characters.
-                        </label>
-                      ) : null}
-                    </FormGroup>
-                  </Col>
-                  <Col className="label-on-right" tag="label" sm="3">
-                    <code>maxLength="5"</code>
-                  </Col>
-                </Row>
-                <Row>
-                  <Label sm="2">Range</Label>
-                  <Col sm="7">
-                    <FormGroup className={rangeState}>
-                      <Input
-                        name="range"
-                        type="text"
-                        onChange={(e) => change(e, "range", "range", 6, 10)}
-                      />
-                      {rangeState === "has-danger" ? (
-                        <label className="error">
-                          Please enter a value between 6 and 10.
-                        </label>
-                      ) : null}
-                    </FormGroup>
-                  </Col>
-                  <Col className="label-on-right" tag="label" sm="3">
-                    <code>min="6" max="10"</code>
-                  </Col>
-                </Row>
-                <Row>
-                  <Label sm="2">Min Value</Label>
-                  <Col sm="7">
-                    <FormGroup className={minState}>
-                      <Input
-                        name="min"
-                        type="text"
-                        onChange={(e) => change(e, "min", "min-value", 6)}
-                      />
-                      {minState === "has-danger" ? (
-                        <label className="error">
-                          Please enter a value greater than or equal to 6.
-                        </label>
-                      ) : null}
-                    </FormGroup>
-                  </Col>
-                  <Col className="label-on-right" tag="label" sm="3">
-                    <code>min="6"</code>
-                  </Col>
-                </Row>
-                <Row>
-                  <Label sm="2">Max Value</Label>
-                  <Col sm="7">
-                    <FormGroup className={maxState}>
-                      <Input
-                        name="max"
-                        type="text"
-                        onChange={(e) => change(e, "max", "max-value", 6)}
-                      />
-                      {maxState === "has-danger" ? (
-                        <label className="error">
-                          Please enter a value less than or equal to 6.
-                        </label>
-                      ) : null}
-                    </FormGroup>
-                  </Col>
-                  <Col className="label-on-right" tag="label" sm="3">
-                    <code>max="6"</code>
-                  </Col>
-                </Row>
-              </CardBody>
-              <CardFooter className="text-center">
-                <Button color="primary" onClick={rangeClick}>
-                  Validate Inputs
+              <CardFooter className="text-left">
+                <Button
+                  disabled={disabledButton}
+                  className="animation-on-hover"
+                  color="success"
+                  onClick={handlePreview}
+                >
+                  Preview
                 </Button>
               </CardFooter>
             </Card>

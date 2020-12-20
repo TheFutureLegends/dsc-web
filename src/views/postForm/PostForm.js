@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import DataTableContainer from "../../container/Table/index.js";
 import FormContainer from "../../container/Form/index.js";
 import { getPostListDataTable } from "../../core/redux/actions/post.action.js";
 
@@ -22,7 +21,8 @@ const PostForm = ({ ...props }) => {
 };
 
 const mapStateToProps = (state) => ({
-  postList: state.post.postList,
+  ui: state.ui,
+  // postList: state.post.postList,
   loading: state.post.loading,
 });
 
@@ -30,4 +30,4 @@ const mapDispatchToProps = {
   getPostListDataTable,
 };
 
-export default connect(null, null)(PostForm);
+export default connect(mapStateToProps, null)(PostForm);
