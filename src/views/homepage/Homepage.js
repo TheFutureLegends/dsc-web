@@ -14,7 +14,7 @@ const Homepage = ({ ...props }) => {
     if (props.loading) {
       props.getPostsWithPagination(10, 1);
 
-      console.log(props.categoryList);
+      // console.log(props.categoryList);
     }
   });
 

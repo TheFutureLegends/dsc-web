@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import DataTableContainer from "../../container/Table/index.js";
 import {
   getPostListDataTable,
+  getPostForEditing,
   deletePost,
 } from "../../core/redux/actions/post.action.js";
 
@@ -33,6 +34,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getPostListDataTable,
+  getPostForEditing,
   deletePost,
 };
 

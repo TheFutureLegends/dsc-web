@@ -6,6 +6,7 @@ import {
   SET_POST,
   SET_POSTS,
   SET_LIST_OF_POST,
+  EDIT_POST,
   DELETE_POST,
 } from "../types/post.types";
 
@@ -54,6 +55,11 @@ export function PostReducer(state = initialState, action) {
       return {
         ...state,
         postList: action.payload,
+      };
+    case EDIT_POST:
+      return {
+        ...state,
+        post: action.payload,
       };
     case DELETE_POST:
       return;

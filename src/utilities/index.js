@@ -8,6 +8,14 @@ export const isEmptyArray = (array) => {
   return false;
 };
 
+export const isEmptyObject = (obj) => {
+  for (var prop in obj) {
+    if (!obj.hasOwnProperty(prop)) return true;
+  }
+
+  return false;
+}
+
 export const isObjectPropertiesEmpty = (obj) => {
   /**
    * Loop through Object

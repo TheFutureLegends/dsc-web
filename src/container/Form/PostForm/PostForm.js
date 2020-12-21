@@ -1,13 +1,8 @@
 import React from "react";
 // reactstrap components
-import {
-  FormGroup,
-  Input,
-  Row,
-  Col,
-} from "reactstrap";
+import { FormGroup, Input, Row, Col } from "reactstrap";
 
-const PostFormContainer__ = ({ handleChange, ...props }) => {
+const PostFormContainer__ = ({ data, handleChange, ...props }) => {
   const { titleState, categoryState, imageUrlState } = props;
 
   return (
@@ -19,6 +14,7 @@ const PostFormContainer__ = ({ handleChange, ...props }) => {
             <Input
               name="title"
               type="text"
+              value={data.title}
               onChange={(e) => handleChange(e, "Title", "title")}
             />
             {titleState.includes("length-not-match") ? (
@@ -37,6 +33,7 @@ const PostFormContainer__ = ({ handleChange, ...props }) => {
               id="category"
               name="category"
               type="text"
+              value={data.category}
               autoComplete="off"
               onChange={(e) => handleChange(e, "Category", "category")}
             />
@@ -55,6 +52,7 @@ const PostFormContainer__ = ({ handleChange, ...props }) => {
             <Input
               name="imageUrl"
               type="text"
+              value={data.imageFile}
               onChange={(e) => handleChange(e, "ImageUrl", "url")}
             />
             {imageUrlState === "has-danger" ? (

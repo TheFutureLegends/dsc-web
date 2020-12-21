@@ -12,7 +12,7 @@ import {
 import PostListAction from "./PostList/PostListAction.js";
 
 /**
- * @param {Array} columns
+ * @param {Array} tableHeader
  * @return {Array} result
  */
 const createTableHeader = (tableHeader) => {
@@ -38,18 +38,20 @@ const createTableHeader = (tableHeader) => {
   return result;
 };
 
-const createData = (data, type = "post", { ...props }) => {
+const createAction = (item, type = "post", { ...props }) => {
   let action;
 
   switch (type) {
     case "post":
-      action = <PostListAction {...props} />;
-      break;
-
+      return <PostListAction data={item} history={props.history} {...props} />;
     default:
       break;
   }
 
+  return action;
+};
+
+const createData = (data, type = "post", { ...props }) => {
   let result = [];
 
   if (!isEmptyArray(data)) {
@@ -59,7 +61,7 @@ const createData = (data, type = "post", { ...props }) => {
         title: getSubString(value.title, 0, 20),
         description: getSubString(value.description, 0, 200),
         category: value.category.title,
-        actions: action,
+        actions: createAction(value, type, { ...props }),
       });
     });
   }
@@ -81,6 +83,7 @@ const DataTableContainer__ = ({
   );
 
   useEffect(() => {}, [dataRows]);
+
   return (
     <>
       <Col md={8} className="ml-auto mr-auto">

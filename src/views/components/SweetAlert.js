@@ -133,6 +133,7 @@ const SweetAlert = () => {
         title="Auto close alert!"
         onConfirm={() => hideAlert()}
         showConfirm={false}
+        timer={2000}
       >
         I will close in 2 seconds.
       </ReactBSAlert>

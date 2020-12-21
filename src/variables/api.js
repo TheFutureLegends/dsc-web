@@ -3,7 +3,9 @@ import { cookies, authorizationCookieName } from "./cookie.js";
 
 export const apiDomain = "http://developer-club-api.herokuapp.com/api";
 
-axios.defaults.baseURL = apiDomain;
+export const localApiDomain = "http://localhost:5000/api"
+
+axios.defaults.baseURL = localApiDomain;
 
 export const getAuthorizationHeaders = () => {
   return {

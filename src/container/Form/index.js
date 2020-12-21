@@ -29,6 +29,7 @@ import {
   isObjectPropertiesEmpty,
   isObjectPropertiesIncludeString,
   convertSlugToString,
+  isStringIncludesWord,
 } from "../../utilities/index.js";
 
 import {
@@ -44,14 +45,7 @@ let form;
 
 var htmlToReactParser = HtmlToReact.Parser;
 
-const FormContainer__ = ({
-  initialValue,
-  data,
-  state,
-  pageTitle,
-  formType,
-  ...props
-}) => {
+const FormContainer__ = ({ data, state, pageTitle, formType, ...props }) => {
   // Preview button
   let btnRef = useRef();
   const [isSubmit, setIsSubmit] = useState(false);
@@ -197,8 +191,11 @@ const FormContainer__ = ({
   };
 
   const handleSubmit = () => {
-    props.createNewPost(formData, props.history);
-    // console.log(formData);
+    if (isStringIncludesWord(props.location.pathname, "edit")) {
+      props.updatePost(formData.id, formData, props.history);
+    } else {
+      props.createNewPost(formData, props.history);
+    }
   };
 
   // var htmlToReactParser = new HtmlToReactParser();
@@ -211,6 +208,7 @@ const FormContainer__ = ({
           categoryState={formState.category}
           imageUrlState={formState.image}
           handleChange={change}
+          data={formData}
           {...props}
         />
       );
@@ -272,7 +270,7 @@ const FormContainer__ = ({
                         </label>
                       ) : null}
                       <Editor
-                        initialValue={initialValue.description}
+                        initialValue={formData.description}
                         id="uuid"
                         apiKey="slyingz9myqi7fv31jkg1mx9m2jrq1gt4tdrw9z0gqzbfgy0"
                         init={{
