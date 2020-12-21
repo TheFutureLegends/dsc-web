@@ -13,6 +13,8 @@ const Homepage = ({ ...props }) => {
   useEffect(() => {
     if (props.loading) {
       props.getPostsWithPagination(10, 1);
+
+      console.log(props.categoryList);
     }
   });
 
@@ -22,6 +24,7 @@ const Homepage = ({ ...props }) => {
 const mapStateToProps = (state) => ({
   loading: state.post.loading,
   posts: state.post.posts,
+  categoryList: state.category.categoryList,
 });
 
 const mapDispatchToProps = {

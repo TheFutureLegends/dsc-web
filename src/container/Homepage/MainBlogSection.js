@@ -28,7 +28,8 @@ const MainBlogSection__ = ({ posts, ...props }) => {
             <CardHeader style={{ marginBottom: "10px" }}>
               <Author
                 src={post.author.avatar}
-                size={30}
+                avatarSize={30}
+                fontSize={"15px"}
                 author={post.author.username}
                 category={post.category.title}
               />

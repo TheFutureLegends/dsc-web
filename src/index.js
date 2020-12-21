@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import { cookies, authorizationCookieName } from "./variables/cookie.js";
 import { logoutUser, getAuthUserData } from "./core/redux/actions/user.action";
 import { getPostListDataTable } from "./core/redux/actions/post.action";
+import { getAllCategories } from "./core/redux/actions/category.action";
 
 // Styling
 import "./assets/css/nucleo-icons.css";
@@ -29,6 +30,8 @@ if (cookie) {
   store.dispatch(logoutUser());
 }
 
+store.dispatch(getAllCategories());
+
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
@@ -44,7 +47,7 @@ ReactDOM.render(
           render={(props) => <AdminLayout {...props} />}
         />
         <Route
-          exact
+          // exact
           path="/"
           render={(props) => <GeneralLayout {...props} />}
         />

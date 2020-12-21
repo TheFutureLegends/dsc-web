@@ -60,40 +60,6 @@ export const getMostPopularPosts = (limit, asc) => async (dispatch) => {
   dispatch({ type: STOP_LOADING_POST });
 };
 
-export const postNewPost = (
-  { title, description, imageFile, category },
-  history
-) => async (dispatch) => {
-  try {
-    await axios.post(
-      `/posts/create`,
-      {
-        title: title,
-        description: description,
-        imageFile: imageFile,
-        category: "web-development",
-      },
-      getAuthorizationHeaders()
-    );
-
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Success",
-      text:
-        "You have created new post. You will be redirect to post list in a moment!",
-      showConfirmButton: false,
-      timer: 3000,
-    });
-
-    getPostListDataTable();
-
-    setInterval(() => history.push("/control-panel/post-list"), 2900);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getPostListDataTable = () => async (dispatch) => {
   dispatch({ type: LOADING_POST });
   try {
@@ -104,6 +70,52 @@ export const getPostListDataTable = () => async (dispatch) => {
     console.log(error);
   }
   dispatch({ type: STOP_LOADING_POST });
+};
+
+export const createNewPost = (formData, history) => async (dispatch) => {
+  Swal.fire({
+    position: "center",
+    title: "Send data to server",
+    showConfirmButton: false,
+    didOpen: () => {
+      Swal.showLoading();
+    },
+  });
+
+  try {
+    await axios.post("/posts/create", formData, getAuthorizationHeaders());
+
+    let res = await axios.get(`/posts/read`, getAuthorizationHeaders());
+
+    dispatch({ type: SET_LIST_OF_POST, payload: res.data.posts });
+
+    Swal.close();
+
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Success",
+      text: `You have created new post.\nYou will be redirect to post list in a moment!`,
+      showConfirmButton: false,
+      timer: 3000,
+      didClose: () => {
+        history.push("/control-panel/post-list");
+      }
+    });
+
+    // setInterval(() => history.push("/control-panel/post-list"), 2900);
+  } catch (error) {
+    Swal.close();
+
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: error.response.data.title,
+      text: error.response.data.message,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
 };
 
 export const deletePost = (item) => async (dispatch) => {

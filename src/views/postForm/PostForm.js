@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import FormContainer from "../../container/Form/index.js";
-import { getPostListDataTable } from "../../core/redux/actions/post.action.js";
+import {
+  // getPostListDataTable,
+  createNewPost,
+} from "../../core/redux/actions/post.action.js";
 
 const PostForm = ({ ...props }) => {
   //   useEffect(() => {
@@ -13,8 +16,10 @@ const PostForm = ({ ...props }) => {
   return (
     <FormContainer
       initialValue={{ title: "", description: "", category: "" }}
+      data={{ title: "", category: "", imageFile: "", description: "" }}
+      state={{ title: "", category: "", imageFile: "", description: "" }}
       pageTitle={"Post Create Form"}
-      type={"post"}
+      formType={"post"}
       {...props}
     />
   );
@@ -22,12 +27,14 @@ const PostForm = ({ ...props }) => {
 
 const mapStateToProps = (state) => ({
   ui: state.ui,
-  // postList: state.post.postList,
   loading: state.post.loading,
+  user: state.user,
+  categoryList: state.category.categoryList,
 });
 
 const mapDispatchToProps = {
-  getPostListDataTable,
+  // getPostListDataTable,
+  createNewPost,
 };
 
-export default connect(mapStateToProps, null)(PostForm);
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm);

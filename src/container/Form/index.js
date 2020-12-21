@@ -1,87 +1,120 @@
 /* eslint-disable no-unused-vars*/
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // reactstrap components
 import {
   Button,
   Card,
+  CardTitle,
   CardBody,
+  CardImg,
   CardFooter,
   FormGroup,
   Form,
-  Input,
   Row,
   Col,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "reactstrap";
+
+import HtmlToReact from "html-to-react";
 
 import { Editor } from "@tinymce/tinymce-react";
 
-const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
-  /**
-   * TinyMCE Key
-   */
+import Author from "../../components/Author/Author.js";
+
+import {
+  isObjectPropertiesEmpty,
+  isObjectPropertiesIncludeString,
+  convertSlugToString,
+} from "../../utilities/index.js";
+
+import {
+  verifyLength,
+  verifyUrl,
+  verifyUrlImageMime,
+  verifyEditorContentLength,
+} from "../../validations/index.js";
+
+import PostFormContainer from "./PostForm/PostForm.js";
+
+let form;
+
+var htmlToReactParser = HtmlToReact.Parser;
+
+const FormContainer__ = ({
+  initialValue,
+  data,
+  state,
+  pageTitle,
+  formType,
+  ...props
+}) => {
   // Preview button
+  let btnRef = useRef();
   const [isSubmit, setIsSubmit] = useState(false);
-  const [disabledButton, setDisabledButton] = useState("");
+  const [disabledButton, setDisabledButton] = useState(true);
 
-  // form
-  const [title, setTitle] = useState("");
-  const [titleState, setTitleState] = useState("");
+  // Preview Modal
+  var parser = new htmlToReactParser();
+  const [unMountModalOnClose, setUnMountModalOnClose] = useState(true);
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
-  const [category, setCategory] = useState("");
-  const [categoryState, setCategoryState] = useState("");
+  // form data
+  const [formData, setFormData] = useState(data);
 
-  const [imageUrl, setImageUrl] = useState("");
-  const [imageUrlState, setImageUrlState] = useState("");
-
-  const [description, setDescription] = useState("");
-  const [descriptionState, setDescriptionState] = useState("");
+  // form success/error state
+  const [formState, setFormState] = useState(state);
 
   const stateFunctions = {
-    setTitle: (value) => setTitle(value),
-    setTitleState: (value) => setTitleState(value),
+    setTitle: (value) =>
+      setFormData({
+        ...formData,
+        title: value,
+      }),
+    setTitleState: (value) =>
+      setFormState({
+        ...formState,
+        title: value,
+      }),
 
-    setCategory: (value) => setCategory(value),
-    setCategoryState: (value) => setCategoryState(value),
+    setCategory: (value) =>
+      setFormData({
+        ...formData,
+        category: value,
+      }),
+    setCategoryState: (value) =>
+      setFormState({
+        ...formState,
+        category: value,
+      }),
 
-    setImageUrl: (value) => setImageUrl(value),
-    setImageUrlState: (value) => setImageUrlState(value),
+    setImageUrl: (value) =>
+      setFormData({
+        ...formData,
+        imageFile: value,
+      }),
+    setImageUrlState: (value) =>
+      setFormState({
+        ...formState,
+        image: value,
+      }),
 
-    setDescription: (value) => setDescription(value),
-    setDescriptionState: (value) => setDescriptionState(value),
+    setDescription: (value) =>
+      setFormData({
+        ...formData,
+        description: value,
+      }),
+    setDescriptionState: (value) =>
+      setFormState({
+        ...formState,
+        description: value,
+      }),
   };
 
-  // function that verifies if a string has a given length or not
-  const verifyLength = (value, length) => {
-    if (value.length >= length) {
-      return true;
-    }
-    return false;
-  };
-
-  // verifies if value is a valid URL
-  const verifyUrl = (value) => {
-    try {
-      new URL(value);
-      return true;
-    } catch (_) {
-      return false;
-    }
-  };
-
-  const verifyEditorContentLength = (value, length) => {
-    const regex = /(<([^>]+)>)/gi;
-
-    const result = value.replace(regex, "");
-
-    if (verifyLength(result, length)) {
-      return true;
-    }
-
-    return false;
-  };
-
-  const change = (event, stateName, type, stateNameEqualTo, maxValue) => {
+  const change = (event, stateName, type) => {
     switch (type) {
       /**
        * Title Validate
@@ -99,7 +132,10 @@ const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
        * Image URL validation
        */
       case "url":
-        if (verifyUrl(event.target.value)) {
+        if (
+          verifyUrl(event.target.value) &&
+          verifyUrlImageMime(event.target.value)
+        ) {
           stateFunctions["set" + stateName + "State"]("has-success");
         } else {
           stateFunctions["set" + stateName + "State"]("has-danger");
@@ -109,14 +145,14 @@ const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
        * Category validation
        */
       case "category":
-        if (verifyLength(event.target.value, 1)) {
+        if (verifyLength(event.target.value, 5)) {
           stateFunctions["set" + stateName + "State"]("has-success");
         } else {
           stateFunctions["set" + stateName + "State"]("has-danger");
         }
         break;
       /**
-       * TinyMCE Editor Content Verify
+       * TinyMCE Editor Content Validate
        */
       case "description":
         if (verifyEditorContentLength(event, 100)) {
@@ -131,46 +167,73 @@ const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
         break;
     }
 
-    if (type === "description") {
-      stateFunctions["set" + stateName](event);
-    } else {
-      stateFunctions["set" + stateName](event.target.value);
+    switch (type) {
+      case "description":
+        stateFunctions["set" + stateName](event);
+        break;
+
+      default:
+        stateFunctions["set" + stateName](event.target.value);
+        break;
     }
   };
 
   const handleEnableButton = () => {
-    // if (props.ui.loading === false) {
-    //   if (
-    //     title === "" ||
-    //     category === "" ||
-    //     imageUrl === "" ||
-    //     description === ""
-    //   ) {
-    //     return setDisabledButton("disabled");
-    //   } else if (
-    //     titleState.includes("has-danger") ||
-    //     categoryState.includes("has-danger") ||
-    //     imageUrlState.includes("has-danger") ||
-    //     descriptionState.includes("has-danger")
-    //   ) {
-    //     return setDisabledButton("disabled");
-    //   } else {
-    //     return setDisabledButton("");
-    //   }
-    // }
+    if (props.ui.loading === false) {
+      if (isObjectPropertiesEmpty(formData)) {
+        return setDisabledButton(true);
+      }
+
+      if (isObjectPropertiesIncludeString(formState, "has-danger")) {
+        return setDisabledButton(true);
+      }
+
+      return setDisabledButton(false);
+    }
   };
 
   const handlePreview = () => {
-    console.log(props);
+    setIsModalOpened(!isModalOpened);
   };
+
+  const handleSubmit = () => {
+    props.createNewPost(formData, props.history);
+    // console.log(formData);
+  };
+
+  // var htmlToReactParser = new HtmlToReactParser();
+
+  switch (formType) {
+    case "post":
+      form = (
+        <PostFormContainer
+          titleState={formState.title}
+          categoryState={formState.category}
+          imageUrlState={formState.image}
+          handleChange={change}
+          {...props}
+        />
+      );
+      break;
+
+    default:
+      break;
+  }
 
   useEffect(() => {
     handleEnableButton();
 
     return () => {
-      handleEnableButton();
+      // handleEnableButton();
     };
-  }, [disabledButton, isSubmit]);
+  }, [
+    formData,
+    formState,
+    disabledButton,
+    isSubmit,
+    isModalOpened,
+    unMountModalOnClose,
+  ]);
 
   return (
     <>
@@ -190,72 +253,20 @@ const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
       </Row>
       <Row>
         <Col md="12">
-          <Form id="RegisterValidation">
+          <Form>
             <Card>
               <CardBody>
-                <Row>
-                  <Col md="6">
-                    <FormGroup className={`has-label ${titleState}`}>
-                      <label>Title *</label>
-                      <Input
-                        name="title"
-                        type="text"
-                        onChange={(e) => change(e, "Title", "title")}
-                      />
-                      {titleState.includes("length-not-match") ? (
-                        <label className="error text-danger">
-                          Title field must be at least 10 characters.
-                        </label>
-                      ) : null}
-                    </FormGroup>
-                  </Col>
-
-                  {/* Category Selection */}
-                  <Col md="6">
-                    <FormGroup className={`has-label ${categoryState}`}>
-                      <label>Category *</label>
-                      <Input
-                        id="category"
-                        name="category"
-                        type="text"
-                        autoComplete="off"
-                        onChange={(e) => change(e, "Category", "category")}
-                      />
-                      {categoryState === "has-danger" ? (
-                        <label className="error text-danger">
-                          This field is required.
-                        </label>
-                      ) : null}
-                    </FormGroup>
-                  </Col>
-                </Row>
+                {form}
                 <Row>
                   <Col md="12">
-                    <FormGroup className={`has-label ${imageUrlState}`}>
-                      <label>Image URL *</label>
-                      <Input
-                        name="imageUrl"
-                        type="text"
-                        onChange={(e) => change(e, "ImageUrl", "url")}
-                      />
-                      {imageUrlState === "has-danger" ? (
-                        <label className="error text-danger">
-                          Please enter a valid URL.
-                        </label>
-                      ) : null}
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col md="12">
-                    <FormGroup className={`has-label ${descriptionState}`}>
+                    <FormGroup className={`has-label ${formState.description}`}>
                       <label>Description *</label>&nbsp;&nbsp;
-                      {descriptionState === "has-danger" ? (
+                      {formState.description === "has-danger" ? (
                         <label className="error text-danger">
                           Content is required.
                         </label>
                       ) : null}
-                      {descriptionState.includes("length-not-match") ? (
+                      {formState.description.includes("length-not-match") ? (
                         <label className="error text-danger">
                           Content must be at least 100 characters.
                         </label>
@@ -276,6 +287,70 @@ const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
                   </Col>
                 </Row>
 
+                <Modal
+                  isOpen={isModalOpened}
+                  toggle={handlePreview}
+                  size="lg"
+                  centered
+                  unmountOnClose={unMountModalOnClose}
+                  className="justify-content-center"
+                  modalClassName="modal-long"
+                >
+                  <ModalHeader
+                    className="justify-content-center"
+                    toggle={handlePreview}
+                  >
+                    Preview
+                  </ModalHeader>
+                  <ModalBody>
+                    <CardTitle
+                      tag="h1"
+                      className="text-center justify-content-center"
+                    >
+                      {formData.title}
+                    </CardTitle>
+                    <Row className="mb-2">
+                      <Col xs="12">
+                        <Author
+                          src={props.user.credential.avatar}
+                          size={40}
+                          avatarSize={40}
+                          fontSize={"20px"}
+                          author={props.user.credential.username}
+                          category={convertSlugToString(formData.category)}
+                        />
+                      </Col>
+                    </Row>
+
+                    <Row className="mb-4">
+                      <Col xs="12">
+                        <CardImg src={formData.imageFile} />
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col xs="12">{parser.parse(formData.description)}</Col>
+                    </Row>
+                  </ModalBody>
+                  <ModalFooter>
+                    <Button
+                      color="danger"
+                      className="animation-on-hover"
+                      onClick={handlePreview}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      color="success"
+                      onClick={(e) => {
+                        handleSubmit();
+                      }}
+                      className="animation-on-hover"
+                    >
+                      Save changes
+                    </Button>
+                  </ModalFooter>
+                </Modal>
+
                 <div className="category form-category">* Required fields</div>
               </CardBody>
               <CardFooter className="text-left">
@@ -284,6 +359,7 @@ const FormContainer__ = ({ initialValue, pageTitle, ...props }) => {
                   className="animation-on-hover"
                   color="success"
                   onClick={handlePreview}
+                  ref={btnRef}
                 >
                   Preview
                 </Button>

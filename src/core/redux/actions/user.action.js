@@ -4,6 +4,7 @@ import {
   SET_AUTHENTICATED,
   LOADING_USER,
 } from "../types/user.types";
+import { SET_LIST_OF_POST } from "../types/post.types";
 import { LOADING_UI, SET_ERRORS, STOP_LOADING_UI } from "../types/ui.types";
 import axios from "axios";
 import { getAuthorizationHeaders } from "../../../variables/api.js";
@@ -29,9 +30,11 @@ export const loginUser = (userData, history) => async (dispatch) => {
 
     setAuthorizationHeader(res.data.accessToken.token);
 
-    // getPostListDataTable();
-
     dispatch({ type: SET_USER, payload: { credential: res.data } });
+
+    let postListResponse = await axios.get(`/posts/read`, getAuthorizationHeaders());
+
+    dispatch({ type: SET_LIST_OF_POST, payload: postListResponse.data.posts });
 
     Swal.close();
 
@@ -42,11 +45,10 @@ export const loginUser = (userData, history) => async (dispatch) => {
       text: "You have logged in!",
       showConfirmButton: false,
       timer: 2000,
+      didClose: () => {
+        history.push("/");
+      },
     });
-
-    setInterval(() => {
-      history.push("/");
-    }, 1900);
 
     // history.push("/");
   } catch (error) {
@@ -121,11 +123,10 @@ export const signupUser = (userData, history) => async (dispatch) => {
       text: "You can now login with your registered email!",
       showConfirmButton: false,
       timer: 2000,
+      didClose: () => {
+        history.push("/auth/login");
+      },
     });
-
-    setInterval(() => {
-      history.push("/auth/login");
-    }, 1900);
   } catch (error) {
     // console.log(error.response.data.message);
 
