@@ -173,17 +173,15 @@ const FormContainer__ = ({ data, state, pageTitle, formType, ...props }) => {
   };
 
   const handleEnableButton = () => {
-    if (props.ui.loading === false) {
-      if (isObjectPropertiesEmpty(formData)) {
-        return setDisabledButton(true);
-      }
-
-      if (isObjectPropertiesIncludeString(formState, "has-danger")) {
-        return setDisabledButton(true);
-      }
-
-      return setDisabledButton(false);
+    if (isObjectPropertiesEmpty(formData)) {
+      return setDisabledButton(true);
     }
+
+    if (isObjectPropertiesIncludeString(formState, "has-danger")) {
+      return setDisabledButton(true);
+    }
+
+    return setDisabledButton(false);
   };
 
   const handlePreview = () => {
