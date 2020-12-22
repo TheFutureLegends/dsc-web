@@ -73,7 +73,7 @@ const PostListAction__ = ({ ...props }) => {
         confirmBtnBsStyle="success"
         btnSize=""
       >
-        Your post is safe :)
+        Your post is extremely safe :)
       </ReactBSAlert>
     );
   };
