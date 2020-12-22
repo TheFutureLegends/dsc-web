@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import { Button } from "reactstrap";
-import Swal from "sweetalert2";
+
+// react component used to create sweet alerts
+// import Swal from "sweetalert2";
+import ReactBSAlert from "react-bootstrap-sweetalert";
 
 const PostListAction__ = ({ ...props }) => {
   const [alert, setAlert] = useState(null);
@@ -19,24 +22,74 @@ const PostListAction__ = ({ ...props }) => {
   };
 
   const handleDelete = (item) => {
-    Swal.fire({
-      title: "Do you want to delete this post?",
-      showCancelButton: true,
-      confirmButtonText: `Yes, I do`,
-      cancelButtonText: `No, I don't`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        Swal.fire("Saved!", "", "success");
-        console.log(item);
-      } else if (result.isDismissed) {
-        Swal.fire("Changes are not saved", "", "info");
-      }
-    });
+    props.warningWithConfirmAndCancelMessage();
   };
+
+  const warningWithConfirmAndCancelMessage = () => {
+    setAlert(
+      <ReactBSAlert
+        warning
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Are you sure?"
+        onConfirm={() => successDelete()}
+        onCancel={() => cancelDetele()}
+        confirmBtnBsStyle="success animation-on-hover"
+        cancelBtnBsStyle="danger animation-on-hover"
+        confirmBtnText="Yes, delete it!"
+        cancelBtnText="Cancel"
+        showCancel
+        btnSize=""
+      >
+        You will not be able to recover this post!
+      </ReactBSAlert>
+    );
+  };
+
+  const successDelete = () => {
+    setAlert(
+      <ReactBSAlert
+        success
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Deleted!"
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
+        confirmBtnBsStyle="success"
+        btnSize=""
+        timer={2000}
+      >
+        Your post has been deleted permanently!
+      </ReactBSAlert>
+    );
+  };
+
+  const cancelDetele = () => {
+    setAlert(
+      <ReactBSAlert
+        info
+        style={{ display: "block", marginTop: "-100px" }}
+        title="Cancelled"
+        onConfirm={() => hideAlert()}
+        onCancel={() => hideAlert()}
+        confirmBtnBsStyle="success"
+        btnSize=""
+      >
+        Your post is safe :)
+      </ReactBSAlert>
+    );
+  };
+
+  useEffect(() => {
+    return function cleanup() {
+      var id = window.setTimeout(null, 0);
+      while (id--) {
+        window.clearTimeout(id);
+      }
+    };
+  });
 
   return (
     <div className="actions-right">
+      {alert}
       {/* use this button to add a edit kind of action */}
       <Button
         onClick={(e) => {
@@ -51,26 +104,7 @@ const PostListAction__ = ({ ...props }) => {
       </Button>{" "}
       {/* use this button to remove the data row */}
       <Button
-        onClick={(e) => {
-          e.preventDefault();
-
-          handleDelete(data);
-        }}
-        // onClick={() => {
-        // console.log(props);
-        //     var newdata = data;
-        //     newdata.find((o, i) => {
-        //       if (o.id === key) {
-        //         // here you should add some custom code so you can delete the data
-        //         // from this component and from your server as well
-        //         data.splice(i, 1);
-        //         console.log(data);
-        //         return true;
-        //       }
-        //       return false;
-        //     });
-        //     setDataRows(newdata);
-        // }}
+        onClick={() => warningWithConfirmAndCancelMessage(data)}
         color="danger"
         size="sm"
         className={classNames("btn-icon btn-link like")}

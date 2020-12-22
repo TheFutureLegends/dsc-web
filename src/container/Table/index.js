@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardBody, Row, Col } from "reactstrap";
+import { Card, CardBody, CardText, Button, Row, Col } from "reactstrap";
 
 import ReactTable from "../../components/ReactTable/ReactTable.js";
 
@@ -10,6 +10,8 @@ import {
 } from "../../utilities/index.js";
 
 import PostListAction from "./PostList/PostListAction.js";
+
+import ReactBSAlert from "react-bootstrap-sweetalert";
 
 /**
  * @param {Array} tableHeader
@@ -82,7 +84,15 @@ const DataTableContainer__ = ({
     createData(data, type, { ...props })
   );
 
-  useEffect(() => {}, [dataRows]);
+  // to stop the warning of calling setState of unmounted component
+  useEffect(() => {
+    return function cleanup() {
+      var id = window.setTimeout(null, 0);
+      while (id--) {
+        window.clearTimeout(id);
+      }
+    };
+  }, [dataRows, alert]);
 
   return (
     <>
