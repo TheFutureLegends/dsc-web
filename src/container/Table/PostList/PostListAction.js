@@ -21,17 +21,13 @@ const PostListAction__ = ({ ...props }) => {
     props.getPostForEditing(id, history);
   };
 
-  const handleDelete = (item) => {
-    props.warningWithConfirmAndCancelMessage();
-  };
-
-  const warningWithConfirmAndCancelMessage = () => {
+  const warningWithConfirmAndCancelMessage = (data) => {
     setAlert(
       <ReactBSAlert
         warning
         style={{ display: "block", marginTop: "-100px" }}
         title="Are you sure?"
-        onConfirm={() => successDelete()}
+        onConfirm={() => successDelete(data)}
         onCancel={() => cancelDetele()}
         confirmBtnBsStyle="success animation-on-hover"
         cancelBtnBsStyle="danger animation-on-hover"
@@ -45,13 +41,17 @@ const PostListAction__ = ({ ...props }) => {
     );
   };
 
-  const successDelete = () => {
+  const successDelete = (data) => {
     setAlert(
       <ReactBSAlert
         success
         style={{ display: "block", marginTop: "-100px" }}
         title="Deleted!"
-        onConfirm={() => hideAlert()}
+        onConfirm={() => {
+          props.deletePost(data, props.history);
+
+          hideAlert();
+        }}
         onCancel={() => hideAlert()}
         confirmBtnBsStyle="success"
         btnSize=""
@@ -88,30 +88,32 @@ const PostListAction__ = ({ ...props }) => {
   });
 
   return (
-    <div className="actions-right">
+    <>
       {alert}
-      {/* use this button to add a edit kind of action */}
-      <Button
-        onClick={(e) => {
-          e.preventDefault();
-          handleEdit(data._id);
-        }}
-        color="info"
-        size="sm"
-        className={classNames("btn-icon btn-link like")}
-      >
-        <i className="tim-icons icon-pencil" />
-      </Button>{" "}
-      {/* use this button to remove the data row */}
-      <Button
-        onClick={() => warningWithConfirmAndCancelMessage(data)}
-        color="danger"
-        size="sm"
-        className={classNames("btn-icon btn-link like")}
-      >
-        <i className="tim-icons icon-simple-remove" />
-      </Button>{" "}
-    </div>
+      <div className="actions-right">
+        {/* use this button to add a edit kind of action */}
+        <Button
+          onClick={(e) => {
+            e.preventDefault();
+            handleEdit(data._id);
+          }}
+          color="info"
+          size="sm"
+          className={classNames("btn-icon btn-link like")}
+        >
+          <i className="tim-icons icon-pencil" />
+        </Button>{" "}
+        {/* use this button to remove the data row */}
+        <Button
+          onClick={() => warningWithConfirmAndCancelMessage(data)}
+          color="danger"
+          size="sm"
+          className={classNames("btn-icon btn-link like")}
+        >
+          <i className="tim-icons icon-simple-remove" />
+        </Button>{" "}
+      </div>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardBody, CardText, Button, Row, Col } from "reactstrap";
+// import { connect } from "react-redux";
+import { Card, CardBody, Row, Col } from "reactstrap";
 
 import ReactTable from "../../components/ReactTable/ReactTable.js";
 
@@ -10,8 +11,6 @@ import {
 } from "../../utilities/index.js";
 
 import PostListAction from "./PostList/PostListAction.js";
-
-import ReactBSAlert from "react-bootstrap-sweetalert";
 
 /**
  * @param {Array} tableHeader
@@ -40,19 +39,6 @@ const createTableHeader = (tableHeader) => {
   return result;
 };
 
-const createAction = (item, type = "post", { ...props }) => {
-  let action;
-
-  switch (type) {
-    case "post":
-      return <PostListAction data={item} history={props.history} {...props} />;
-    default:
-      break;
-  }
-
-  return action;
-};
-
 const createData = (data, type = "post", { ...props }) => {
   let result = [];
 
@@ -69,6 +55,19 @@ const createData = (data, type = "post", { ...props }) => {
   }
 
   return result;
+};
+
+const createAction = (item, type = "post", { ...props }) => {
+  let action;
+
+  switch (type) {
+    case "post":
+      return <PostListAction data={item} history={props.history} {...props} />;
+    default:
+      break;
+  }
+
+  return action;
 };
 
 const DataTableContainer__ = ({
@@ -92,7 +91,7 @@ const DataTableContainer__ = ({
         window.clearTimeout(id);
       }
     };
-  }, [dataRows, alert]);
+  });
 
   return (
     <>
@@ -109,9 +108,6 @@ const DataTableContainer__ = ({
       <Row className="mt-5">
         <Col xs={12} md={12}>
           <Card>
-            {/* <CardHeader>
-                <CardTitle tag="h4">React Table</CardTitle>
-              </CardHeader> */}
             <CardBody>
               <ReactTable
                 data={dataRows}
@@ -130,4 +126,10 @@ const DataTableContainer__ = ({
   );
 };
 
+// const mapStateToProps = (state) => ({
+//   postList: state.post.postList,
+//   loading: state.post.loading,
+// });
+
 export default DataTableContainer__;
+// export default connect(mapStateToProps, null)(DataTableContainer__);

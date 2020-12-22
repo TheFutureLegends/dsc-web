@@ -7,7 +7,7 @@ import {
   LOADING_POST,
   STOP_LOADING_POST,
   EDIT_POST,
-  // DELETE_POST,
+  DELETE_POST,
 } from "../types/post.types";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -68,7 +68,6 @@ export const getMostPopularPosts = (limit, asc) => async (dispatch) => {
 };
 
 export const getPostListDataTable = () => async (dispatch) => {
-  dispatch({ type: LOADING_POST });
   try {
     let res = await axios.get(`/posts/read`, getAuthorizationHeaders());
 
@@ -76,6 +75,7 @@ export const getPostListDataTable = () => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+
   dispatch({ type: STOP_LOADING_POST });
 };
 
@@ -208,14 +208,24 @@ export const updatePost = (id, formData, history) => async (dispatch) => {
   }
 };
 
-export const deletePost = (item) => async (dispatch) => {
+export const deletePost = (item, history) => async (dispatch) => {
+  dispatch({ type: LOADING_POST });
+
+  dispatch({ type: DELETE_POST, payload: item });
+
   try {
-    await axios.delete("/posts/delete/" + item.id, getAuthorizationHeaders());
+    await axios.delete("/posts/delete/" + item._id, getAuthorizationHeaders());
 
     let res = await axios.get(`/posts/read`, getAuthorizationHeaders());
 
     dispatch({ type: SET_LIST_OF_POST, payload: res.data.posts });
+
+    dispatch({ type: STOP_LOADING_POST });
+
+    history.push("/control-panel/post-list");
   } catch (error) {
     console.log(error);
   }
+
+  dispatch({ type: STOP_LOADING_POST });
 };

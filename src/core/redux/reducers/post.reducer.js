@@ -62,7 +62,16 @@ export function PostReducer(state = initialState, action) {
         post: action.payload,
       };
     case DELETE_POST:
-      return;
+      const item = action.payload;
+
+      const newList = state.postList.filter((i) => i._id !== item._id);
+
+      console.log("Reducer list: ", newList);
+      
+      return {
+        ...state,
+        postList: newList,
+      };
     default:
       return state;
   }
