@@ -45,7 +45,7 @@ export const getPostDetail = (slug) => async (dispatch) => {
 export const getMorePostsWithSameCategory = (category) => async (dispatch) => {
   dispatch({ type: LOADING_POST });
   try {
-    let res = await axios.get(`/posts?latest=true&asc=false&limit=3&page=3`);
+    let res = await axios.get(`/posts/getMorePostsWithSameCategory/${category}`);
 
     dispatch({ type: SET_MORE_POSTS, payload: res.data.posts });
   } catch (error) {

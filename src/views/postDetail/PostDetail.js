@@ -9,12 +9,9 @@ import {
   getPostDetail,
   getMorePostsWithSameCategory,
 } from "../../core/redux/actions/post.action.js";
-import { isEmptyObject } from "../../utilities/index.js";
 import PostDetailContainer from "../../container/postDetail/PostDetailContainer.js";
 
 const PostDetail = (props) => {
-  const [data, setData] = useState({});
-
   const [isLoading, setIsLoading] = useState(true);
   // We can use the `useParams` hook here to access
   // the dynamic pieces of the URL.

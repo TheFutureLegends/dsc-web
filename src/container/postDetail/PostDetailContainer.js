@@ -31,8 +31,6 @@ const PostDetailContainer__ = ({ ...props }) => {
   if (isLoading && !isEmptyObject(props.postDetail)) {
     props.getMorePostsWithSameCategory(data.category.slug);
 
-    console.log(data.category.slug);
-
     setIsLoading(false);
   }
 
@@ -99,7 +97,7 @@ const PostDetailContainer__ = ({ ...props }) => {
                   <Col md="4" key={post.slug}>
                     <PostCard
                       post={post}
-                      avatar={{ fontSize: "15px", avatarSize: 30 }}
+                      avatar={{ fontSize: "12px", avatarSize: 30 }}
                       handleReadMore={handleReadMore}
                       {...props}
                     />
