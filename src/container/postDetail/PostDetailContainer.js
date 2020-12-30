@@ -30,8 +30,8 @@ const PostDetailContainer__ = ({ ...props }) => {
             <img
               src={props.postDetail.image}
               alt={props.postDetail.slug}
-                width="100%"
-                height="500px"
+              width="100%"
+              height="500px"
             />
           </Row>
           <hr />
@@ -44,6 +44,11 @@ const PostDetailContainer__ = ({ ...props }) => {
                 author={props.postDetail.author.username}
                 category={props.postDetail.category.title}
               />
+            </Col>
+            <Col md="4">
+              <span style={{ fontSize: "20px" }}>
+                {props.postDetail.createdAt}
+              </span>
             </Col>
           </Row>
         </>
