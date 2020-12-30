@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 import { Row, Col } from "reactstrap";
 import ContentLoader from "../../components/ContentLoader/ContentLoader.js";
 import Author from "../../components/Author/Author.js";
@@ -13,28 +12,35 @@ const PostDetailContainer__ = ({ ...props }) => {
 
   const data = props.postDetail;
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const [count, setCount] = useState(3000);
 
   const handleReadMore = (slug) => {
-    // props.history.push(`/post/${slug}`);
-    console.log(props);
+    props.getPostDetail(slug);
+
+    props.history.push(`/post/${slug}`);
   };
 
-  if (!props.loading && count === 3000 && isEmptyObject(props.postDetail)) {
+  if (!props.loading && count === 3000 && !isEmptyObject(props.postDetail)) {
     timer = setTimeout(() => {
       setCount(0);
-
-      props.getMorePostsWithSameCategory(data.category.slug);
-
-      console.log(props.morePostsWithSameCategory);
     }, 3000);
+  }
+
+  if (isLoading && !isEmptyObject(props.postDetail)) {
+    props.getMorePostsWithSameCategory(data.category.slug);
+
+    console.log(data.category.slug);
+
+    setIsLoading(false);
   }
 
   useEffect(() => {
     return () => {
       clearTimeout(timer);
     };
-  }, [count]);
+  }, [count, isLoading]);
   return (
     <>
       {count === 3000 ? (
@@ -89,30 +95,16 @@ const PostDetailContainer__ = ({ ...props }) => {
                     More Posts From {data.category.title}
                   </h1>
                 </Col>
-                <Col md="4">
-                  <PostCard
-                    post={props.postDetail}
-                    avatar={{ fontSize: "13px", avatarSize: 20 }}
-                    handleReadMore={handleReadMore}
-                    {...props}
-                  />
-                </Col>
-                <Col md="4">
-                  <PostCard
-                    post={props.postDetail}
-                    avatar={{ fontSize: "13px", avatarSize: 20 }}
-                    handleReadMore={handleReadMore}
-                    {...props}
-                  />
-                </Col>
-                <Col md="4">
-                  <PostCard
-                    post={props.postDetail}
-                    avatar={{ fontSize: "13px", avatarSize: 20 }}
-                    handleReadMore={handleReadMore}
-                    {...props}
-                  />
-                </Col>
+                {props.morePostsWithSameCategory.map((post) => (
+                  <Col md="4" key={post.slug}>
+                    <PostCard
+                      post={post}
+                      avatar={{ fontSize: "15px", avatarSize: 30 }}
+                      handleReadMore={handleReadMore}
+                      {...props}
+                    />
+                  </Col>
+                ))}
               </Row>
             </>
           )}
@@ -121,11 +113,6 @@ const PostDetailContainer__ = ({ ...props }) => {
     </>
   );
 };
-
-const mapStateToProps = (state) => ({
-  loading: state.post.loading,
-  postDetail: state.post.postDetail,
-});
 
 export default PostDetailContainer__;
 
