@@ -16,8 +16,8 @@ import Author from "../../components/Author/Author.js";
 import { getSubString } from "../../utilities/index.js";
 
 const MainBlogSection__ = ({ posts, ...props }) => {
-  const handleReadMore = () => {
-    console.log(posts);
+  const handleReadMore = (slug) => {
+    props.history.push(`/post/${slug}`);
   };
 
   return (
@@ -41,7 +41,9 @@ const MainBlogSection__ = ({ posts, ...props }) => {
               <Button
                 color="success"
                 className="animation-on-hover"
-                onClick={handleReadMore}
+                onClick={() => {
+                  handleReadMore(post.slug);
+                }}
               >
                 Read More
               </Button>

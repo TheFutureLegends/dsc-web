@@ -1,12 +1,10 @@
 import {
-  SET_POST,
+  SET_POST_DETAIL,
   SET_POSTS,
-  SET_POPULAR_POSTS,
-  SET_LATEST_POSTS,
   SET_LIST_OF_POST,
   LOADING_POST,
   STOP_LOADING_POST,
-  EDIT_POST,
+  SET_EDIT_POST,
   DELETE_POST,
 } from "../types/post.types";
 import axios from "axios";
@@ -19,20 +17,14 @@ const hideAlert = () => {
   return null;
 };
 
-export const getPost = (slug, history) => async (dispatch) => {
-  try {
-    let res = await axios.get(`/posts/${slug}`);
-    dispatch({ type: SET_POST, payload: res.data });
-    history.push(`/posts/${slug}`);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const getPostsWithPagination = (limit, page) => async (dispatch) => {
+export const getLatestPostWithPagination = (latest, asc, limit, page) => async (
+  dispatch
+) => {
   dispatch({ type: LOADING_POST });
   try {
-    let res = await axios.get(`/posts?latest=true&limit=${limit}&page=${page}`);
+    let res = await axios.get(
+      `/posts?latest=${latest}&asc=${asc}&limit=${limit}&page=${page}`
+    );
 
     dispatch({ type: SET_POSTS, payload: res.data.posts });
   } catch (error) {
@@ -41,26 +33,12 @@ export const getPostsWithPagination = (limit, page) => async (dispatch) => {
   dispatch({ type: STOP_LOADING_POST });
 };
 
-export const getLatestPost = (limit, asc) => async (dispatch) => {
+export const getPostDetail = (slug) => async (dispatch) => {
   dispatch({ type: LOADING_POST });
   try {
-    let res = await axios.get(`/posts?latest=true&limit=${limit}&asc=${asc}`);
+    let res = await axios.get(`/posts/${slug}`);
 
-    dispatch({ type: SET_LATEST_POSTS, payload: res.data.posts });
-  } catch (error) {
-    console.log(error);
-  }
-  dispatch({ type: STOP_LOADING_POST });
-};
-
-export const getMostPopularPosts = (limit, asc) => async (dispatch) => {
-  dispatch({ type: LOADING_POST });
-  try {
-    let res = await axios.get(
-      `/posts?latest=true?sortBy=visit&limit=${limit}&asc=${asc}`
-    );
-
-    dispatch({ type: SET_POPULAR_POSTS, payload: res.data.posts });
+    dispatch({ type: SET_POST_DETAIL, payload: res.data.post });
   } catch (error) {
     console.log(error);
   }
@@ -100,7 +78,7 @@ export const getPostForEditing = (id, history) => async (dispatch) => {
   try {
     let res = await axios.get(`/posts/edit/${id}`, getAuthorizationHeaders());
 
-    dispatch({ type: EDIT_POST, payload: res.data });
+    dispatch({ type: SET_EDIT_POST, payload: res.data });
 
     Swal.close();
 

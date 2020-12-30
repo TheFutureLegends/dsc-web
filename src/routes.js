@@ -45,8 +45,9 @@
 // import Widgets from "./views/Widgets.js";
 // import Charts from "./views/Charts.js";
 import Homepage from "./views/homepage/Homepage.js";
+import PostDetailPage from "./views/postDetail/PostDetail.js";
 
-import SweetAlert from "./views/components/SweetAlert.js";
+// import SweetAlert from "./views/components/SweetAlert.js";
 
 /**
  * Authentication Page
@@ -168,8 +169,38 @@ const routes = [
     icon: "tim-icons icon-bank",
     component: Homepage,
     layout: "",
-    // authenticated: false,
-    // invisible: false,
+    authenticated: false,
+    invisible: false,
+  },
+  {
+    path: "/post/:slug",
+    name: "Post detail",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-bank",
+    component: PostDetailPage,
+    layout: "",
+    authenticated: false,
+    invisible: true,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    rtlName: "هعذاتسجيل الدخول",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Login,
+    layout: "/auth",
+    authenticated: false,
+    invisible: true,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    rtlName: "هعذاتسجيل الدخول",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Register,
+    layout: "/auth",
+    authenticated: false,
+    invisible: true,
   },
   // {
   //   path: "/post-list",
@@ -405,26 +436,6 @@ const routes = [
   //   component: Calendar,
   //   layout: "/control-panel",
   // },
-  {
-    path: "/login",
-    name: "Login",
-    rtlName: "هعذاتسجيل الدخول",
-    icon: "tim-icons icon-chart-pie-36",
-    component: Login,
-    layout: "/auth",
-    authenticated: false,
-    invisible: true,
-  },
-  {
-    path: "/register",
-    name: "Register",
-    rtlName: "هعذاتسجيل الدخول",
-    icon: "tim-icons icon-chart-pie-36",
-    component: Register,
-    layout: "/auth",
-    authenticated: false,
-    invisible: true,
-  },
 ];
 
 export default routes;

@@ -1,20 +1,17 @@
 import {
   LOADING_POST,
   STOP_LOADING_POST,
-  SET_LATEST_POSTS,
-  SET_POPULAR_POSTS,
-  SET_POST,
+  SET_POST_DETAIL,
   SET_POSTS,
   SET_LIST_OF_POST,
-  EDIT_POST,
+  SET_EDIT_POST,
   DELETE_POST,
 } from "../types/post.types";
 
 const initialState = {
   loading: true,
-  mostPopularPosts: [],
-  latestPosts: [],
   posts: [],
+  postDetail: {},
   post: {},
   postList: [],
 };
@@ -31,32 +28,22 @@ export function PostReducer(state = initialState, action) {
         ...state,
         loading: false,
       };
-    case SET_LATEST_POSTS:
-      return {
-        ...state,
-        latestPosts: action.payload,
-      };
-    case SET_POPULAR_POSTS:
-      return {
-        ...state,
-        mostPopularPosts: action.payload,
-      };
     case SET_POSTS:
       return {
         ...state,
         posts: action.payload,
       };
-    case SET_POST:
+    case SET_POST_DETAIL:
       return {
         ...state,
-        post: action.payload,
+        postDetail: action.payload,
       };
     case SET_LIST_OF_POST:
       return {
         ...state,
         postList: action.payload,
       };
-    case EDIT_POST:
+    case SET_EDIT_POST:
       return {
         ...state,
         post: action.payload,
@@ -67,7 +54,7 @@ export function PostReducer(state = initialState, action) {
       const newList = state.postList.filter((i) => i._id !== item._id);
 
       console.log("Reducer list: ", newList);
-      
+
       return {
         ...state,
         postList: newList,

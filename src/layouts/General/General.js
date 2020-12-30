@@ -109,6 +109,7 @@ const GeneralLayout__ = (props) => {
       if (prop.layout === "") {
         return (
           <Route
+            exact
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}

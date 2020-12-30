@@ -6,7 +6,7 @@ import { Col } from "reactstrap";
 
 import MainBlogSection from "./MainBlogSection.js";
 
-const DashboardContainer__ = (props) => {
+const HomepageContainer__ = (props) => {
   return (
     <Col md="9">
       <MainBlogSection posts={props.posts} {...props} />
@@ -18,4 +18,4 @@ const mapStateToProps = (state) => ({
   posts: state.post.posts,
 });
 
-export default connect(mapStateToProps, null)(DashboardContainer__);
+export default connect(mapStateToProps, null)(HomepageContainer__);
