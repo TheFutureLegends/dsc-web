@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getLatestPostWithPagination } from "../../core/redux/actions/post.action.js";
 import HomepageContainer from "../../container/Homepage/index.js";
 
 const Homepage = ({ ...props }) => {
-  useEffect(() => {
-    if (props.loading) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const getLatestPost = () => {
+    if (isLoading) {
       /**
        * @params latest
        * @params asc
@@ -13,8 +15,16 @@ const Homepage = ({ ...props }) => {
        * @params current page
        */
       props.getLatestPostWithPagination(true, false, 100, 1);
+
+      setIsLoading(false);
     }
-  });
+  };
+
+  useEffect(() => {
+    getLatestPost();
+
+    return () => {};
+  }, [isLoading]);
 
   return <HomepageContainer {...props} />;
 };

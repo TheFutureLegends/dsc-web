@@ -9,12 +9,16 @@ export const isEmptyArray = (array) => {
 };
 
 export const isEmptyObject = (obj) => {
-  for (var prop in obj) {
-    if (!obj.hasOwnProperty(prop)) return true;
+  // for (var prop in obj) {
+  //   if (!obj.hasOwnProperty(prop)) return true;
+  // }
+
+  if (Object.keys(obj).length === 0 && obj.constructor === Object) {
+    return true;
   }
 
   return false;
-}
+};
 
 export const isObjectPropertiesEmpty = (obj) => {
   /**

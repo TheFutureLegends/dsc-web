@@ -5,10 +5,16 @@ import { useParams } from "react-router-dom";
 // reactstrap components
 import { Col } from "reactstrap";
 
-import { getPostDetail } from "../../core/redux/actions/post.action.js";
+import {
+  getPostDetail,
+  getMorePostsWithSameCategory,
+} from "../../core/redux/actions/post.action.js";
+import { isEmptyObject } from "../../utilities/index.js";
 import PostDetailContainer from "../../container/postDetail/PostDetailContainer.js";
 
 const PostDetail = (props) => {
+  const [data, setData] = useState({});
+
   const [isLoading, setIsLoading] = useState(true);
   // We can use the `useParams` hook here to access
   // the dynamic pieces of the URL.
@@ -37,10 +43,12 @@ const PostDetail = (props) => {
 const mapStateToProps = (state) => ({
   loading: state.post.loading,
   postDetail: state.post.postDetail,
+  morePostsWithSameCategory: state.post.morePostsWithSameCategory,
 });
 
 const mapDispatchToProps = {
   getPostDetail,
+  getMorePostsWithSameCategory,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

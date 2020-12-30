@@ -1,5 +1,6 @@
 import {
   SET_POST_DETAIL,
+  SET_MORE_POSTS,
   SET_POSTS,
   SET_LIST_OF_POST,
   LOADING_POST,
@@ -8,14 +9,10 @@ import {
   DELETE_POST,
 } from "../types/post.types";
 import axios from "axios";
-import Swal from "sweetalert2";
 // react component used to create sweet alerts
-import ReactBSAlert from "react-bootstrap-sweetalert";
+import Swal from "sweetalert2";
+// authorization header variables
 import { getAuthorizationHeaders } from "../../../variables/api.js";
-
-const hideAlert = () => {
-  return null;
-};
 
 export const getLatestPostWithPagination = (latest, asc, limit, page) => async (
   dispatch
@@ -39,6 +36,18 @@ export const getPostDetail = (slug) => async (dispatch) => {
     let res = await axios.get(`/posts/${slug}`);
 
     dispatch({ type: SET_POST_DETAIL, payload: res.data.post });
+  } catch (error) {
+    console.log(error);
+  }
+  dispatch({ type: STOP_LOADING_POST });
+};
+
+export const getMorePostsWithSameCategory = (category) => async (dispatch) => {
+  dispatch({ type: LOADING_POST });
+  try {
+    let res = await axios.get(`/posts?latest=true&asc=false&limit=3&page=3`);
+
+    dispatch({ type: SET_MORE_POSTS, payload: res.data.posts });
   } catch (error) {
     console.log(error);
   }

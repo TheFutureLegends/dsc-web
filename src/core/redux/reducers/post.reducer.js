@@ -2,6 +2,7 @@ import {
   LOADING_POST,
   STOP_LOADING_POST,
   SET_POST_DETAIL,
+  SET_MORE_POSTS,
   SET_POSTS,
   SET_LIST_OF_POST,
   SET_EDIT_POST,
@@ -12,6 +13,7 @@ const initialState = {
   loading: true,
   posts: [],
   postDetail: {},
+  morePostsWithSameCategory: [],
   post: {},
   postList: [],
 };
@@ -37,6 +39,11 @@ export function PostReducer(state = initialState, action) {
       return {
         ...state,
         postDetail: action.payload,
+      };
+    case SET_MORE_POSTS:
+      return {
+        ...state,
+        morePostsWithSameCategory: action.payload,
       };
     case SET_LIST_OF_POST:
       return {

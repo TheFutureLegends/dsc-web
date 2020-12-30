@@ -1,4 +1,3 @@
-import React from "react";
 import HtmlToReact from "html-to-react";
 
 var htmlToReactParser = HtmlToReact.Parser;
