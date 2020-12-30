@@ -21,17 +21,19 @@ const ArticleLoader = (props) => (
     <rect x="600" y="515" rx="4" ry="4" width="250" height="25" />
     {/* hr tag */}
     <rect x="0" y="470" rx="5" ry="5" width="1200" height="10" />
-    {/* Content */}
-    <rect x="0" y="600" rx="4" ry="4" width="800" height="15" />
-    <rect x="0" y="630" rx="4" ry="4" width="600" height="15" />
-    <rect x="0" y="660" rx="4" ry="4" width="520" height="15" />
-    <rect x="0" y="690" rx="4" ry="4" width="720" height="15" />
-    <rect x="0" y="720" rx="4" ry="4" width="800" height="15" />
-    <rect x="0" y="750" rx="4" ry="4" width="500" height="15" />
-    <rect x="0" y="780" rx="4" ry="4" width="720" height="15" />
-    <rect x="0" y="810" rx="4" ry="4" width="800" height="15" />
     {/* hr tag */}
-    <rect x="0" y="860" rx="5" ry="5" width="1200" height="10" />
+    <rect x="0" y="580" rx="5" ry="5" width="1200" height="10" />
+    {/* Content */}
+    <rect x="0" y="630" rx="4" ry="4" width="800" height="15" />
+    <rect x="0" y="660" rx="4" ry="4" width="600" height="15" />
+    <rect x="0" y="690" rx="4" ry="4" width="520" height="15" />
+    <rect x="0" y="7290" rx="4" ry="4" width="720" height="15" />
+    <rect x="0" y="750" rx="4" ry="4" width="800" height="15" />
+    <rect x="0" y="780" rx="4" ry="4" width="500" height="15" />
+    <rect x="0" y="810" rx="4" ry="4" width="720" height="15" />
+    <rect x="0" y="840" rx="4" ry="4" width="800" height="15" />
+    {/* hr tag */}
+    <rect x="0" y="890" rx="5" ry="5" width="1200" height="10" />
     {/* <rect x="48" y="684" rx="4" ry="4" width="598" height="15" />
     <rect x="48" y="718" rx="4" ry="4" width="720" height="15" />
     <rect x="49" y="748" rx="4" ry="4" width="419" height="15" /> */}

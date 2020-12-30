@@ -196,8 +196,6 @@ const FormContainer__ = ({ data, state, pageTitle, formType, ...props }) => {
     }
   };
 
-  // var htmlToReactParser = new HtmlToReactParser();
-
   switch (formType) {
     case "post":
       form = (

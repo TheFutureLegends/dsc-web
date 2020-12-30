@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Row, Col } from "reactstrap";
 import ContentLoader from "../../components/ContentLoader/ContentLoader.js";
 import Author from "../../components/Author/Author.js";
-import { isEmptyObject } from "../../utilities/index.js";
+import htmlToReactParserUtilities from "../../utilities/htmlToReactParser.js";
 
 const PostDetailContainer__ = ({ ...props }) => {
   const [count, setCount] = useState(3000);
@@ -34,7 +34,9 @@ const PostDetailContainer__ = ({ ...props }) => {
               height="500px"
             />
           </Row>
-          <hr />
+          <hr
+            style={{ height: "5px", background: "#cbbcb1", border: "none" }}
+          />
           <Row>
             <Col md="8">
               <Author
@@ -45,46 +47,26 @@ const PostDetailContainer__ = ({ ...props }) => {
                 category={props.postDetail.category.title}
               />
             </Col>
-            <Col md="4">
+            <Col md="4" className="text-right mt-2">
               <span style={{ fontSize: "20px" }}>
                 {props.postDetail.createdAt}
               </span>
             </Col>
           </Row>
+          <hr
+            style={{ height: "5px", background: "#cbbcb1", border: "none" }}
+          />
+          <Row>
+            <Col md="12">
+              <p>{htmlToReactParserUtilities(props.postDetail.description)}</p>
+            </Col>
+          </Row>
+          <hr
+            style={{ height: "5px", background: "#cbbcb1", border: "none" }}
+          />
         </>
       )}
     </>
-    // <ContentLoader></ContentLoader>
-    // <>
-    //   {isEmptyObject(props.postDetail) ? (
-    //     <ContentLoader></ContentLoader>
-    //   ) : (
-    //     <>
-    //       <Row>
-    //         <h1>{props.postDetail.title}</h1>
-    //       </Row>
-    //       <Row>
-    //         <img
-    //           src={props.postDetail.image}
-    //           alt={props.postDetail.slug}
-    //           width="100%"
-    //         />
-    //       </Row>
-    //       <hr />
-    //       <Row>
-    //         <Col md="6">
-    //           <Author
-    //             src={props.postDetail.author.avatar}
-    //             avatarSize={30}
-    //             fontSize={"15px"}
-    //             author={props.postDetail.author.username}
-    //             category={props.postDetail.category.title}
-    //           />
-    //         </Col>
-    //       </Row>
-    //     </>
-    //   )}
-    // </>
   );
 };
 
