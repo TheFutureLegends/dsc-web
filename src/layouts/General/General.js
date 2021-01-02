@@ -43,8 +43,6 @@ const GeneralLayout__ = (props) => {
   const notificationAlertRef = useRef(null);
   const location = useLocation();
 
-  useAlan();
-
   useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -182,6 +180,9 @@ const GeneralLayout__ = (props) => {
     setSidebarOpened(false);
     document.documentElement.classList.remove("nav-open");
   };
+
+  useAlan();
+
   return (
     <div className="wrapper">
       <div className="rna-container">

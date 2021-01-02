@@ -5,11 +5,13 @@ import { connect } from "react-redux";
 import { Col } from "reactstrap";
 
 import MainBlogSection from "./MainBlogSection.js";
+import GridLoader from "../../components/ContentLoader/Grid/GridLoader.js";
 
 const HomepageContainer__ = (props) => {
   return (
     <Col md="9">
       <MainBlogSection posts={props.posts} {...props} />
+      {/* <GridLoader {...props} /> */}
     </Col>
   );
 };
