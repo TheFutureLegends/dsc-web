@@ -16,7 +16,7 @@ import { logoutUser, getAuthUserData } from "./core/redux/actions/user.action";
 import { getPostListDataTable } from "./core/redux/actions/post.action";
 import { getAllCategories } from "./core/redux/actions/category.action";
 
-import { getNumberOfTutorial } from "./core/redux/actions/bot.action";
+// import { getNumberOfTutorial } from "./core/redux/actions/bot.action";
 
 
 // Styling
