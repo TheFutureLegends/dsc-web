@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import App from "./App.js";
 // import PerfectScrollbar from "react-perfect-scrollbar";
 
 import AuthLayout from "./layouts/Auth/Auth.js";
@@ -14,6 +15,9 @@ import { cookies, authorizationCookieName } from "./variables/cookie.js";
 import { logoutUser, getAuthUserData } from "./core/redux/actions/user.action";
 import { getPostListDataTable } from "./core/redux/actions/post.action";
 import { getAllCategories } from "./core/redux/actions/category.action";
+
+import { getNumberOfTutorial } from "./core/redux/actions/bot.action";
+
 
 // Styling
 import "./assets/css/nucleo-icons.css";
@@ -34,27 +38,7 @@ store.dispatch(getAllCategories());
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Switch>
-        {/* <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Route path="/rtl" render={(props) => <RTLLayout {...props} />} />
-      <Redirect from="/" to="/admin/dashboard" /> */}
-        {/* <Route render={(props) => <AuthLayout {...props} />}></Route> */}
-        <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-        <Route
-          path="/control-panel"
-          render={(props) => <AdminLayout {...props} />}
-        />
-        <Route
-          // exact
-          path="/"
-          render={(props) => <GeneralLayout {...props} />}
-        />
-
-        {/* <Redirect from="/" to="/dsc" /> */}
-      </Switch>
-    </BrowserRouter>
+    <App />
   </Provider>,
   document.getElementById("root")
 );

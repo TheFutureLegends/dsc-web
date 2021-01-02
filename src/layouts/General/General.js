@@ -27,6 +27,7 @@ import routes from "../../routes.js";
 import { protectedRoutes } from "../../routes.js";
 
 import logo from "../../assets/img/react-logo.png";
+import useAlan from "../../hooks/alanAI.js";
 
 var ps;
 
@@ -38,6 +39,9 @@ const GeneralLayout__ = (props) => {
   const mainPanelRef = useRef(null);
   const notificationAlertRef = useRef(null);
   const location = useLocation();
+
+  useAlan();
+
   useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
