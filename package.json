@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@alan-ai/alan-sdk-web": "^1.8.10",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -10,6 +11,7 @@
     "axios": "^0.21.0",
     "bootstrap": "4.5.3",
     "chart.js": "2.9.4",
+    "cheerio": "^1.0.0-rc.5",
     "classnames": "2.2.6",
     "formik": "^2.2.6",
     "html-to-react": "^1.4.5",
@@ -39,6 +41,7 @@
     "reactstrap": "8.7.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "request": "^2.88.2",
     "sweetalert2": "^10.12.5",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^0.2.4",
