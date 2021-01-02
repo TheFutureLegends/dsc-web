@@ -37,5 +37,3 @@ const doCall = (uri, resultList, numberOfTutorial) => {
 doCall(uri, resultList, numberOfTutorial);
 
 export default doCall;
-
-console.log("Function doCall: ", numberOfTutorial);

@@ -150,7 +150,7 @@ function Table({ columns, data }) {
                 name="singleSelect"
                 value={numberOfRows}
                 onChange={(value) => {
-                  console.log(value);
+                  // console.log(value);
                   setPageSize(value.value);
                   setNumberOfRows(value);
                 }}
