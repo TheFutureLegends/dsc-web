@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Row, Col } from "reactstrap";
-import ContentLoader from "../../components/ContentLoader/ContentLoader.js";
+import PostLoaderDesktop from "../../components/ContentLoader/posts/PostLoaderDesktop.js";
 import Author from "../../components/Author/Author.js";
 import htmlToReactParserUtilities from "../../utilities/htmlToReactParser.js";
 import PostCard from "../../components/Card/PostCard.js";
@@ -17,9 +17,14 @@ const PostDetailContainer__ = ({ ...props }) => {
   const [count, setCount] = useState(3000);
 
   const handleReadMore = (slug) => {
-    props.getPostDetail(slug);
+    console.log(props);
+    // props.getPostDetail(slug);
 
-    props.history.push(`/post/${slug}`);
+    // setIsLoading(true);
+
+    setCount(3000);
+
+    // props.history.push(`/post/${slug}`);
   };
 
   if (!props.loading && count === 3000 && !isEmptyObject(props.postDetail)) {
@@ -29,7 +34,7 @@ const PostDetailContainer__ = ({ ...props }) => {
   }
 
   if (isLoading && !isEmptyObject(props.postDetail)) {
-    props.getMorePostsWithSameCategory(data.category.slug);
+    props.getMorePostsWithSameCategory(data._id, data.category.slug);
 
     setIsLoading(false);
   }
@@ -42,7 +47,7 @@ const PostDetailContainer__ = ({ ...props }) => {
   return (
     <>
       {count === 3000 ? (
-        <ContentLoader></ContentLoader>
+        <PostLoaderDesktop></PostLoaderDesktop>
       ) : (
         <>
           {isEmptyObject(data) ? (

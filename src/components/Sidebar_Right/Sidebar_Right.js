@@ -29,9 +29,9 @@ import {
 } from "reactstrap";
 
 // javascript plugin used to create scrollbars on windows
-import PerfectScrollbar from "perfect-scrollbar";
+// import PerfectScrollbar from "perfect-scrollbar";
 
-var perfectScrollbar;
+// var perfectScrollbar;
 
 const SidebarLeft__ = (props) => {
   const sidebarRightRef = useRef(null);
@@ -66,7 +66,7 @@ const SidebarLeft__ = (props) => {
   }, [openedCollapses]);
 
   return (
-    <div className="col-md-3" style={{ position: "relative" }}>
+    <div className="col-md-3 d-none d-md-block" style={{ position: "relative" }}>
       <Row style={{ position: "fixed", width: "330px" }}>
         <Col md="12" xs="12">
           <div

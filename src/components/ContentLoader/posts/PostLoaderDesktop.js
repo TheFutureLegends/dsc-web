@@ -1,9 +1,9 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 import { Row, Col } from "reactstrap";
-import random from "../../utilities/random.js";
+import random from "../../../utilities/random.js";
 
-const ArticleLoader = ({
+const PostLoaderDesktop__ = ({
   width = "100%",
   height = 2000,
   heading = { width: 140, height: 24 },
@@ -127,11 +127,11 @@ const ArticleLoader = ({
   );
 };
 
-ArticleLoader.metadata = {
+PostLoaderDesktop__.metadata = {
   name: "Leo Nguyen",
   github: "leonguyen0202",
   description: "Article or News",
-  filename: "ArticleLoader",
+  filename: "PostLoaderDesktop__",
 };
 
-export default ArticleLoader;
+export default PostLoaderDesktop__;

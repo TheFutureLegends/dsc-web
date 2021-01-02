@@ -42,10 +42,12 @@ export const getPostDetail = (slug) => async (dispatch) => {
   dispatch({ type: STOP_LOADING_POST });
 };
 
-export const getMorePostsWithSameCategory = (category) => async (dispatch) => {
+export const getMorePostsWithSameCategory = (postId, category) => async (dispatch) => {
   dispatch({ type: LOADING_POST });
   try {
-    let res = await axios.get(`/posts/getMorePostsWithSameCategory/${category}`);
+    let res = await axios.get(
+      `/posts/${postId}/getMorePostsWithSameCategory/${category}`
+    );
 
     dispatch({ type: SET_MORE_POSTS, payload: res.data.posts });
   } catch (error) {
