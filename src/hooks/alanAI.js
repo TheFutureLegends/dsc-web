@@ -81,6 +81,8 @@ export default function useAlan() {
 
   // Connect this website with Alan AI by the key
   useEffect(() => {
+    console.log(key);
+
     if (alanInstance != null) return;
     setAlanInstance(
       alanBtn({
