@@ -28,6 +28,8 @@ import routes from "../../routes.js";
 import { protectedRoutes } from "../../routes.js";
 
 import logo from "../../assets/img/react-logo.png";
+
+// Alan AI import
 import useAlan from "../../hooks/alanAI.js";
 
 var ps;
