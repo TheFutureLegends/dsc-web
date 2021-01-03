@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Row, Col } from "reactstrap";
-import PostLoaderDesktop from "../../components/ContentLoader/Posts/PostLoaderDesktop.js";
+import PostLoaderDesktop from "../../components/ContentLoader/posts/PostLoaderDesktop.js";
 import Author from "../../components/Author/Author.js";
 import htmlToReactParserUtilities from "../../utilities/htmlToReactParser.js";
 import PostCard from "../../components/Card/PostCard.js";
