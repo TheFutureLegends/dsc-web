@@ -1,15 +1,16 @@
 import request from "request";
 import cheerio from "cheerio";
-import axios from "axios";
 
-let uri = "https://www.w3schools.com/";
+import { SET_NUMBER_OF_TUTORIAL } from "../types/bot.types.js";
 
-let resultList = [];
+export const getNumberOfTutorial = () => async (dispatch) => {
+  const urlToCall = "https://www.w3schools.com/";
 
-let numberOfTutorial = 0;
+  let resultList = [];
 
-const doCall = (uri, resultList, numberOfTutorial) => {
-  request(uri, { mode: "no-cors" }, function (error, response, body) {
+  let numberOfTutorial = 0;
+
+  request(urlToCall, { mode: "no-cors" }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
       const cheerioLoad = cheerio.load(body);
 
@@ -29,11 +30,12 @@ const doCall = (uri, resultList, numberOfTutorial) => {
     }
 
     numberOfTutorial = resultList.length;
+
+    console.log(
+      "Inside function, out of if else statement: ",
+      numberOfTutorial
+    );
+
+    dispatch({ type: SET_NUMBER_OF_TUTORIAL, payload: resultList.length });
   });
-
-  return numberOfTutorial;
 };
-
-doCall(uri, resultList, numberOfTutorial);
-
-export default doCall;

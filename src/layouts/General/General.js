@@ -17,8 +17,9 @@ import Footer from "../../components/Footer/Footer.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
 import SidebarRight from "../../components/Sidebar_Right/Sidebar_Right.js";
 import { Row } from "reactstrap";
-import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
-import { IsContentLightMode, IsSidebarMini } from "../../logic/fixedPlugin.js";
+// import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
+// import { IsContentLightMode } from "../../logic/fixedPlugin.js";
+import { IsSidebarMini } from "../../logic/fixedPlugin.js";
 
 // logout func
 import { logoutUser } from "../../core/redux/actions/user.action.js";
@@ -27,6 +28,9 @@ import routes from "../../routes.js";
 import { protectedRoutes } from "../../routes.js";
 
 import logo from "../../assets/img/react-logo.png";
+
+// Alan AI import
+import useAlan from "../../hooks/alanAI.js";
 
 var ps;
 
@@ -38,6 +42,7 @@ const GeneralLayout__ = (props) => {
   const mainPanelRef = useRef(null);
   const notificationAlertRef = useRef(null);
   const location = useLocation();
+
   useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -175,6 +180,9 @@ const GeneralLayout__ = (props) => {
     setSidebarOpened(false);
     document.documentElement.classList.remove("nav-open");
   };
+
+  useAlan();
+
   return (
     <div className="wrapper">
       <div className="rna-container">

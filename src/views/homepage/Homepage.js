@@ -6,6 +6,8 @@ import HomepageContainer from "../../container/Homepage/index.js";
 const Homepage = ({ ...props }) => {
   const [isLoading, setIsLoading] = useState(true);
 
+  const [hasMoreItems, sethasMoreItems] = useState(true);
+
   const getLatestPost = () => {
     if (isLoading) {
       /**
