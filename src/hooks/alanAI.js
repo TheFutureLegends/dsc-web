@@ -1,11 +1,11 @@
 import {useEffect, useState, useCallback} from 'react'
 import alanBtn from "@alan-ai/alan-sdk-web"
-import resultList from "./w3school_scrape/scrape.js"
+import homeScraper from "./w3school_scrape/homeScrape.js";
 
 const COMMANDS = {
     SHOW_NUMBER_OF_TUTORIAL : 'show-number-of-tutorial',
     SHOW_JAVA : 'show-Java',
-    SHOW_PHP : 'show-Php',
+    SHOW_PHP : 'show-PHP',
     SHOW_PYTHON : 'show-Python',
     SHOW_JAVASCRIPT : 'show-Js',
     BEST_AI_LANGUAGE : 'best-ai-language'
@@ -14,7 +14,7 @@ const COMMANDS = {
 // Use asynchronous to make the bot says before the alert popup
 let botSays = (answer) => {
     setTimeout(() => { alert(answer)
-    }, 2000)
+    }, 3000)
 }
 let key = '16719338d8e08c6aff8745f74935071f2e956eca572e1d8b807a3e2338fdd0dc/stage'
 export default function useAlan(){
@@ -22,13 +22,13 @@ export default function useAlan(){
 
     // Give the answers
     const showNumberOfTutorial = useCallback(() => {
-        alanInstance.playText("I know " + resultList.length + "best tutorials")
-        botSays('This is my answer :' + resultList.length)
+        alanInstance.playText("These are number of tutorial that I know")
+        homeScraper.scape()
     }, [alanInstance])
     const showJavaInfo = useCallback(() => {
         alanInstance.playText("Java is a popular programming language, created in 1995 " +
             "This is the object oriented programming language" +
-            "If you want to learn more about Java please follow the link https://www.w3schools.com/Java/java_intro.asp ")
+            " If you want to learn more about Java please follow the link https://www.w3schools.com/Java/java_intro.asp ")
         botSays('This is my answer : https://www.w3schools.com/Java/java_intro.asp')
     }, [alanInstance])
 
