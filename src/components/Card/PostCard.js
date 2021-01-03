@@ -27,13 +27,15 @@ const PostCard__ = ({ post, avatar, ...props }) => {
           category={post.category.title}
         />
       </CardHeader>
-      <CardImg top src={post.image} alt="..." />
+      <CardImg top src={post.image} alt={post.slug} />
       <CardBody>
-        <CardTitle tag="h3">{getSubString(post.title, 0, 30)}</CardTitle>
+        <CardTitle tag="h3" className="font-weight-bold">
+          {getSubString(post.title, 0, 25)}
+        </CardTitle>
         <CardText>{getSubString(post.description, 0, 95)}</CardText>
         <Button
           color="success"
-          className="animation-on-hover"
+          className="animation-on-hover mt-4"
           onClick={() => {
             props.handleReadMore(post.slug);
           }}
@@ -44,7 +46,9 @@ const PostCard__ = ({ post, avatar, ...props }) => {
       <CardFooter>
         <hr />
         <Row>
-          <Col md="6" xs="6">Views: {post.visit}</Col>
+          <Col md="6" xs="6">
+            Views: {post.visit}
+          </Col>
           <Col md="6" xs="6" className="text-right">
             {post.createdAt}
           </Col>

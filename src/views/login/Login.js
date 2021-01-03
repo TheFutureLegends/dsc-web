@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
-import LoginContainer from "../../container/Login/index.js";
+import LoginContainer from "../../container/Login/LoginContainer.js";
 import { loginUser } from "../../core/redux/actions/user.action.js";
 
 const Login = ({ ...props }) => {

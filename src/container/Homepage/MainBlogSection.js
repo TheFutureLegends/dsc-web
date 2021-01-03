@@ -24,7 +24,7 @@ const MainBlogSection__ = ({ posts, ...props }) => {
   return (
     <Row>
       {posts.map((post) => (
-        <Col md="6" xs="12" key={post.slug}>
+        <Col md="4" xs="6" key={post.slug}>
           <PostCard
             post={post}
             avatar={{ fontSize: "15px", avatarSize: 30 }}

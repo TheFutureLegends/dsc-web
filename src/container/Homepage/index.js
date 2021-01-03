@@ -9,7 +9,7 @@ import GridLoader from "../../components/ContentLoader/Grid/GridLoader.js";
 
 const HomepageContainer__ = (props) => {
   return (
-    <Col md="9">
+    <Col md="12">
       <MainBlogSection posts={props.posts} {...props} />
       {/* <GridLoader {...props} /> */}
     </Col>

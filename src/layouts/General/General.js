@@ -223,7 +223,7 @@ const GeneralLayout__ = (props) => {
               {getRoutes(routes)}
               {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
             </Switch>
-            <SidebarRight></SidebarRight>
+            {/* <SidebarRight></SidebarRight> */}
           </Row>
         </div>
 
