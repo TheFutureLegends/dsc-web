@@ -32,7 +32,7 @@ const PostCard__ = ({ post, avatar, ...props }) => {
         <CardTitle tag="h3" className="font-weight-bold">
           {getSubString(post.title, 0, 25)}
         </CardTitle>
-        <CardText>{getSubString(post.description, 0, 95)}</CardText>
+        <CardText>{getSubString(post.description, 0, 70)}</CardText>
         <Button
           color="success"
           className="animation-on-hover mt-4"

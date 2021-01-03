@@ -16,7 +16,7 @@ const Homepage = ({ ...props }) => {
        * @params limit per page
        * @params current page
        */
-      props.getLatestPostWithPagination(true, false, 100, 1);
+      props.getLatestPostWithPagination(true, false, 9, 1);
 
       setIsLoading(false);
     }

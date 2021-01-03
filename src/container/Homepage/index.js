@@ -11,7 +11,7 @@ const HomepageContainer__ = (props) => {
   return (
     <Col md="12">
       <MainBlogSection posts={props.posts} {...props} />
-      {/* <GridLoader {...props} /> */}
+      <GridLoader {...props} />
     </Col>
   );
 };
