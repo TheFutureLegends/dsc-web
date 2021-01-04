@@ -63,7 +63,7 @@ const PostForm = ({ ...props }) => {
 const mapStateToProps = (state) => ({
   ui: state.ui,
   user: state.user,
-  categoryList: state.category.categoryList,
+  // categoryList: state.category.categoryList,
   loading: state.post.loading,
   post: state.post.post,
 });

@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+// import { BrowserRouter, Route, Switch } from "react-router-dom";
 import App from "./App.js";
 // import PerfectScrollbar from "react-perfect-scrollbar";
 
-import AuthLayout from "./layouts/Auth/Auth.js";
-import AdminLayout from "./layouts/Admin/Admin.js";
-import GeneralLayout from "./layouts/General/General.js";
+// import AuthLayout from "./layouts/Auth/Auth.js";
+// import AdminLayout from "./layouts/Admin/Admin.js";
+// import GeneralLayout from "./layouts/General/General.js";
 // import RTLLayout from "layouts/RTL/RTL.js";
 
 import store from "./core/redux/store";

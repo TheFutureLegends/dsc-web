@@ -1,6 +1,8 @@
 import {
   LOADING_POST,
   STOP_LOADING_POST,
+  SET_POSTS_WITH_PAGINATION,
+  SET_POSTS_TO_DISPLAY,
   SET_POST_DETAIL,
   SET_MORE_POSTS,
   SET_POSTS,
@@ -9,8 +11,12 @@ import {
   DELETE_POST,
 } from "../types/post.types";
 
-const initialState = {
+import { mergeArrays } from "../../../utilities/index.js";
+
+let initialState = {
   loading: true,
+  postsWithPagination: {},
+  postsToDisplay: [],
   posts: [],
   postDetail: {},
   morePostsWithSameCategory: [],
@@ -29,6 +35,20 @@ export function PostReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
+      };
+    case SET_POSTS_WITH_PAGINATION:
+      return {
+        ...state,
+        postsWithPagination: action.payload,
+      };
+
+    case SET_POSTS_TO_DISPLAY:
+      return {
+        ...state,
+        postsToDisplay: mergeArrays(
+          state.postsToDisplay,
+          state.postsWithPagination.posts
+        ),
       };
     case SET_POSTS:
       return {

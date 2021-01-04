@@ -77,8 +77,10 @@ const DataTableContainer__ = ({
   tableHeader,
   ...props
 }) => {
+  // eslint-disable-next-line no-unused-vars
   const [columns, setColumns] = useState(createTableHeader(tableHeader));
 
+  // eslint-disable-next-line no-unused-vars
   const [dataRows, setDataRows] = useState(
     createData(data, type, { ...props })
   );

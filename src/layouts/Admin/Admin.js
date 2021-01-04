@@ -25,6 +25,7 @@ var ps;
 
 const AdminLayout__ = (props) => {
   const [activeColor, setActiveColor] = useState("blue");
+  // eslint-disable-next-line no-unused-vars
   const [sidebarMini, setSidebarMini] = useState(true);
   const [opacity, setOpacity] = useState(0);
   const [sidebarOpened, setSidebarOpened] = useState(false);
@@ -74,7 +75,7 @@ const AdminLayout__ = (props) => {
       }
       window.removeEventListener("scroll", showNavbarButton);
     };
-  }, []);
+  }, [props.user.authenticated]);
   const showNavbarButton = () => {
     if (
       document.documentElement.scrollTop > 50 ||
@@ -110,7 +111,9 @@ const AdminLayout__ = (props) => {
     });
   };
 
+  // eslint-disable-next-line
   const getBrandText = () => {
+    // eslint-disable-next-line
     let pathName = window.location.pathname;
   };
 
@@ -134,9 +137,11 @@ const AdminLayout__ = (props) => {
     }
     return activeRoute;
   };
+  // eslint-disable-next-line
   const handleActiveClick = (color) => {
     setActiveColor(color);
   };
+
   const handleMiniClick = () => {
     let notifyMessage = "Sidebar mini ";
     if (document.body.classList.contains("sidebar-mini")) {
@@ -201,10 +206,7 @@ const AdminLayout__ = (props) => {
         />
         {props.user.authenticated ? (
           <div className="content">
-            <Switch>
-              {getRoutes(protectedRoutes)}
-              {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
-            </Switch>
+            <Switch>{getRoutes(protectedRoutes)}</Switch>
           </div>
         ) : (
           <Redirect to="/auth/login" />

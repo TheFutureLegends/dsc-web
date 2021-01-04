@@ -1,4 +1,6 @@
 import {
+  SET_POSTS_WITH_PAGINATION,
+  SET_POSTS_TO_DISPLAY,
   SET_POST_DETAIL,
   SET_MORE_POSTS,
   SET_POSTS,
@@ -23,6 +25,10 @@ export const getLatestPostWithPagination = (latest, asc, limit, page) => async (
       `/posts?latest=${latest}&asc=${asc}&limit=${limit}&page=${page}`
     );
 
+    dispatch({ type: SET_POSTS_WITH_PAGINATION, payload: res.data });
+
+    dispatch({ type: SET_POSTS_TO_DISPLAY });
+
     dispatch({ type: SET_POSTS, payload: res.data.posts });
   } catch (error) {
     console.log(error);
@@ -42,7 +48,9 @@ export const getPostDetail = (slug) => async (dispatch) => {
   dispatch({ type: STOP_LOADING_POST });
 };
 
-export const getMorePostsWithSameCategory = (postId, category) => async (dispatch) => {
+export const getMorePostsWithSameCategory = (postId, category) => async (
+  dispatch
+) => {
   dispatch({ type: LOADING_POST });
   try {
     let res = await axios.get(

@@ -15,7 +15,7 @@ import { Row } from "reactstrap";
 // import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 import { IsSidebarMini } from "../../logic/fixedPlugin.js";
 // import { IsContentLightMode } from "../../logic/fixedPlugin.js";
-import { cookies, authorizationCookieName } from "../../variables/cookie.js";
+// import { cookies, authorizationCookieName } from "../../variables/cookie.js";
 import { logoutUser } from "../../core/redux/actions/user.action.js";
 
 import routes, { protectedRoutes } from "../../routes.js";
@@ -27,6 +27,7 @@ var ps;
 const AuthLayout__ = (props) => {
   const [activeColor, setActiveColor] = useState("blue");
 
+  // eslint-disable-next-line no-unused-vars
   const [sidebarMini, setSidebarMini] = useState(IsSidebarMini());
 
   const [opacity, setOpacity] = useState(0);
@@ -150,6 +151,7 @@ const AuthLayout__ = (props) => {
     return activeRoute;
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleActiveClick = (color) => {
     setActiveColor(color);
   };

@@ -1,31 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-
+// eslint-disable-next-line
+import React, { useState, useEffect } from "react";
 import {
-  // Badge,
   Button,
-  // ButtonGroup,
   Card,
   CardHeader,
   CardBody,
-  // CardFooter,
-  // CardTitle,
-  // CardImg,
-  // CardText,
-  // ListGroup,
-  // ListGroupItem,
-  // DropdownToggle,
-  // DropdownMenu,
-  // DropdownItem,
-  // UncontrolledDropdown,
-  // Label,
-  // FormGroup,
-  // Input,
-  // Progress,
-  // Table,
   Row,
   Col,
   Collapse,
-  // UncontrolledTooltip,
 } from "reactstrap";
 
 // javascript plugin used to create scrollbars on windows
@@ -34,7 +16,7 @@ import {
 // var perfectScrollbar;
 
 const SidebarLeft__ = (props) => {
-  const sidebarRightRef = useRef(null);
+  // const sidebarRightRef = useRef(null);
 
   const [openedCollapses, setOpenedCollapses] = useState([]);
 
@@ -49,7 +31,7 @@ const SidebarLeft__ = (props) => {
   };
 
   useEffect(() => {
-    let innerMainPanelRef = sidebarRightRef;
+    // let innerMainPanelRef = sidebarRightRef;
     // if (navigator.platform.indexOf("Win") > -1) {
     //   perfectScrollbar = new PerfectScrollbar(sidebarRightRef.current, {
     //     suppressScrollX: true,
@@ -66,7 +48,10 @@ const SidebarLeft__ = (props) => {
   }, [openedCollapses]);
 
   return (
-    <div className="col-md-3 d-none d-md-block" style={{ position: "relative" }}>
+    <div
+      className="col-md-3 d-none d-md-block"
+      style={{ position: "relative" }}
+    >
       <Row style={{ position: "fixed", width: "330px" }}>
         <Col md="12" xs="12">
           <div

@@ -9,7 +9,7 @@ import { LOADING_UI, SET_ERRORS, STOP_LOADING_UI } from "../types/ui.types";
 import axios from "axios";
 import { getAuthorizationHeaders } from "../../../variables/api.js";
 import { cookies, authorizationCookieName } from "../../../variables/cookie.js";
-import { getPostListDataTable } from "./post.action.js";
+// import { getPostListDataTable } from "./post.action.js";
 // ES6 Modules or TypeScript
 import Swal from "sweetalert2";
 
@@ -32,7 +32,10 @@ export const loginUser = (userData, history) => async (dispatch) => {
 
     dispatch({ type: SET_USER, payload: { credential: res.data } });
 
-    let postListResponse = await axios.get(`/posts/read`, getAuthorizationHeaders());
+    let postListResponse = await axios.get(
+      `/posts/read`,
+      getAuthorizationHeaders()
+    );
 
     dispatch({ type: SET_LIST_OF_POST, payload: postListResponse.data.posts });
 
@@ -79,8 +82,6 @@ export const getAuthUserData = () => async (dispatch) => {
     let res = await axios.get(`/users/profile`, getAuthorizationHeaders());
 
     if (res) {
-      // getPostListDataTable();
-
       dispatch({
         type: SET_USER,
         payload: { credential: res.data },

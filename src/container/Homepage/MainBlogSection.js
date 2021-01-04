@@ -1,19 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardImg,
-  CardText,
-  CardFooter,
-  CardTitle,
-  Row,
-  Col,
-} from "reactstrap";
-
-import Author from "../../components/Author/Author.js";
-import { getSubString } from "../../utilities/index.js";
+import { Row, Col } from "reactstrap";
 import PostCard from "../../components/Card/PostCard.js";
 
 const MainBlogSection__ = ({ posts, ...props }) => {

@@ -28,6 +28,7 @@ const PostDetail = (props) => {
   useEffect(() => {
     fetchPost(slug);
     return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, slug]);
 
   return (

@@ -15,7 +15,7 @@ import NotificationAlert from "react-notification-alert";
 import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Footer from "../../components/Footer/Footer.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
-import SidebarRight from "../../components/Sidebar_Right/Sidebar_Right.js";
+// import SidebarRight from "../../components/Sidebar_Right/Sidebar_Right.js";
 import { Row } from "reactstrap";
 // import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 // import { IsContentLightMode } from "../../logic/fixedPlugin.js";
@@ -36,6 +36,7 @@ var ps;
 
 const GeneralLayout__ = (props) => {
   const [activeColor, setActiveColor] = useState("blue");
+  // eslint-disable-next-line no-unused-vars
   const [sidebarMini, setSidebarMini] = useState(IsSidebarMini());
   const [opacity, setOpacity] = useState(0);
   const [sidebarOpened, setSidebarOpened] = useState(false);
@@ -146,6 +147,7 @@ const GeneralLayout__ = (props) => {
     return activeRoute;
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleActiveClick = (color) => {
     setActiveColor(color);
   };
@@ -219,10 +221,7 @@ const GeneralLayout__ = (props) => {
         />
         <div className="content">
           <Row>
-            <Switch>
-              {getRoutes(routes)}
-              {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
-            </Switch>
+            <Switch>{getRoutes(routes)}</Switch>
             {/* <SidebarRight></SidebarRight> */}
           </Row>
         </div>

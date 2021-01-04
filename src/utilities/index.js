@@ -73,3 +73,12 @@ export const convertSlugToString = (slug) => {
 
   return capitalizeFirstLetter(slug.toLowerCase().replace(regex, " "));
 };
+
+export const mergeArrays = (...arrays) => {
+  let jointArray = [];
+
+  arrays.forEach((array) => {
+    jointArray = [...jointArray, ...array];
+  });
+  return [...new Set([...jointArray])];
+};

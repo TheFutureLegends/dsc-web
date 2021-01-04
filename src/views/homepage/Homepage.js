@@ -1,39 +1,91 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getLatestPostWithPagination } from "../../core/redux/actions/post.action.js";
-import HomepageContainer from "../../container/Homepage/index.js";
+
+import GridLoader from "../../components/ContentLoader/Grid/GridLoader.js";
+import HomepageContainer from "../../container/Homepage/HomepageContainer.js";
+
+import useInfiniteScroll from "../../hooks/useInfiniteScroll.js";
 
 const Homepage = ({ ...props }) => {
+  let timer;
+
+  const [page, setPage] = useState(1);
+
+  // eslint-disable-next-line no-unused-vars
+  const [itemPerPage, setItemPerPage] = useState(6);
+
+  const [timerCount, setTimerCount] = useState(3000);
+
   const [isLoading, setIsLoading] = useState(true);
 
-  const [hasMoreItems, sethasMoreItems] = useState(true);
+  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
+
+  const [hasNextPage, setHasNextPage] = useState(true);
 
   const getLatestPost = () => {
     if (isLoading) {
       /**
        * @params latest
        * @params asc
-       * @params limit per page
+       * @params item per page
        * @params current page
        */
-      props.getLatestPostWithPagination(true, false, 9, 1);
+      props.getLatestPostWithPagination(true, false, itemPerPage, page);
+
+      setPage(page + 1);
 
       setIsLoading(false);
     }
   };
 
+  function fetchMoreListItems() {
+    if (page <= props.postsWithPagination.totalPages) {
+      setTimeout(() => {
+        props.getLatestPostWithPagination(true, false, itemPerPage, page);
+
+        setIsFetching(false);
+      }, 2000);
+
+      setPage(page + 1);
+    } else {
+      setTimeout(() => {
+        setHasNextPage(false);
+      }, 2000);
+    }
+  }
+
+  if (!props.loading && timerCount === 3000) {
+    timer = setTimeout(() => {
+      setTimerCount(0);
+    }, 3000);
+  }
+
   useEffect(() => {
     getLatestPost();
 
-    return () => {};
-  }, [isLoading]);
+    return () => {
+      clearTimeout(timer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFetching, isLoading, hasNextPage, timerCount, itemPerPage, page]);
 
-  return <HomepageContainer {...props} />;
+  return (
+    <React.Fragment>
+      {timerCount === 3000 && <GridLoader height={1000} {...props} />}
+
+      <HomepageContainer {...props} />
+
+      {hasNextPage && isFetching && <GridLoader height={1000} {...props} />}
+    </React.Fragment>
+  );
+  // return <HomepageContainer {...props} />;
 };
 
 const mapStateToProps = (state) => ({
   loading: state.post.loading,
-  posts: state.post.posts,
+  postsWithPagination: state.post.postsWithPagination,
+  postsToDisplay: state.post.postsToDisplay,
   categoryList: state.category.categoryList,
 });
 
