@@ -39,7 +39,7 @@ import {
   verifyEditorContentLength,
 } from "../../validations/index.js";
 
-import PostFormContainer from "./PostForm/PostForm.js";
+import PostFormContainer from "./PostForm/PostFormContainer.js";
 
 let form;
 

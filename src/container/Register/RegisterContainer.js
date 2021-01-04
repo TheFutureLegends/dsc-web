@@ -17,7 +17,7 @@ import {
   Col,
 } from "reactstrap";
 
-const Register = ({ ...props }) => {
+const RegisterContainer__ = ({ ...props }) => {
   let btnRef = useRef();
 
   // register button
@@ -197,7 +197,7 @@ const Register = ({ ...props }) => {
                 src={require("../../assets/img/card-primary.png").default}
               />
               <CardTitle tag="h4" className="ml-2">
-                Register
+                Container__
               </CardTitle>
             </CardHeader>
             <CardBody>
@@ -339,4 +339,4 @@ const Register = ({ ...props }) => {
   );
 };
 
-export default Register;
+export default RegisterContainer__;

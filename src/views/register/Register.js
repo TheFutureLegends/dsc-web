@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import RegisterContainer from "../../container/Register/index.js";
+import RegisterContainer from "../../container/Register/RegisterContainer.js";
 import { signupUser } from "../../core/redux/actions/user.action.js";
 
 const Register = ({ ...props }) => {

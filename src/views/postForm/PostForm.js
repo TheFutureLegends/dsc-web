@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import FormContainer from "../../container/Form/index.js";
+import FormContainer from "../../container/Form/FormContainer.js";
 import {
   // getPostListDataTable,
   createNewPost,
