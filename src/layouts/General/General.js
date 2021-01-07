@@ -1,10 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  Route,
-  Switch,
-  // Redirect,
-  useLocation,
-} from "react-router-dom";
+import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
@@ -112,6 +107,13 @@ const GeneralLayout__ = (props) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
+
+      if (location.pathname === "/login" || location.pathname === "/register") {
+        if (props.user.authenticated) {
+          return <Redirect to="/" key={key} />;
+        }
+      }
+
       if (prop.layout === "") {
         return (
           <Route
@@ -183,7 +185,7 @@ const GeneralLayout__ = (props) => {
     document.documentElement.classList.remove("nav-open");
   };
 
-  useAlan();
+  // useAlan();
 
   return (
     <div className="wrapper">

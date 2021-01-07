@@ -313,7 +313,7 @@ const RegisterContainer__ = ({ ...props }) => {
                 <h6>
                   <a
                     className="link footer-link"
-                    href="/auth/login"
+                    href="/login"
                     // onClick={(e) => e.preventDefault()}
                   >
                     Already has an account?

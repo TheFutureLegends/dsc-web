@@ -71,7 +71,13 @@ export const capitalizeFirstLetter = (string) => {
 export const convertSlugToString = (slug) => {
   const regex = /[-_]/;
 
-  return capitalizeFirstLetter(slug.toLowerCase().replace(regex, " "));
+  if (slug !== "") {
+    return capitalizeFirstLetter(slug.toLowerCase().replace(regex, " "));
+  }
+
+  return slug;
+
+  // return capitalizeFirstLetter(slug.toLowerCase().replace(regex, " "));
 };
 
 export const mergeArrays = (...arrays) => {

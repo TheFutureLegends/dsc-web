@@ -5,7 +5,6 @@ import {
   SET_POSTS_TO_DISPLAY,
   SET_POST_DETAIL,
   SET_MORE_POSTS,
-  SET_POSTS,
   SET_LIST_OF_POST,
   SET_EDIT_POST,
   DELETE_POST,
@@ -49,11 +48,6 @@ export function PostReducer(state = initialState, action) {
           state.postsToDisplay,
           state.postsWithPagination.posts
         ),
-      };
-    case SET_POSTS:
-      return {
-        ...state,
-        posts: action.payload,
       };
     case SET_POST_DETAIL:
       return {

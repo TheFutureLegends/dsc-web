@@ -1,4 +1,5 @@
 import React from "react";
+import Select from "react-select";
 // reactstrap components
 import { FormGroup, Input, Row, Col } from "reactstrap";
 
@@ -16,6 +17,7 @@ const PostFormContainer__ = ({ data, handleChange, ...props }) => {
               type="text"
               value={data.title}
               onChange={(e) => handleChange(e, "Title", "title")}
+              placeholder="Enter title for your post"
             />
             {titleState.includes("length-not-match") ? (
               <label className="error text-danger">
@@ -29,15 +31,24 @@ const PostFormContainer__ = ({ data, handleChange, ...props }) => {
         <Col md="6">
           <FormGroup className={`has-label ${categoryState}`}>
             <label>Category *</label>
-            <Input
+            {/* <Input
               id="category"
               name="category"
               type="text"
               value={data.category}
               autoComplete="off"
               onChange={(e) => handleChange(e, "Category", "category")}
+            /> */}
+            <Select
+              className="react-select danger"
+              classNamePrefix="react-select"
+              name="category"
+              value={data.category}
+              onChange={(e) => handleChange(e, "Category", "category")}
+              options={props.categoryOptions}
+              placeholder="Single Select"
             />
-            {categoryState === "has-danger" ? (
+            {categoryState.includes("has-danger") ? (
               <label className="error text-danger">
                 This field is required.
               </label>
@@ -54,6 +65,7 @@ const PostFormContainer__ = ({ data, handleChange, ...props }) => {
               type="text"
               value={data.imageFile}
               onChange={(e) => handleChange(e, "ImageUrl", "url")}
+              placeholder="Enter the url leads to your image"
             />
             {imageUrlState === "has-danger" ? (
               <label className="error text-danger">

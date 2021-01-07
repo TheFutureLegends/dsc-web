@@ -46,7 +46,7 @@ const AdminLayout__ = (props) => {
     // }
 
     if (!props.user.authenticated) {
-      return <Redirect to="/auth/login" />;
+      return <Redirect to="/login" />;
     }
 
     let innerMainPanelRef = mainPanelRef;
@@ -100,6 +100,7 @@ const AdminLayout__ = (props) => {
       if (prop.layout === "/control-panel") {
         return (
           <Route
+            exact
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
@@ -209,7 +210,7 @@ const AdminLayout__ = (props) => {
             <Switch>{getRoutes(protectedRoutes)}</Switch>
           </div>
         ) : (
-          <Redirect to="/auth/login" />
+          <Redirect to="/login" />
         )}
 
         {

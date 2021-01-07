@@ -125,7 +125,7 @@ export const signupUser = (userData, history) => async (dispatch) => {
       showConfirmButton: false,
       timer: 2000,
       didClose: () => {
-        history.push("/auth/login");
+        history.push("/login");
       },
     });
   } catch (error) {

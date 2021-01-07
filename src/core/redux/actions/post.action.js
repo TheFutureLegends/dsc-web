@@ -3,7 +3,6 @@ import {
   SET_POSTS_TO_DISPLAY,
   SET_POST_DETAIL,
   SET_MORE_POSTS,
-  SET_POSTS,
   SET_LIST_OF_POST,
   LOADING_POST,
   STOP_LOADING_POST,
@@ -28,8 +27,6 @@ export const getLatestPostWithPagination = (latest, asc, limit, page) => async (
     dispatch({ type: SET_POSTS_WITH_PAGINATION, payload: res.data });
 
     dispatch({ type: SET_POSTS_TO_DISPLAY });
-
-    dispatch({ type: SET_POSTS, payload: res.data.posts });
   } catch (error) {
     console.log(error);
   }
@@ -122,7 +119,14 @@ export const createNewPost = (formData, history) => async (dispatch) => {
   });
 
   try {
-    await axios.post("/posts/create", formData, getAuthorizationHeaders());
+    let data = {
+      title: formData.title,
+      imageFile: formData.imageFile,
+      description: formData.description,
+      category: formData.category.value,
+    };
+
+    await axios.post("/posts/create", data, getAuthorizationHeaders());
 
     let res = await axios.get(`/posts/read`, getAuthorizationHeaders());
 
@@ -168,9 +172,16 @@ export const updatePost = (id, formData, history) => async (dispatch) => {
   });
 
   try {
+    let data = {
+      title: formData.title,
+      imageFile: formData.imageFile,
+      description: formData.description,
+      category: formData.category.value,
+    };
+
     await axios.patch(
       `/posts/update/${id}`,
-      formData,
+      data,
       getAuthorizationHeaders()
     );
 

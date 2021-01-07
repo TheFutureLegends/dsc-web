@@ -17,7 +17,7 @@ import { getSubString } from "../../utilities/index.js";
 
 const PostCard__ = ({ post, avatar, ...props }) => {
   return (
-    <Card style={{ width: "100%" }}>
+    <Card style={{ width: "100%", backgroundColor: "#f5f6fa" }}>
       <CardHeader style={{ marginBottom: "10px" }}>
         <Author
           src={post.author.avatar}

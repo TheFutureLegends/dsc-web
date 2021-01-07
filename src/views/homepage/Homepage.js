@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getLatestPostWithPagination } from "../../core/redux/actions/post.action.js";
 
@@ -68,16 +68,28 @@ const Homepage = ({ ...props }) => {
       clearTimeout(timer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFetching, isLoading, hasNextPage, timerCount, itemPerPage, page]);
+  }, [
+    isFetching,
+    isLoading,
+    hasNextPage,
+    timerCount,
+    itemPerPage,
+    page,
+    timer,
+  ]);
 
   return (
-    <React.Fragment>
-      {timerCount === 3000 && <GridLoader height={1000} {...props} />}
+    <Fragment>
+      {timerCount === 3000 ? (
+        <GridLoader height={1000} {...props} />
+      ) : (
+        <HomepageContainer {...props} />
+      )}
 
-      <HomepageContainer {...props} />
-
-      {hasNextPage && isFetching && <GridLoader height={1000} {...props} />}
-    </React.Fragment>
+      {timerCount !== 3000 && hasNextPage && isFetching && (
+        <GridLoader height={1000} {...props} />
+      )}
+    </Fragment>
   );
   // return <HomepageContainer {...props} />;
 };
