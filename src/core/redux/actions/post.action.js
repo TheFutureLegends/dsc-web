@@ -219,19 +219,19 @@ export const deletePost = (item, history) => async (dispatch) => {
 
   dispatch({ type: DELETE_POST, payload: item });
 
-  // try {
-  //   await axios.delete("/posts/delete/" + item._id, getAuthorizationHeaders());
+  try {
+    await axios.delete("/posts/delete/" + item._id, getAuthorizationHeaders());
 
-  //   let res = await axios.get(`/posts/read`, getAuthorizationHeaders());
+    let res = await axios.get(`/posts/read`, getAuthorizationHeaders());
 
-  //   dispatch({ type: SET_LIST_OF_POST, payload: res.data.posts });
+    dispatch({ type: SET_LIST_OF_POST, payload: res.data.posts });
 
-  //   dispatch({ type: STOP_LOADING_POST });
+    dispatch({ type: STOP_LOADING_DATA });
 
-  //   history.push("/control-panel/post-list");
-  // } catch (error) {
-  //   console.log(error);
-  // }
+    history.push("/control-panel/post-list");
+  } catch (error) {
+    console.log(error);
+  }
 
   dispatch({ type: STOP_LOADING_DATA });
 };

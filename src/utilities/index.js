@@ -114,3 +114,7 @@ export const mergeArrays = (...combinedArrays) => {
 
   return finalArray;
 };
+
+export const filterArrays = (initalArray, item) => {
+  return initalArray.filter((data) => data._id !== item._id);
+};

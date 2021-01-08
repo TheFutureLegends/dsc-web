@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { connect } from "react-redux";
 import classNames from "classnames";
 import { Button } from "reactstrap";
 // react component used to create sweet alerts
@@ -40,6 +41,8 @@ const createTableHeader = (tableHeader) => {
 };
 
 const PostListTable__ = ({ data, tableHeader, ...props }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const [alert, setAlert] = useState(null);
 
   // eslint-disable-next-line no-unused-vars
@@ -83,32 +86,33 @@ const PostListTable__ = ({ data, tableHeader, ...props }) => {
     });
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const [rows, setRows] = useState(mapData(props.postList));
+  const setDataRows = () => {
+    if (isLoading) {
+      setRows(mapData(data));
 
-  const handleDelete = (value) => {
-    let newArray = rows.filter((item) => item._id !== value._id);
+      setIsLoading(false);
+    }
+  };
 
-    console.log("Post List Table Container NewArray: ", newArray);
+  const [rows, setRows] = useState([]);
 
-    setRows(newArray);
+  const handleDelete = (item) => {
+    props.deletePost(item, props.history);
 
-    props.deletePost(value);
-
-    console.log("Post List Table Container after delete: ", rows);
+    setIsLoading(true);
   };
 
   const hideAlert = () => {
     setAlert(null);
   };
 
-  const warningWithConfirmAndCancelMessage = (data) => {
+  const warningWithConfirmAndCancelMessage = (item) => {
     setAlert(
       <ReactBSAlert
         warning
         style={{ display: "block", marginTop: "-100px" }}
         title="Are you sure?"
-        onConfirm={() => successDelete(data)}
+        onConfirm={() => successDelete(item)}
         onCancel={() => cancelDetele()}
         confirmBtnBsStyle="success animation-on-hover"
         cancelBtnBsStyle="danger animation-on-hover"
@@ -122,16 +126,14 @@ const PostListTable__ = ({ data, tableHeader, ...props }) => {
     );
   };
 
-  const successDelete = (data) => {
+  const successDelete = (item) => {
     setAlert(
       <ReactBSAlert
         success
         style={{ display: "block", marginTop: "-100px" }}
         title="Deleted!"
         onConfirm={() => {
-          handleDelete(data);
-
-          props.deletePost(data, props.history);
+          handleDelete(item);
 
           hideAlert();
         }}
@@ -163,13 +165,16 @@ const PostListTable__ = ({ data, tableHeader, ...props }) => {
 
   // to stop the warning of calling setState of unmounted component
   useEffect(() => {
+    setDataRows();
+
     return function cleanup() {
       var id = window.setTimeout(null, 0);
       while (id--) {
         window.clearTimeout(id);
       }
     };
-  }, [rows]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rows, isLoading]);
 
   return (
     <Fragment>
@@ -187,5 +192,10 @@ const PostListTable__ = ({ data, tableHeader, ...props }) => {
   );
 };
 
-export default PostListTable__;
-// export default connect(mapStateToProps, null)(DataTableContainer__);
+const mapStateToProps = (state) => ({
+  postList: state.post.postList,
+  loading: state.ui.loading,
+});
+
+// export default PostListTable__;
+export default connect(mapStateToProps, null)(PostListTable__);

@@ -20,6 +20,7 @@ const PostList = ({ ...props }) => {
 
   useEffect(() => {
     fetchPostsDataTable();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   return (

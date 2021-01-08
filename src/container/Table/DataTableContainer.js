@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Card, CardBody, Row, Col } from "reactstrap";
 import PostListTable from "./PostList/PostListTable.js";
 import TableLoader from "../../components/ContentLoader/Table/TableLoader.js";
-import { isEmptyArray } from "../../utilities/index.js";
 
 const DataTableContainer__ = ({
   data,
@@ -17,7 +16,7 @@ const DataTableContainer__ = ({
 
   const [timerCount, setTimerCount] = useState(3000);
 
-  if (!props.loading && timerCount === 3000 && !isEmptyArray(data)) {
+  if (!props.loading && timerCount === 3000) {
     timer = setTimeout(() => {
       setTimerCount(0);
     }, 3000);

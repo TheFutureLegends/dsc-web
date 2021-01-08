@@ -8,7 +8,7 @@ import {
   DELETE_POST,
 } from "../types/post.types";
 
-import { mergeArrays } from "../../../utilities/index.js";
+import { mergeArrays, filterArrays } from "../../../utilities/index.js";
 
 let initialState = {
   postsWithPagination: {},
@@ -26,7 +26,6 @@ export function PostReducer(state = initialState, action) {
         ...state,
         postsWithPagination: action.payload,
       };
-
     case SET_POSTS_TO_DISPLAY:
       return {
         ...state,
@@ -57,20 +56,9 @@ export function PostReducer(state = initialState, action) {
       };
 
     case DELETE_POST:
-      console.log(
-        "Post reducer Delete post before delete: (PostList) -> ",
-        state.postList
-      );
-
-      let newArray = state.postList.filter(
-        (item) => item._id !== action.payload._id
-      );
-
-      console.log("Post reducer Delete post: (NewArray) -> ", newArray);
-
       return {
         ...state,
-        postList: newArray,
+        postList: filterArrays(state.postList, action.payload),
       };
     default:
       return state;

@@ -10,6 +10,22 @@ import useInfiniteScroll from "../../hooks/useInfiniteScroll.js";
 const Homepage = ({ ...props }) => {
   let timer;
 
+  const fetchMoreListItems = () => {
+    if (page <= props.postsWithPagination.totalPages) {
+      setTimeout(() => {
+        props.getLatestPostWithPagination(true, false, itemPerPage, page);
+
+        setIsFetching(false);
+      }, 2000);
+
+      setPage(page + 1);
+    } else {
+      setTimeout(() => {
+        setHasNextPage(false);
+      }, 2000);
+    }
+  };
+
   const [page, setPage] = useState(1);
 
   // eslint-disable-next-line no-unused-vars
@@ -38,22 +54,6 @@ const Homepage = ({ ...props }) => {
       setIsLoading(false);
     }
   };
-
-  function fetchMoreListItems() {
-    if (page <= props.postsWithPagination.totalPages) {
-      setTimeout(() => {
-        props.getLatestPostWithPagination(true, false, itemPerPage, page);
-
-        setIsFetching(false);
-      }, 2000);
-
-      setPage(page + 1);
-    } else {
-      setTimeout(() => {
-        setHasNextPage(false);
-      }, 2000);
-    }
-  }
 
   if (!props.loading && timerCount === 3000) {
     timer = setTimeout(() => {
