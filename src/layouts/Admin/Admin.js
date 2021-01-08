@@ -19,7 +19,7 @@ import { logoutUser } from "../../core/redux/actions/user.action.js";
 import routes from "../../routes.js";
 import { protectedRoutes } from "../../routes.js";
 
-import logo from "../../assets/img/react-logo.png";
+import logo from "../../assets/img/logo.jpg";
 
 var ps;
 
@@ -192,7 +192,7 @@ const AdminLayout__ = (props) => {
         activeColor={activeColor}
         logo={{
           outterLink: "/",
-          text: "Demo Website",
+          text: "RMIT Developer Club",
           imgSrc: logo,
         }}
         closeSidebar={closeSidebar}
