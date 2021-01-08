@@ -9,7 +9,7 @@ import MainBlogSection from "./MainBlogSection.js";
 const HomepageContainer__ = (props) => {
   return (
     <Col md="12">
-      <MainBlogSection posts={props.postsToDisplay} {...props} />
+      <MainBlogSection posts={props.postsToDisplay[0]} {...props} />
     </Col>
   );
 };

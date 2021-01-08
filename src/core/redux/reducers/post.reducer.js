@@ -1,6 +1,4 @@
 import {
-  LOADING_POST,
-  STOP_LOADING_POST,
   SET_POSTS_WITH_PAGINATION,
   SET_POSTS_TO_DISPLAY,
   SET_POST_DETAIL,
@@ -13,10 +11,8 @@ import {
 import { mergeArrays } from "../../../utilities/index.js";
 
 let initialState = {
-  loading: true,
   postsWithPagination: {},
   postsToDisplay: [],
-  posts: [],
   postDetail: {},
   morePostsWithSameCategory: [],
   post: {},
@@ -25,16 +21,6 @@ let initialState = {
 
 export function PostReducer(state = initialState, action) {
   switch (action.type) {
-    case LOADING_POST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case STOP_LOADING_POST:
-      return {
-        ...state,
-        loading: false,
-      };
     case SET_POSTS_WITH_PAGINATION:
       return {
         ...state,
@@ -69,16 +55,22 @@ export function PostReducer(state = initialState, action) {
         ...state,
         post: action.payload,
       };
+
     case DELETE_POST:
-      const item = action.payload;
+      console.log(
+        "Post reducer Delete post before delete: (PostList) -> ",
+        state.postList
+      );
 
-      const newList = state.postList.filter((i) => i._id !== item._id);
+      let newArray = state.postList.filter(
+        (item) => item._id !== action.payload._id
+      );
 
-      console.log("Reducer list: ", newList);
+      console.log("Post reducer Delete post: (NewArray) -> ", newArray);
 
       return {
         ...state,
-        postList: newList,
+        postList: newArray,
       };
     default:
       return state;

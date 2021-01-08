@@ -22,7 +22,7 @@ import { logoutUser } from "../../core/redux/actions/user.action.js";
 import routes from "../../routes.js";
 import { protectedRoutes } from "../../routes.js";
 
-import logo from "../../assets/img/react-logo.png";
+import logo from "../../assets/img/logo.jpg";
 
 // Alan AI import
 import useAlan from "../../hooks/alanAI.js";
@@ -185,7 +185,7 @@ const GeneralLayout__ = (props) => {
     document.documentElement.classList.remove("nav-open");
   };
 
-  // useAlan();
+  useAlan();
 
   return (
     <div className="wrapper">
@@ -208,7 +208,7 @@ const GeneralLayout__ = (props) => {
         activeColor={activeColor}
         logo={{
           outterLink: "/",
-          text: "Demo Website",
+          text: "RMIT Developer Club",
           imgSrc: logo,
         }}
         closeSidebar={closeSidebar}

@@ -39,7 +39,7 @@ const PostDetail = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.post.loading,
+  loading: state.ui.loading,
   postDetail: state.post.postDetail,
   morePostsWithSameCategory: state.post.morePostsWithSameCategory,
 });

@@ -80,11 +80,37 @@ export const convertSlugToString = (slug) => {
   // return capitalizeFirstLetter(slug.toLowerCase().replace(regex, " "));
 };
 
-export const mergeArrays = (...arrays) => {
-  let jointArray = [];
+export const mergeArrays = (...combinedArrays) => {
+  const finalArray = combinedArrays.reduce(
+    (prev, cur, index, array) => {
+      // This is the value that we'll return at the end of each reduce iteration
+      let toReturn;
 
-  arrays.forEach((array) => {
-    jointArray = [...jointArray, ...array];
-  });
-  return [...new Set([...jointArray])];
+      // Get a reference to the last item in the PREV array
+      const lastObj = prev[prev.length - 1];
+
+      // if the IDs are different, concat the cur obj into the prev array
+      if (lastObj._id !== cur._id) {
+        toReturn = prev.concat(cur);
+      }
+
+      // if the IDS are same
+      // store the most recent in the PREV array
+      else if (lastObj._id === cur._id) {
+        prev.splice(prev.length - 1, 1, cur);
+
+        toReturn = prev;
+      }
+
+      // otherwise just return the previous value
+      else {
+        toReturn = prev;
+      }
+
+      return toReturn;
+    },
+    [combinedArrays[0]]
+  );
+
+  return finalArray;
 };

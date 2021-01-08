@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import DataTableContainer from "../../container/Table/index.js";
+import DataTableContainer from "../../container/Table/DataTableContainer.js";
 import {
   getPostListDataTable,
   getPostForEditing,
@@ -8,11 +8,19 @@ import {
 } from "../../core/redux/actions/post.action.js";
 
 const PostList = ({ ...props }) => {
-  useEffect(() => {
-    if (props.loading) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchPostsDataTable = () => {
+    if (isLoading) {
       props.getPostListDataTable();
+
+      setIsLoading(false);
     }
-  });
+  };
+
+  useEffect(() => {
+    fetchPostsDataTable();
+  }, [isLoading]);
 
   return (
     <DataTableContainer
@@ -27,7 +35,7 @@ const PostList = ({ ...props }) => {
 
 const mapStateToProps = (state) => ({
   postList: state.post.postList,
-  loading: state.post.loading,
+  loading: state.ui.loading,
 });
 
 const mapDispatchToProps = {

@@ -95,7 +95,7 @@ const Homepage = ({ ...props }) => {
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.post.loading,
+  loading: state.ui.loading,
   postsWithPagination: state.post.postsWithPagination,
   postsToDisplay: state.post.postsToDisplay,
   categoryList: state.category.categoryList,
