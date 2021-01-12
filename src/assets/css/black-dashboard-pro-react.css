@@ -22065,7 +22065,7 @@ Copyright (c) 2015 Daniel Eden
     display: none !important; } }
 
 .white-content {
-  background: #f5f6fa; }
+  background: #ffffff; }
   .white-content .navbar.navbar-transparent .navbar-brand {
     color: #1d253b; }
   .white-content .navbar.navbar-transparent .navbar-toggler-bar {
@@ -22087,7 +22087,7 @@ Copyright (c) 2015 Daniel Eden
     .white-content .sidebar p {
       color: rgba(255, 255, 255, 0.8); }
   .white-content .main-panel {
-    background: #f5f6fa; }
+    background: #ffffff; }
   .white-content h1, .white-content h2, .white-content h3, .white-content h4, .white-content h5, .white-content h6, .white-content p, .white-content ol li, .white-content ul li, .white-content pre {
     color: #1d253b; }
   .white-content .font-icon-detail i {
@@ -22193,9 +22193,9 @@ Copyright (c) 2015 Daniel Eden
   .white-content .btn-group .btn.active {
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); }
   .white-content .bootstrap-switch.bootstrap-switch-off .bootstrap-switch-label {
-    background: #d3d7e9; }
+    background: #e6e6e6; }
   .white-content .bootstrap-switch-off:before {
-    background: rgba(211, 215, 233, 0.5); }
+    background: rgba(230, 230, 230, 0.5); }
   .white-content .card:not(.card-white).card-pricing, .white-content .card:not(.card-white).card-login, .white-content .card:not(.card-white).card-register {
     background: #27293d; }
   .white-content .card:not(.card-white).card-login .form-control::-moz-placeholder, .white-content .card:not(.card-white).card-register .form-control::-moz-placeholder {
@@ -22367,7 +22367,7 @@ Copyright (c) 2015 Daniel Eden
     padding: 2px;
     color: #344675; }
   .white-content .fc-unthemed .fc-today {
-    background: #d3d7e9; }
+    background: #e6e6e6; }
   .white-content .fc-unthemed .fc-content, .white-content .fc-unthemed .fc-divider, .white-content .fc-unthemed .fc-list-heading td, .white-content .fc-unthemed .fc-list-view, .white-content .fc-unthemed .fc-popover, .white-content .fc-unthemed .fc-row, .white-content .fc-unthemed tbody, .white-content .fc-unthemed td, .white-content .fc-unthemed th, .white-content .fc-unthemed thead {
     border-color: #9499a7; }
   .white-content .fc-prev-button, .white-content .fc-next-button {
@@ -22377,7 +22377,7 @@ Copyright (c) 2015 Daniel Eden
   .white-content .fc button.btn-primary:not([data-action]):hover, .white-content .fc button:not([data-action]):hover {
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); }
   .white-content .full-page {
-    background: #f5f6fa; }
+    background: #ffffff; }
     .white-content .full-page h1, .white-content .full-page h2, .white-content .full-page h3, .white-content .full-page h4, .white-content .full-page h5, .white-content .full-page h6, .white-content .full-page p, .white-content .full-page ol li, .white-content .full-page ul li, .white-content .full-page pre {
       color: #1d253b; }
     .white-content .full-page .description {
@@ -22387,7 +22387,7 @@ Copyright (c) 2015 Daniel Eden
     .white-content .full-page .footer .copyright {
       color: #1d253b; }
   .white-content .nav-pills .nav-item .nav-link:not(.active) {
-    background: #d3d7e9;
+    background: #e6e6e6;
     color: #1d253b; }
     .white-content .nav-pills .nav-item .nav-link:not(.active):hover {
       background: #cccccc; }
@@ -27486,7 +27486,7 @@ This file was modified entirely by Creative Tim for React-Select v2.0.0
   background-color: rgba(0, 0, 0, 0.05); }
 
 .white-content .rbc-today {
-  background: #d3d7e9; }
+  background: #e6e6e6; }
 
 .white-content .rbc-day-bg + .rbc-day-bg,
 .white-content .rbc-month-row,

@@ -131,12 +131,12 @@ const IsUserAuthenticated__ = ({ user, ...props }) => {
         </>
       ) : (
         <>
-          <NavLink href="/auth/login">
+          <NavLink href="/login">
             <Button className="btn-default animation-on-hover" color="success">
               Login
             </Button>
           </NavLink>
-          <NavLink href="/auth/register">
+          <NavLink href="/register">
             <Button className="btn-default animation-on-hover" color="success">
               Register
             </Button>

@@ -1,6 +1,5 @@
 import request from "request";
 import cheerio from "cheerio";
-import axios from "axios";
 
 let uri = "https://www.w3schools.com/";
 

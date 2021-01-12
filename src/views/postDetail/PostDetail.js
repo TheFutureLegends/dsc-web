@@ -28,6 +28,7 @@ const PostDetail = (props) => {
   useEffect(() => {
     fetchPost(slug);
     return () => {};
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, slug]);
 
   return (
@@ -38,7 +39,7 @@ const PostDetail = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  loading: state.post.loading,
+  loading: state.ui.loading,
   postDetail: state.post.postDetail,
   morePostsWithSameCategory: state.post.morePostsWithSameCategory,
 });

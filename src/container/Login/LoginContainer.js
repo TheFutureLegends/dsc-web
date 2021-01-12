@@ -94,9 +94,9 @@ const LoginContainer__ = ({ ...props }) => {
   });
 
   return (
-    <Col md="9">
+    <Col md="12">
       <Container>
-        <Col className="ml-auto mr-auto" lg="6" md="6">
+        <Col className="ml-auto mr-auto mt-0.5" lg="4" md="4">
           <Form className="form">
             <Card className="card-login card-white">
               <CardHeader className="mb-5">

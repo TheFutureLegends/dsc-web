@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import FormContainer from "../../container/Form/index.js";
+import FormContainer from "../../container/Form/FormContainer.js";
 import {
   // getPostListDataTable,
   createNewPost,
@@ -12,9 +12,21 @@ import { isEmptyObject, isStringIncludesWord } from "../../utilities/index.js";
 const PostForm = ({ ...props }) => {
   let defaultTitle = "Post Create Form";
 
+  let categoryOptions = [];
+
+  props.categoryList.forEach((value, index) => {
+    categoryOptions.push({
+      value: value.slug,
+      label: value.title,
+    });
+  });
+
   let initialFormData = {
     title: "",
-    category: "",
+    category: {
+      value: "",
+      label: "",
+    },
     imageFile: "",
     description: "",
   };
@@ -35,24 +47,24 @@ const PostForm = ({ ...props }) => {
     initialFormData = {
       id: props.post._id,
       title: props.post.title,
-      category: props.post.category.slug,
+      category: {
+        value: props.post.category.slug,
+        label: props.post.category.title,
+      },
       imageFile: props.post.image,
       description: props.post.description,
     };
   }
 
-  // console.log(initialFormData);
-
   useEffect(() => {
-    //     if (props.loading) {
-    //       props.getPostListDataTable();
-    //     }
-  });
+    return () => {};
+  }, []);
 
   return (
     <FormContainer
       data={initialFormData}
       state={initialFormState}
+      categoryOptions={categoryOptions}
       pageTitle={defaultTitle}
       formType={"post"}
       {...props}

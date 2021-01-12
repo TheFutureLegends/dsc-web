@@ -19,12 +19,13 @@ import { logoutUser } from "../../core/redux/actions/user.action.js";
 import routes from "../../routes.js";
 import { protectedRoutes } from "../../routes.js";
 
-import logo from "../../assets/img/react-logo.png";
+import logo from "../../assets/img/logo.jpg";
 
 var ps;
 
 const AdminLayout__ = (props) => {
   const [activeColor, setActiveColor] = useState("blue");
+  // eslint-disable-next-line no-unused-vars
   const [sidebarMini, setSidebarMini] = useState(true);
   const [opacity, setOpacity] = useState(0);
   const [sidebarOpened, setSidebarOpened] = useState(false);
@@ -45,7 +46,7 @@ const AdminLayout__ = (props) => {
     // }
 
     if (!props.user.authenticated) {
-      return <Redirect to="/auth/login" />;
+      return <Redirect to="/login" />;
     }
 
     let innerMainPanelRef = mainPanelRef;
@@ -74,7 +75,7 @@ const AdminLayout__ = (props) => {
       }
       window.removeEventListener("scroll", showNavbarButton);
     };
-  }, []);
+  }, [props.user.authenticated]);
   const showNavbarButton = () => {
     if (
       document.documentElement.scrollTop > 50 ||
@@ -99,6 +100,7 @@ const AdminLayout__ = (props) => {
       if (prop.layout === "/control-panel") {
         return (
           <Route
+            exact
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
@@ -110,7 +112,9 @@ const AdminLayout__ = (props) => {
     });
   };
 
+  // eslint-disable-next-line
   const getBrandText = () => {
+    // eslint-disable-next-line
     let pathName = window.location.pathname;
   };
 
@@ -134,9 +138,11 @@ const AdminLayout__ = (props) => {
     }
     return activeRoute;
   };
+  // eslint-disable-next-line
   const handleActiveClick = (color) => {
     setActiveColor(color);
   };
+
   const handleMiniClick = () => {
     let notifyMessage = "Sidebar mini ";
     if (document.body.classList.contains("sidebar-mini")) {
@@ -186,7 +192,7 @@ const AdminLayout__ = (props) => {
         activeColor={activeColor}
         logo={{
           outterLink: "/",
-          text: "Demo Website",
+          text: "RMIT Developer Club",
           imgSrc: logo,
         }}
         closeSidebar={closeSidebar}
@@ -201,13 +207,10 @@ const AdminLayout__ = (props) => {
         />
         {props.user.authenticated ? (
           <div className="content">
-            <Switch>
-              {getRoutes(protectedRoutes)}
-              {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
-            </Switch>
+            <Switch>{getRoutes(protectedRoutes)}</Switch>
           </div>
         ) : (
-          <Redirect to="/auth/login" />
+          <Redirect to="/login" />
         )}
 
         {

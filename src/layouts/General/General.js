@@ -1,10 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  Route,
-  Switch,
-  // Redirect,
-  useLocation,
-} from "react-router-dom";
+import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
@@ -15,7 +10,7 @@ import NotificationAlert from "react-notification-alert";
 import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
 import Footer from "../../components/Footer/Footer.js";
 import Sidebar from "../../components/Sidebar/Sidebar.js";
-import SidebarRight from "../../components/Sidebar_Right/Sidebar_Right.js";
+// import SidebarRight from "../../components/Sidebar_Right/Sidebar_Right.js";
 import { Row } from "reactstrap";
 // import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 // import { IsContentLightMode } from "../../logic/fixedPlugin.js";
@@ -27,7 +22,7 @@ import { logoutUser } from "../../core/redux/actions/user.action.js";
 import routes from "../../routes.js";
 import { protectedRoutes } from "../../routes.js";
 
-import logo from "../../assets/img/react-logo.png";
+import logo from "../../assets/img/logo.jpg";
 
 // Alan AI import
 import useAlan from "../../hooks/alanAI.js";
@@ -36,6 +31,7 @@ var ps;
 
 const GeneralLayout__ = (props) => {
   const [activeColor, setActiveColor] = useState("blue");
+  // eslint-disable-next-line no-unused-vars
   const [sidebarMini, setSidebarMini] = useState(IsSidebarMini());
   const [opacity, setOpacity] = useState(0);
   const [sidebarOpened, setSidebarOpened] = useState(false);
@@ -111,6 +107,13 @@ const GeneralLayout__ = (props) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
+
+      if (location.pathname === "/login" || location.pathname === "/register") {
+        if (props.user.authenticated) {
+          return <Redirect to="/" key={key} />;
+        }
+      }
+
       if (prop.layout === "") {
         return (
           <Route
@@ -146,6 +149,7 @@ const GeneralLayout__ = (props) => {
     return activeRoute;
   };
 
+  // eslint-disable-next-line no-unused-vars
   const handleActiveClick = (color) => {
     setActiveColor(color);
   };
@@ -204,7 +208,7 @@ const GeneralLayout__ = (props) => {
         activeColor={activeColor}
         logo={{
           outterLink: "/",
-          text: "Demo Website",
+          text: "RMIT Developer Club",
           imgSrc: logo,
         }}
         closeSidebar={closeSidebar}
@@ -219,11 +223,8 @@ const GeneralLayout__ = (props) => {
         />
         <div className="content">
           <Row>
-            <Switch>
-              {getRoutes(routes)}
-              {/* <Redirect from="/control-panel" to="/control-panel/dashboard" /> */}
-            </Switch>
-            <SidebarRight></SidebarRight>
+            <Switch>{getRoutes(routes)}</Switch>
+            {/* <SidebarRight></SidebarRight> */}
           </Row>
         </div>
 

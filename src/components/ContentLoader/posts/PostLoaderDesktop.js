@@ -1,6 +1,6 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
-import { Row, Col } from "reactstrap";
+// import { Row, Col } from "reactstrap";
 import random from "../../../utilities/random.js";
 
 const PostLoaderDesktop__ = ({

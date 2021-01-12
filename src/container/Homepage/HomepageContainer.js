@@ -5,19 +5,18 @@ import { connect } from "react-redux";
 import { Col } from "reactstrap";
 
 import MainBlogSection from "./MainBlogSection.js";
-import GridLoader from "../../components/ContentLoader/Grid/GridLoader.js";
 
 const HomepageContainer__ = (props) => {
   return (
-    <Col md="9">
-      <MainBlogSection posts={props.posts} {...props} />
-      {/* <GridLoader {...props} /> */}
+    <Col md="12">
+      <MainBlogSection posts={props.postsToDisplay[0]} {...props} />
     </Col>
   );
 };
 
 const mapStateToProps = (state) => ({
-  posts: state.post.posts,
+  postsWithPagination: state.post.postsWithPagination,
+  postsToDisplay: state.post.postsToDisplay,
 });
 
 export default connect(mapStateToProps, null)(HomepageContainer__);

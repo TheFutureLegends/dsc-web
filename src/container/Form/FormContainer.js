@@ -39,7 +39,7 @@ import {
   verifyEditorContentLength,
 } from "../../validations/index.js";
 
-import PostFormContainer from "./PostForm/PostForm.js";
+import PostFormContainer from "./PostForm/PostFormContainer.js";
 
 let form;
 
@@ -139,7 +139,7 @@ const FormContainer__ = ({ data, state, pageTitle, formType, ...props }) => {
        * Category validation
        */
       case "category":
-        if (verifyLength(event.target.value, 5)) {
+        if (verifyLength(event.value, 5)) {
           stateFunctions["set" + stateName + "State"]("has-success");
         } else {
           stateFunctions["set" + stateName + "State"]("has-danger");
@@ -165,7 +165,9 @@ const FormContainer__ = ({ data, state, pageTitle, formType, ...props }) => {
       case "description":
         stateFunctions["set" + stateName](event);
         break;
-
+      case "category":
+        stateFunctions["set" + stateName](event);
+        break;
       default:
         stateFunctions["set" + stateName](event.target.value);
         break;
@@ -220,6 +222,7 @@ const FormContainer__ = ({ data, state, pageTitle, formType, ...props }) => {
     return () => {
       // handleEnableButton();
     };
+    // eslint-disable-next-line
   }, [
     formData,
     formState,
@@ -311,7 +314,7 @@ const FormContainer__ = ({ data, state, pageTitle, formType, ...props }) => {
                           avatarSize={40}
                           fontSize={"20px"}
                           author={props.user.credential.username}
-                          category={convertSlugToString(formData.category)}
+                          category={convertSlugToString(formData.category.label)}
                         />
                       </Col>
                     </Row>

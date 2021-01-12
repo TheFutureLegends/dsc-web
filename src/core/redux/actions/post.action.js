@@ -1,13 +1,14 @@
 import {
+  SET_POSTS_WITH_PAGINATION,
+  SET_POSTS_TO_DISPLAY,
   SET_POST_DETAIL,
   SET_MORE_POSTS,
-  SET_POSTS,
   SET_LIST_OF_POST,
-  LOADING_POST,
-  STOP_LOADING_POST,
   SET_EDIT_POST,
   DELETE_POST,
 } from "../types/post.types";
+
+import { LOADING_DATA, STOP_LOADING_DATA } from "../types/ui.types.js";
 import axios from "axios";
 // react component used to create sweet alerts
 import Swal from "sweetalert2";
@@ -17,21 +18,23 @@ import { getAuthorizationHeaders } from "../../../variables/api.js";
 export const getLatestPostWithPagination = (latest, asc, limit, page) => async (
   dispatch
 ) => {
-  dispatch({ type: LOADING_POST });
+  dispatch({ type: LOADING_DATA });
   try {
     let res = await axios.get(
       `/posts?latest=${latest}&asc=${asc}&limit=${limit}&page=${page}`
     );
 
-    dispatch({ type: SET_POSTS, payload: res.data.posts });
+    dispatch({ type: SET_POSTS_WITH_PAGINATION, payload: res.data });
+
+    dispatch({ type: SET_POSTS_TO_DISPLAY });
   } catch (error) {
     console.log(error);
   }
-  dispatch({ type: STOP_LOADING_POST });
+  dispatch({ type: STOP_LOADING_DATA });
 };
 
 export const getPostDetail = (slug) => async (dispatch) => {
-  dispatch({ type: LOADING_POST });
+  dispatch({ type: LOADING_DATA });
   try {
     let res = await axios.get(`/posts/${slug}`);
 
@@ -39,11 +42,13 @@ export const getPostDetail = (slug) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
-  dispatch({ type: STOP_LOADING_POST });
+  dispatch({ type: STOP_LOADING_DATA });
 };
 
-export const getMorePostsWithSameCategory = (postId, category) => async (dispatch) => {
-  dispatch({ type: LOADING_POST });
+export const getMorePostsWithSameCategory = (postId, category) => async (
+  dispatch
+) => {
+  dispatch({ type: LOADING_DATA });
   try {
     let res = await axios.get(
       `/posts/${postId}/getMorePostsWithSameCategory/${category}`
@@ -53,10 +58,12 @@ export const getMorePostsWithSameCategory = (postId, category) => async (dispatc
   } catch (error) {
     console.log(error);
   }
-  dispatch({ type: STOP_LOADING_POST });
+  dispatch({ type: STOP_LOADING_DATA });
 };
 
 export const getPostListDataTable = () => async (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+
   try {
     let res = await axios.get(`/posts/read`, getAuthorizationHeaders());
 
@@ -65,7 +72,7 @@ export const getPostListDataTable = () => async (dispatch) => {
     console.log(error);
   }
 
-  dispatch({ type: STOP_LOADING_POST });
+  dispatch({ type: STOP_LOADING_DATA });
 };
 
 /**
@@ -84,7 +91,7 @@ export const getPostForEditing = (id, history) => async (dispatch) => {
     },
   });
 
-  dispatch({ type: LOADING_POST });
+  dispatch({ type: LOADING_DATA });
 
   try {
     let res = await axios.get(`/posts/edit/${id}`, getAuthorizationHeaders());
@@ -100,7 +107,7 @@ export const getPostForEditing = (id, history) => async (dispatch) => {
     console.log(error);
   }
 
-  dispatch({ type: STOP_LOADING_POST });
+  dispatch({ type: STOP_LOADING_DATA });
 };
 
 export const createNewPost = (formData, history) => async (dispatch) => {
@@ -114,7 +121,14 @@ export const createNewPost = (formData, history) => async (dispatch) => {
   });
 
   try {
-    await axios.post("/posts/create", formData, getAuthorizationHeaders());
+    let data = {
+      title: formData.title,
+      imageFile: formData.imageFile,
+      description: formData.description,
+      category: formData.category.value,
+    };
+
+    await axios.post("/posts/create", data, getAuthorizationHeaders());
 
     let res = await axios.get(`/posts/read`, getAuthorizationHeaders());
 
@@ -160,11 +174,14 @@ export const updatePost = (id, formData, history) => async (dispatch) => {
   });
 
   try {
-    await axios.patch(
-      `/posts/update/${id}`,
-      formData,
-      getAuthorizationHeaders()
-    );
+    let data = {
+      title: formData.title,
+      imageFile: formData.imageFile,
+      description: formData.description,
+      category: formData.category.value,
+    };
+
+    await axios.patch(`/posts/update/${id}`, data, getAuthorizationHeaders());
 
     let res = await axios.get(`/posts/read`, getAuthorizationHeaders());
 
@@ -198,7 +215,7 @@ export const updatePost = (id, formData, history) => async (dispatch) => {
 };
 
 export const deletePost = (item, history) => async (dispatch) => {
-  dispatch({ type: LOADING_POST });
+  dispatch({ type: LOADING_DATA });
 
   dispatch({ type: DELETE_POST, payload: item });
 
@@ -209,12 +226,12 @@ export const deletePost = (item, history) => async (dispatch) => {
 
     dispatch({ type: SET_LIST_OF_POST, payload: res.data.posts });
 
-    dispatch({ type: STOP_LOADING_POST });
+    dispatch({ type: STOP_LOADING_DATA });
 
     history.push("/control-panel/post-list");
   } catch (error) {
     console.log(error);
   }
 
-  dispatch({ type: STOP_LOADING_POST });
+  dispatch({ type: STOP_LOADING_DATA });
 };

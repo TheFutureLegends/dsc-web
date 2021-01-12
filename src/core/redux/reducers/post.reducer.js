@@ -1,17 +1,18 @@
 import {
-  LOADING_POST,
-  STOP_LOADING_POST,
+  SET_POSTS_WITH_PAGINATION,
+  SET_POSTS_TO_DISPLAY,
   SET_POST_DETAIL,
   SET_MORE_POSTS,
-  SET_POSTS,
   SET_LIST_OF_POST,
   SET_EDIT_POST,
   DELETE_POST,
 } from "../types/post.types";
 
-const initialState = {
-  loading: true,
-  posts: [],
+import { mergeArrays, filterArrays } from "../../../utilities/index.js";
+
+let initialState = {
+  postsWithPagination: {},
+  postsToDisplay: [],
   postDetail: {},
   morePostsWithSameCategory: [],
   post: {},
@@ -20,20 +21,18 @@ const initialState = {
 
 export function PostReducer(state = initialState, action) {
   switch (action.type) {
-    case LOADING_POST:
+    case SET_POSTS_WITH_PAGINATION:
       return {
         ...state,
-        loading: true,
+        postsWithPagination: action.payload,
       };
-    case STOP_LOADING_POST:
+    case SET_POSTS_TO_DISPLAY:
       return {
         ...state,
-        loading: false,
-      };
-    case SET_POSTS:
-      return {
-        ...state,
-        posts: action.payload,
+        postsToDisplay: mergeArrays(
+          state.postsToDisplay,
+          state.postsWithPagination.posts
+        ),
       };
     case SET_POST_DETAIL:
       return {
@@ -55,16 +54,11 @@ export function PostReducer(state = initialState, action) {
         ...state,
         post: action.payload,
       };
+
     case DELETE_POST:
-      const item = action.payload;
-
-      const newList = state.postList.filter((i) => i._id !== item._id);
-
-      console.log("Reducer list: ", newList);
-
       return {
         ...state,
-        postList: newList,
+        postList: filterArrays(state.postList, action.payload),
       };
     default:
       return state;

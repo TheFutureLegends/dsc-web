@@ -1,13 +1,10 @@
 import axios from "axios";
 import { cookies, authorizationCookieName } from "./cookie.js";
 
-let apiDomain = "";
-
-if (process.env.NODE_ENV === "production") {
-  apiDomain = "https://developer-club-api.herokuapp.com/api";
-} else {
-  apiDomain = "http://localhost:5000/api";
-}
+let apiDomain =
+  process.env.NODE_ENV === "production"
+    ? "https://developer-club-api.herokuapp.com/api"
+    : "http://localhost:5000/api";
 
 axios.defaults.baseURL = apiDomain;
 

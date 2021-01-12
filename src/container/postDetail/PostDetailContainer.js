@@ -17,14 +17,13 @@ const PostDetailContainer__ = ({ ...props }) => {
   const [count, setCount] = useState(3000);
 
   const handleReadMore = (slug) => {
-    console.log(props);
-    // props.getPostDetail(slug);
+    props.getPostDetail(slug);
 
-    // setIsLoading(true);
+    setIsLoading(true);
 
     setCount(3000);
 
-    // props.history.push(`/post/${slug}`);
+    props.history.push(`/post/${slug}`);
   };
 
   if (!props.loading && count === 3000 && !isEmptyObject(props.postDetail)) {
@@ -43,7 +42,7 @@ const PostDetailContainer__ = ({ ...props }) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [count, isLoading]);
+  }, [count, isLoading, timer]);
   return (
     <>
       {count === 3000 ? (
