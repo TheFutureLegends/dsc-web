@@ -2,7 +2,7 @@ const request = require('request');
 const cheerio = require('cheerio');
 
 let allLinkScraper = {
-    scape: () => {
+    scrape: () => {
         let proxyurl = "https://cors-anywhere.herokuapp.com/"
         let url = 'https://www.w3schools.com/'
         request(proxyurl + url, (error, response, data) => {
