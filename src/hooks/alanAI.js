@@ -77,7 +77,17 @@ export default function useAlan(){
             window.removeEventListener(INTENTS.CSS, showCssInfo)
             window.removeEventListener(INTENTS.SHOW_LINK, showAllLinks)
         }
-    },[showNumberOfTutorial, showJavaInfo, showPhpInfo, showPythonInfo, showJavascriptInfo,showRInfo, showHtmlInfo, showCssInfo, showAllLinks])
+    },[
+        showNumberOfTutorial,
+        showJavaInfo,
+        showPhpInfo,
+        showPythonInfo,
+        showJavascriptInfo,
+        showRInfo,
+        showHtmlInfo,
+        showCssInfo,
+        showAllLinks
+    ])
 
     // Connect this website with Alan AI by the key
     useEffect(() => {
