@@ -1,96 +1,97 @@
-import { useEffect, useState, useCallback } from "react";
-import alanBtn from "@alan-ai/alan-sdk-web";
-import resultList from "./w3school_scrape/scrape.js";
-
-const COMMANDS = {
-  SHOW_NUMBER_OF_TUTORIAL: "show-number-of-tutorial",
-  SHOW_JAVA: "show-Java",
-  SHOW_PHP: "show-Php",
-  SHOW_PYTHON: "show-Python",
-  SHOW_JAVASCRIPT: "show-Js",
-  BEST_AI_LANGUAGE: "best-ai-language",
-};
+import {useEffect, useState, useCallback} from 'react'
+import alanBtn from "@alan-ai/alan-sdk-web"
+import programmingLanguageScraper from "./w3school_scrape/prorammingLanguageTutorialScrape.js";
+import allLinkScraper from "./w3school_scrape/allLinkScraper";
+import oneLinkScraper from "./w3school_scrape/oneLinkScraper";
+import { INTENTS } from './intents'
 
 // Use asynchronous to make the bot says before the alert popup
-let botSays = (answer) => {
-  setTimeout(() => {
-    alert(answer);
-  }, 2000);
-};
-let key =
-  "16719338d8e08c6aff8745f74935071f2e956eca572e1d8b807a3e2338fdd0dc/stage";
+let key = '16719338d8e08c6aff8745f74935071f2e956eca572e1d8b807a3e2338fdd0dc/stage'
+export default function useAlan(){
+    const [alanInstance, setAlanInstance] = useState()
 
-export default function useAlan() {
-  const [alanInstance, setAlanInstance] = useState();
+    // Give the answers
+    const showAllLinks = useCallback(() => {
+        alanInstance.playText("Links are")
+        allLinkScraper.scape()
+    }, [alanInstance])
+    const showNumberOfTutorial = useCallback(() => {
+        alanInstance.playText("These are number of tutorial that I know")
+        programmingLanguageScraper.scape()
+    }, [alanInstance])
+    const showJavaInfo = useCallback(() => {
+        alanInstance.playText(" If you want to learn more about Java please follow the link ")
+        oneLinkScraper.scapeWithKeyWord(INTENTS.JAVA)
+    }, [alanInstance])
 
-  // Give the answers
-  const showNumberOfTutorial = useCallback(() => {
-    alanInstance.playText("I know " + resultList.length + "best tutorials");
-    botSays("This is my answer :" + resultList.length);
-  }, [alanInstance]);
-  const showJavaInfo = useCallback(() => {
-    alanInstance.playText(
-      "Java is a popular programming language, created in 1995 " +
-        "This is the object oriented programming language" +
-        "If you want to learn more about Java please follow the link https://www.w3schools.com/Java/java_intro.asp "
-    );
-    botSays(
-      "This is my answer : https://www.w3schools.com/Java/java_intro.asp"
-    );
-  }, [alanInstance]);
+    const showPhpInfo = useCallback(() => {
+        alanInstance.playText("If you want to learn more about PHP please follow the link")
+        oneLinkScraper.scapeWithKeyWord(INTENTS.PHP)
+    }, [alanInstance])
 
-  const showPhpInfo = useCallback(() => {
-    alanInstance.playText(
-      "PHP is a server scripting language, and a powerful tool for making dynamic and interactive Web pages." +
-        "PHP is an acronym for Hypertext Preprocessor" +
-        "If you want to learn more about PHP please follow the link https://www.w3schools.com/Php/php_intro.asp "
-    );
-    botSays("This is my answer : https://www.w3schools.com/Php/php_intro.asp");
-  }, [alanInstance]);
+    const showPythonInfo = useCallback(() => {
+        alanInstance.playText("If you want to learn more about Python please follow the link")
+        oneLinkScraper.scapeWithKeyWord(INTENTS.PYTHON)
+    }, [alanInstance])
 
-  const showPythonInfo = useCallback(() => {
-    alanInstance.playText(
-      "Python is a popular programming language. It was created by Guido van Rossum, and released in 1991" +
-        "It is used for web development server side , software development , mathematics ,and system scripting " +
-        "If you want to learn more about Python please follow the link https://www.w3schools.com/Python/python_intro.asp "
-    );
-    botSays(
-      "This is my answer : https://www.w3schools.com/Python/python_intro.asp"
-    );
-  }, [alanInstance]);
+    const showJavascriptInfo = useCallback(() => {
+        alanInstance.playText("If you want to learn more about Python please follow the link")
+        oneLinkScraper.scapeWithKeyWord(INTENTS.JAVASCRIPT)
+    }, [alanInstance])
 
-  // Add event Listener. For each commands, each answers will be given
-  useEffect(() => {
-    window.addEventListener(
-      COMMANDS.SHOW_NUMBER_OF_TUTORIAL,
-      showNumberOfTutorial
-    );
-    window.addEventListener(COMMANDS.SHOW_JAVA, showJavaInfo);
-    window.addEventListener(COMMANDS.SHOW_PHP, showPhpInfo);
-    window.addEventListener(COMMANDS.SHOW_PYTHON, showPythonInfo);
-    return () => {
-      window.removeEventListener(
-        COMMANDS.SHOW_NUMBER_OF_TUTORIAL,
-        showNumberOfTutorial
-      );
-      window.removeEventListener(COMMANDS.SHOW_JAVA, showJavaInfo);
-      window.removeEventListener(COMMANDS.SHOW_PHP, showPhpInfo);
-      window.removeEventListener(COMMANDS.SHOW_PYTHON, showPythonInfo);
-    };
-  }, [showNumberOfTutorial, showJavaInfo, showPhpInfo, showPythonInfo]);
+    const showRInfo = useCallback(() => {
+        alanInstance.playText("If you want to learn more about Python please follow the link")
+        oneLinkScraper.scapeWithKeyWord(INTENTS.R)
+    }, [alanInstance])
 
-  // Connect this website with Alan AI by the key
-  useEffect(() => {
-    if (alanInstance != null) return;
-    setAlanInstance(
-      alanBtn({
-        key: key, // get the key to access Alan AI
-        onCommand: ({ command }) => {
-          window.dispatchEvent(new CustomEvent(command));
-          console.log(command);
-        },
-      })
-    );
-  }, [alanInstance]);
-  return null;
+    const showHtmlInfo = useCallback(() => {
+        alanInstance.playText("If you want to learn more about Python please follow the link")
+        oneLinkScraper.scapeWithKeyWord(INTENTS.HTML)
+    }, [alanInstance])
+
+    const showCssInfo = useCallback(() => {
+        alanInstance.playText("If you want to learn more about Python please follow the link")
+        oneLinkScraper.scapeWithKeyWord(INTENTS.CSS)
+    }, [alanInstance])
+
+    // Add event Listener. For each commands, each answers will be given
+
+    useEffect(() => {
+        window.addEventListener(INTENTS.SHOW_NUMBER_OF_TUTORIAL, showNumberOfTutorial)
+        window.addEventListener(INTENTS.JAVA, showJavaInfo)
+        window.addEventListener(INTENTS.PHP, showPhpInfo)
+        window.addEventListener(INTENTS.PYTHON, showPythonInfo)
+        window.addEventListener(INTENTS.JAVASCRIPT, showJavascriptInfo)
+        window.addEventListener(INTENTS.R, showRInfo)
+        window.addEventListener(INTENTS.HTML, showHtmlInfo)
+        window.addEventListener(INTENTS.CSS, showCssInfo)
+        window.addEventListener(INTENTS.SHOW_LINK, showAllLinks)
+        return () => {
+            window.removeEventListener(INTENTS.SHOW_NUMBER_OF_TUTORIAL, showNumberOfTutorial)
+            window.removeEventListener(INTENTS.JAVA, showJavaInfo)
+            window.removeEventListener(INTENTS.PHP, showPhpInfo)
+            window.removeEventListener(INTENTS.PYTHON, showPythonInfo)
+            window.removeEventListener(INTENTS.JAVASCRIPT, showJavascriptInfo)
+            window.removeEventListener(INTENTS.R, showRInfo)
+            window.removeEventListener(INTENTS.HTML, showHtmlInfo)
+            window.removeEventListener(INTENTS.CSS, showCssInfo)
+            window.removeEventListener(INTENTS.SHOW_LINK, showAllLinks)
+        }
+    },[showNumberOfTutorial, showJavaInfo, showPhpInfo, showPythonInfo, showJavascriptInfo,showRInfo, showHtmlInfo, showCssInfo, showAllLinks])
+
+    // Connect this website with Alan AI by the key
+    useEffect(() => {
+        if (alanInstance != null ) return
+        setAlanInstance(
+            alanBtn({
+                key: key, // get the key to access Alan AI
+                onCommand: ({command}) => {
+                    window.dispatchEvent(new CustomEvent(command))
+                    console.log(command)
+                }
+            })
+        )
+
+    },[])
+    return null
 }
