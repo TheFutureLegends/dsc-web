@@ -4,12 +4,15 @@ import programmingLanguageScraper from "./w3school_scrape/prorammingLanguageTuto
 import allLinkScraper from "./w3school_scrape/allLinkScraper";
 import oneLinkScraper from "./w3school_scrape/oneLinkScraper";
 import { INTENTS } from "./intents";
+import { useToastify } from "../providers/TutorialNotificationProvider.js";
 
 // Use asynchronous to make the bot says before the alert popup
 let key =
   "16719338d8e08c6aff8745f74935071f2e956eca572e1d8b807a3e2338fdd0dc/stage";
 export default function useAlan() {
   const [alanInstance, setAlanInstance] = useState();
+
+  const { notification, setIsLoading } = useToastify();
 
   // Give the answers
   const showAllLinks = useCallback(() => {
@@ -18,8 +21,13 @@ export default function useAlan() {
   }, [alanInstance]);
   const showNumberOfTutorial = useCallback(() => {
     alanInstance.playText("These are number of tutorial that I know");
+
+    setIsLoading(true);
+
+    notification();
+
     programmingLanguageScraper.scrape();
-  }, [alanInstance]);
+  }, [alanInstance, notification, setIsLoading]);
   const showJavaInfo = useCallback(() => {
     alanInstance.playText(
       " If you want to learn more about Java please follow the link "

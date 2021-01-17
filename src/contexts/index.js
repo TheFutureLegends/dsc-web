@@ -9,3 +9,5 @@ export const MenuContext = createContext();
 export const ModalContext = createContext();
 
 export const UtilityContext = createContext();
+
+export const TutorialNotificationContext = createContext();
