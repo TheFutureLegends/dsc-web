@@ -16,8 +16,7 @@ import { logoutUser, getAuthUserData } from "./core/redux/actions/user.action";
 import { getPostListDataTable } from "./core/redux/actions/post.action";
 import { getAllCategories } from "./core/redux/actions/category.action";
 
-// import { getNumberOfTutorial } from "./core/redux/actions/bot.action";
-
+import { TutorialNotificationProvider } from "./providers/TutorialNotificationProvider.js";
 
 // Styling
 import "./assets/css/nucleo-icons.css";
@@ -38,7 +37,9 @@ store.dispatch(getAllCategories());
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <TutorialNotificationProvider>
+      <App />
+    </TutorialNotificationProvider>
   </Provider>,
   document.getElementById("root")
 );

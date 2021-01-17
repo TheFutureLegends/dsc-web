@@ -30,7 +30,7 @@ let programmingLanguageTutorialScraper = {
         }
         numberOfTutorial = resultList.length;
 
-        botSays("Number of tutorial that I know:" + numberOfTutorial);
+        // botSays("Number of tutorial that I know:" + numberOfTutorial);
       }
     });
   },
