@@ -18,6 +18,7 @@ export default function useAlan() {
   }, [alanInstance]);
   const showNumberOfTutorial = useCallback(() => {
     alanInstance.playText("These are number of tutorial that I know");
+
     programmingLanguageScraper.scrape();
   }, [alanInstance]);
   const showJavaInfo = useCallback(() => {

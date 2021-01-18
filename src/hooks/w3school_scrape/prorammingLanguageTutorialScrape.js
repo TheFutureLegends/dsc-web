@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const request = require("request");
 const cheerio = require("cheerio");
 
@@ -30,7 +32,12 @@ let programmingLanguageTutorialScraper = {
         }
         numberOfTutorial = resultList.length;
 
-        botSays("Number of tutorial that I know:" + numberOfTutorial);
+        toast.success(
+          "Number of programming language that I know:" + numberOfTutorial,
+          {
+            position: toast.POSITION.BOTTOM_RIGHT,
+          }
+        );
       }
     });
   },

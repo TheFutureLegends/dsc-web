@@ -21751,6 +21751,9 @@ Copyright (c) 2015 Daniel Eden
   left: 0;
   top: 0; }
 
+.Toastify__toast-container--bottom-right {
+  margin-bottom: 100px; }
+
 .login-page .card-login {
   border-radius: 0.4285rem;
   padding-bottom: 0.7rem; }
