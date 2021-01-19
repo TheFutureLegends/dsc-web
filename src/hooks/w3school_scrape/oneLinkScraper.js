@@ -6,12 +6,12 @@ const request = require("request");
 const cheerio = require("cheerio");
 
 let botSays = (title, answer) => {
-  const customHTMLLink = (url) => {
-    return `<a href="${url}">${title}</a>`;
+  const customHTMLLink = () => {
+    return `Click <a href="${url}" target="_blank">here</a> to redirect to ${title} resource.`;
   };
 
   setTimeout(() => {
-    toast.success(title + ": " + customHTMLLink(answer), {
+    toast.success(title + ": " + customHTMLLink(), {
       toastId: "one-link-scrapper",
     });
   });
