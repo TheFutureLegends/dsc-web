@@ -6,7 +6,7 @@ const cheerio = require("cheerio");
 
 let botSays = (title, answer) => {
   const customHTMLLink = (url) => {
-    return `<a href=${url}>${title}</a>`;
+    return `<a href="${url}">${title}</a>`;
   };
 
   setTimeout(() => {
