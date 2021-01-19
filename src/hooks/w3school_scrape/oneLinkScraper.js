@@ -1,6 +1,7 @@
-import request from "request";
-import cheerio from "cheerio";
 import { success } from "../../components/Toastify/Toastify.js";
+
+const request = require("request");
+const cheerio = require("cheerio");
 
 const Msg = ({ title, url }) => (
   <div>
@@ -19,9 +20,7 @@ const Msg = ({ title, url }) => (
 );
 
 let botSays = (title, url) => {
-  setTimeout(() => {
-    success(<Msg title={title} url={url} />);
-  });
+  success(<Msg title={title} url={url} />);
 };
 
 let oneLinkScraper = {

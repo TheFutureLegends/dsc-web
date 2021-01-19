@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 // Use asynchronous to make the bot says before the alert popup
 let key =
   "16719338d8e08c6aff8745f74935071f2e956eca572e1d8b807a3e2338fdd0dc/stage";
-  
+
 export default function useAlan() {
   const [alanInstance, setAlanInstance] = useState();
   // Give the basic answers:
@@ -53,7 +53,9 @@ export default function useAlan() {
     allLinkScraper.scrape();
   }, [alanInstance]);
   const showNumberOfTutorial = useCallback(() => {
-    alanInstance.playText("These are number of tutorial that I know");
+    alanInstance.playText(
+      "These are number of programming languages that I know"
+    );
     programmingLanguageScraper.scrape();
   }, [alanInstance]);
   const showJavaInfo = useCallback(() => {

@@ -27,7 +27,7 @@ let programmingLanguageTutorialScraper = {
         numberOfTutorial = resultList.length;
 
         toast.success(
-          "Number of programming language that I know:" + numberOfTutorial,
+          "Number of programming languages that I know:" + numberOfTutorial,
           {
             position: toast.POSITION.BOTTOM_RIGHT,
           }
