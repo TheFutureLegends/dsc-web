@@ -140,7 +140,7 @@ const AdminNavbar__ = ({ ...props }) => {
           </button>
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="ml-auto" navbar>
-              <InputGroup className="search-bar" tag="li">
+              {/* <InputGroup className="search-bar" tag="li">
                 <Button
                   color="link"
                   data-target="#searchModal"
@@ -151,7 +151,7 @@ const AdminNavbar__ = ({ ...props }) => {
                   <i className="tim-icons icon-zoom-split" />
                   <span className="d-lg-none d-md-block">Search</span>
                 </Button>
-              </InputGroup>
+              </InputGroup> */}
               <IsUserAuthenticated
                 user={props.user}
                 logout={handleLogout}
@@ -162,7 +162,7 @@ const AdminNavbar__ = ({ ...props }) => {
           </Collapse>
         </Container>
       </Navbar>
-      <Modal
+      {/* <Modal
         modalClassName="modal-search"
         isOpen={modalSearch}
         toggle={toggleModalSearch}
@@ -179,7 +179,7 @@ const AdminNavbar__ = ({ ...props }) => {
             <i className="tim-icons icon-simple-remove" />
           </button>
         </div>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

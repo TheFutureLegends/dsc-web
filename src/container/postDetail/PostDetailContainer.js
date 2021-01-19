@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Row, Col } from "reactstrap";
 import PostLoaderDesktop from "../../components/ContentLoader/posts/PostLoaderDesktop.js";
@@ -44,7 +44,7 @@ const PostDetailContainer__ = ({ ...props }) => {
     };
   }, [count, isLoading, timer]);
   return (
-    <>
+    <Fragment>
       {count === 3000 ? (
         <PostLoaderDesktop></PostLoaderDesktop>
       ) : (
@@ -52,7 +52,7 @@ const PostDetailContainer__ = ({ ...props }) => {
           {isEmptyObject(data) ? (
             <Redirect to="/" />
           ) : (
-            <>
+            <Fragment>
               <Row className="justify-content-center text-center">
                 <h1>{data.title}</h1>
               </Row>
@@ -108,11 +108,11 @@ const PostDetailContainer__ = ({ ...props }) => {
                   </Col>
                 ))}
               </Row>
-            </>
+            </Fragment>
           )}
         </>
       )}
-    </>
+    </Fragment>
   );
 };
 

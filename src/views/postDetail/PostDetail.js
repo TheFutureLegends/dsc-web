@@ -32,7 +32,7 @@ const PostDetail = (props) => {
   }, [isLoading, slug]);
 
   return (
-    <Col md="9">
+    <Col md="12">
       <PostDetailContainer data={props.postDetail} {...props} />
     </Col>
   );

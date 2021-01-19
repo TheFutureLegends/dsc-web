@@ -181,7 +181,6 @@ const Sidebar = (props) => {
         <a
           href={logo.outterLink}
           className="simple-text logo-mini"
-          target="_blank"
           onClick={props.closeSidebar}
         >
           <div className="logo-img">
