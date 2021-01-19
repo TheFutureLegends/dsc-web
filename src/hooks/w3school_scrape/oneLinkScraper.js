@@ -15,6 +15,7 @@ let botSays = (answer) => {
     });
   });
 };
+
 let oneLinkScraper = {
   scrapeWithKeyWord: (keyword) => {
     let proxyurl = "https://cors-anywhere.herokuapp.com/";
