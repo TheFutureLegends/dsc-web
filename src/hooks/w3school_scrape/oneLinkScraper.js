@@ -18,8 +18,6 @@ const Msg = ({ title, url }) => (
   </div>
 );
 
-export const RenderLinkToResource = ({ title, url, ...props }) => <div></div>;
-
 let botSays = (title, url) => {
   setTimeout(() => {
     success(<Msg title={title} url={url} />);
