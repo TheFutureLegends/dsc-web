@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   return (
     <Fragment>
-      <ToastContainer autoClose = {20000}/>
+      <ToastContainer autoClose={20000} closeOnClick={false} />
       <BrowserRouter>
         <Switch>
           {/* <Route path="/auth" render={(props) => <AuthLayout {...props} />} />

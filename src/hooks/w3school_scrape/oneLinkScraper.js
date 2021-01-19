@@ -5,12 +5,12 @@ const request = require("request");
 const cheerio = require("cheerio");
 
 let botSays = (answer) => {
-  const customHTMLLink = () => {
-    return;
+  const customHTMLLink = (url) => {
+    return `<a href=${url}>${url}</a>`;
   };
 
   setTimeout(() => {
-    toast.success(answer, {
+    toast.success(customHTMLLink(answer), {
       toastId: "one-link-scrapper",
     });
   });
