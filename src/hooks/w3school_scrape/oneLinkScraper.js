@@ -12,12 +12,9 @@ const customHTMLLink = (title, url) => (
 );
 
 const RenderLinkToResource = ({ title, url }) => (
-  <Fragment>
-    {title}:
-    <div>
-      Click <Link to={url}>here</Link> to open {title} resource.
-    </div>
-  </Fragment>
+  <div>
+    {title}: Click <Link to={url}>here</Link> to open {title} resource.
+  </div>
 );
 
 let botSays = (title, url) => {
