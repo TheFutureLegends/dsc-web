@@ -1,5 +1,4 @@
 import { success } from "../../components/Toastify/Toastify.js";
-
 const request = require("request");
 const cheerio = require("cheerio");
 
@@ -18,11 +17,9 @@ const Msg = ({ title, url }) => (
     to open {title} resource
   </div>
 );
-
 let botSays = (title, url) => {
   success(<Msg title={title} url={url} />);
 };
-
 let allLinkScraper = {
   scrape: () => {
     let proxyurl = "https://cors-anywhere.herokuapp.com/";
