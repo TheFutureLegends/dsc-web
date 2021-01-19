@@ -17,9 +17,11 @@ const Msg = ({ title, url }) => (
     to open {title} resource
   </div>
 );
+
 let botSays = (title, url) => {
   success(<Msg title={title} url={url} />);
 };
+
 let allLinkScraper = {
   scrape: () => {
     let proxyurl = "https://cors-anywhere.herokuapp.com/";
