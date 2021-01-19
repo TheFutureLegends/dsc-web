@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, Link } from "react";
 import { toast } from "react-toastify";
 
 const request = require("request");
@@ -7,7 +7,12 @@ const cheerio = require("cheerio");
 
 let botSays = (title, url) => {
   const customHTMLLink = (title, url) => {
-    return `Click <a href="${url}" target="_blank">here</a> to open ${title} resource.`;
+    return (
+      <div>
+        Click <Link to={url}>here</Link> to open {title} resource.
+      </div>
+    );
+    // return `Click <a href="${url}" target="_blank">here</a> to open ${title} resource.`;
   };
 
   setTimeout(() => {
@@ -26,10 +31,7 @@ let oneLinkScraper = {
       let links = webContent("a"); //jquery get all hyperlinks
       webContent(links).each((index, link) => {
         if (webContent(link).text().toLowerCase() === keyword.toLowerCase()) {
-          botSays(
-            webContent(link).text(),
-            url + webContent(link).attr("href")
-          );
+          botSays(webContent(link).text(), url + webContent(link).attr("href"));
         }
       });
     });
