@@ -1,4 +1,4 @@
-import { Link } from "react";
+import { Fragment, Link } from "react";
 import { toast } from "react-toastify";
 
 const request = require("request");
@@ -11,9 +11,18 @@ const customHTMLLink = (title, url) => (
   </div>
 );
 
+const RenderLinkToResource = ({ title, url }) => (
+  <Fragment>
+    {title}:
+    <div>
+      Click <Link to={url}>here</Link> to open {title} resource.
+    </div>
+  </Fragment>
+);
+
 let botSays = (title, url) => {
   setTimeout(() => {
-    toast.success(title + ": " + customHTMLLink(title, url), {
+    toast.success(<RenderLinkToResource title={title} url={url} />, {
       toastId: "one-link-scrapper",
     });
   });
