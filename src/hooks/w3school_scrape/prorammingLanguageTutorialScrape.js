@@ -3,12 +3,6 @@ import { toast } from "react-toastify";
 const request = require("request");
 const cheerio = require("cheerio");
 
-let botSays = (answer) => {
-  setTimeout(() => {
-    window.alert(answer);
-  }, 3000);
-};
-
 let programmingLanguageTutorialScraper = {
   scrape: function homeScraper() {
     let proxyurl = "https://cors-anywhere.herokuapp.com/";

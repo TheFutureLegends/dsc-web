@@ -1,10 +1,19 @@
+import { Fragment } from "react";
+import { toast } from "react-toastify";
+
 const request = require("request");
 const cheerio = require("cheerio");
 
 let botSays = (answer) => {
+  const customHTMLLink = () => {
+    return;
+  };
+
   setTimeout(() => {
-    window.alert(answer);
-  }, 3000);
+    toast.success(answer, {
+      toastId: "one-link-scrapper",
+    });
+  });
 };
 let oneLinkScraper = {
   scrapeWithKeyWord: (keyword) => {

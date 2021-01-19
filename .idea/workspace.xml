@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f50d3986-b96b-4dc8-9346-7074beb47fc4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/variables/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/variables/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/w3school_scrape/allLinkScraper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/w3school_scrape/allLinkScraper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/w3school_scrape/oneLinkScraper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/w3school_scrape/oneLinkScraper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/w3school_scrape/prorammingLanguageTutorialScrape.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/w3school_scrape/prorammingLanguageTutorialScrape.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

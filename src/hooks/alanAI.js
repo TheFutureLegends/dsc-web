@@ -3,22 +3,56 @@ import alanBtn from "@alan-ai/alan-sdk-web";
 import programmingLanguageScraper from "./w3school_scrape/prorammingLanguageTutorialScrape.js";
 import allLinkScraper from "./w3school_scrape/allLinkScraper";
 import oneLinkScraper from "./w3school_scrape/oneLinkScraper";
-import { INTENTS } from "./intents";
+import { INTENTS } from "./intents.js";
+import unityLinkScraper from "./coursera/unityLinkScraper.js";
+import dataScienceBeginnerLinkScraper from "./coursera/dataScienceBeginnerLinkScraper";
+import { toast } from "react-toastify";
 
 // Use asynchronous to make the bot says before the alert popup
 let key =
   "16719338d8e08c6aff8745f74935071f2e956eca572e1d8b807a3e2338fdd0dc/stage";
 export default function useAlan() {
   const [alanInstance, setAlanInstance] = useState();
+  // Give the basic answers:
+  const answerWaiting = useCallback(() => {
+    alanInstance.playText(
+      "I am waiting for your question about learning programming"
+    );
+    toast.success("You can ask me about programming");
+  }, [alanInstance]);
+  const answerHowToHelp = useCallback(() => {
+    alanInstance.playText(
+      "I am your assistant, I can answer questions realted to programming. For other topics, I cannot"
+    );
+    toast.success("I can answer questions related to programming skills");
+  }, [alanInstance]);
+  const answerBotVsGoogle = useCallback(() => {
+    alanInstance.playText(
+      "Google is the search Engine, just lists out every link related to your questions. I will give you the best answer only"
+    );
+    toast.error("Google: Too many link");
+    toast.success("Owl bot: The best answer only");
+  }, [alanInstance]);
 
-  // Give the answers
+  // Give the advanced answers
+  const showDataScienceBeginner = useCallback(() => {
+    alanInstance.playText(
+      "You can start with Data Science by following this link"
+    );
+    dataScienceBeginnerLinkScraper.scrape();
+  }, [alanInstance]);
+  const showUnityEngine = useCallback(() => {
+    alanInstance.playText(
+      "You can start with Unity Engine by following this link"
+    );
+    unityLinkScraper.scrape();
+  }, [alanInstance]);
   const showAllLinks = useCallback(() => {
     alanInstance.playText("Links are");
     allLinkScraper.scrape();
   }, [alanInstance]);
   const showNumberOfTutorial = useCallback(() => {
     alanInstance.playText("These are number of tutorial that I know");
-
     programmingLanguageScraper.scrape();
   }, [alanInstance]);
   const showJavaInfo = useCallback(() => {
@@ -73,6 +107,14 @@ export default function useAlan() {
   // Add event Listener. For each commands, each answers will be given
 
   useEffect(() => {
+    window.addEventListener(INTENTS.HOW_TO_HELP, answerHowToHelp);
+    window.addEventListener(INTENTS.BOT_VS_GOOGLE, answerBotVsGoogle);
+    window.addEventListener(INTENTS.WAITING, answerWaiting);
+    window.addEventListener(
+      INTENTS.DATA_SCIENCE_BEGINNER,
+      showDataScienceBeginner
+    );
+    window.addEventListener(INTENTS.SHOW_UNITY_ENGINE, showUnityEngine);
     window.addEventListener(
       INTENTS.SHOW_NUMBER_OF_TUTORIAL,
       showNumberOfTutorial
@@ -86,6 +128,14 @@ export default function useAlan() {
     window.addEventListener(INTENTS.CSS, showCssInfo);
     window.addEventListener(INTENTS.SHOW_LINK, showAllLinks);
     return () => {
+      window.removeEventListener(INTENTS.HOW_TO_HELP, answerHowToHelp);
+      window.removeEventListener(INTENTS.BOT_VS_GOOGLE, answerBotVsGoogle);
+      window.removeEventListener(INTENTS.WAITING, answerWaiting);
+      window.removeEventListener(
+        INTENTS.DATA_SCIENCE_BEGINNER,
+        showDataScienceBeginner
+      );
+      window.removeEventListener(INTENTS.SHOW_UNITY_ENGINE, showUnityEngine);
       window.removeEventListener(
         INTENTS.SHOW_NUMBER_OF_TUTORIAL,
         showNumberOfTutorial
@@ -100,6 +150,9 @@ export default function useAlan() {
       window.removeEventListener(INTENTS.SHOW_LINK, showAllLinks);
     };
   }, [
+    answerHowToHelp,
+    answerBotVsGoogle,
+    answerWaiting,
     showNumberOfTutorial,
     showJavaInfo,
     showPhpInfo,
@@ -109,6 +162,8 @@ export default function useAlan() {
     showHtmlInfo,
     showCssInfo,
     showAllLinks,
+    showUnityEngine,
+    showDataScienceBeginner,
   ]);
 
   // Connect this website with Alan AI by the key

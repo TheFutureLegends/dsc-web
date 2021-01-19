@@ -6,13 +6,13 @@ import AdminLayout from "./layouts/Admin/Admin.js";
 import GeneralLayout from "./layouts/General/General.js";
 // import AuthLayout from "./layouts/Auth/Auth.js";
 // import RTLLayout from "layouts/RTL/RTL.js";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
     <Fragment>
-      <ToastContainer />
+      <ToastContainer autoClose = {20000}/>
       <BrowserRouter>
         <Switch>
           {/* <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
