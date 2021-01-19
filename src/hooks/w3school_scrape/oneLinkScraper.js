@@ -5,13 +5,13 @@ const request = require("request");
 
 const cheerio = require("cheerio");
 
-let botSays = (title, answer) => {
-  const customHTMLLink = () => {
+let botSays = (title, url) => {
+  const customHTMLLink = (title, url) => {
     return `Click <a href="${url}" target="_blank">here</a> to open ${title} resource.`;
   };
 
   setTimeout(() => {
-    toast.success(title + ": " + customHTMLLink(), {
+    toast.success(title + ": " + customHTMLLink(title, url), {
       toastId: "one-link-scrapper",
     });
   });
