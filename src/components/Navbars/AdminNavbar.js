@@ -11,14 +11,14 @@ import {
   // DropdownMenu,
   // DropdownItem,
   // UncontrolledDropdown,
-  Input,
-  InputGroup,
+  // Input,
+  // InputGroup,
   // NavbarBrand,
   Navbar,
   // NavLink,
   Nav,
   Container,
-  Modal,
+  // Modal,
   UncontrolledTooltip,
 } from "reactstrap";
 
@@ -38,7 +38,7 @@ const AdminNavbar__ = ({ ...props }) => {
 
   const [collapseOpen, setCollapseOpen] = useState(false);
 
-  const [modalSearch, setModalSearch] = useState(false);
+  // const [modalSearch, setModalSearch] = useState(false);
 
   const [color, setColor] = useState("navbar-transparent");
 
@@ -69,9 +69,9 @@ const AdminNavbar__ = ({ ...props }) => {
   };
 
   // this function is to open the Search modal
-  const toggleModalSearch = () => {
-    setModalSearch(!modalSearch);
-  };
+  // const toggleModalSearch = () => {
+  //   setModalSearch(!modalSearch);
+  // };
 
   // this function will log user out
   const handleLogout = () => {

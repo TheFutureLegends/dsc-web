@@ -4,9 +4,6 @@
   "private": true,
   "dependencies": {
     "@alan-ai/alan-sdk-web": "^1.8.10",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "@tinymce/tinymce-react": "^3.8.4",
     "axios": "^0.21.0",
     "bootstrap": "4.5.3",
@@ -17,7 +14,6 @@
     "moment": "2.29.1",
     "node-sass": "4.14.1",
     "node-sass-package-importer": "5.3.2",
-    "nouislider": "14.6.3",
     "perfect-scrollbar": "1.4.0",
     "prop-types": "15.7.2",
     "react": "17.0.1",

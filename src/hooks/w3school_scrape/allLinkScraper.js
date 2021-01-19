@@ -22,7 +22,6 @@ const Msg = ({ title, url }) => (
 let botSays = (title, url) => {
   success(<Msg title={title} url={url} />);
 };
-const customToastId = "all-links-custom-id";
 
 let allLinkScraper = {
   scrape: () => {
