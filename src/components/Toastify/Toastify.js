@@ -9,13 +9,21 @@ const error = (message) =>
     toastId: "custom-error-toast-id",
   });
 
-const success = (message) =>
-  toast(message, {
-    type: "success",
-    className: "custom-success-toast",
-    toastId: "custom-success-toast-id",
-  });
-
+const success = (message, unique = false) => {
+  if (unique) {
+    toast(message, {
+      type: "success",
+      className: "custom-success-toast",
+      toastId: "custom-success-toast-id",
+    });
+  } else {
+    toast(message, {
+      type: "success",
+      className: "custom-success-toast",
+    });
+  }
+}
+  
 const info = (message) =>
   toast(message, {
     type: "info",
