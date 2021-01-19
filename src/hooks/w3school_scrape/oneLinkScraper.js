@@ -7,7 +7,7 @@ const cheerio = require("cheerio");
 
 let botSays = (title, answer) => {
   const customHTMLLink = () => {
-    return `Click <a href="${url}" target="_blank">here</a> to redirect to ${title} resource.`;
+    return `Click <a href="${url}" target="_blank">here</a> to open ${title} resource.`;
   };
 
   setTimeout(() => {
