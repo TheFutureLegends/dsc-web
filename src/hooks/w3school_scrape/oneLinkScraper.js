@@ -1,27 +1,28 @@
-import { Fragment, Link } from "react";
-import { toast } from "react-toastify";
+import request from "request";
+import cheerio from "cheerio";
+import { success } from "../../components/Toastify/Toastify.js";
 
-const request = require("request");
-
-const cheerio = require("cheerio");
-
-const customHTMLLink = (title, url) => (
+const Msg = ({ title, url }) => (
   <div>
-    Click <Link to={url}>here</Link> to open {title} resource.
+    {title}:{"\n"}
+    Click{" "}
+    <a
+      href={url}
+      rel="noreferrer"
+      className="toastify-resource-anchor"
+      target="_blank"
+    >
+      here
+    </a>{" "}
+    to open {title} resource
   </div>
 );
 
-const RenderLinkToResource = ({ title, url }) => (
-  <div>
-    {title}: Click <Link to={url}>here</Link> to open {title} resource.
-  </div>
-);
+export const RenderLinkToResource = ({ title, url, ...props }) => <div></div>;
 
 let botSays = (title, url) => {
   setTimeout(() => {
-    toast.success(<RenderLinkToResource title={title} url={url} />, {
-      toastId: "one-link-scrapper",
-    });
+    success(<Msg title={title} url={url} />);
   });
 };
 

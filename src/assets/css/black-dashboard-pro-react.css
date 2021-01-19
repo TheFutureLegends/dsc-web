@@ -21751,8 +21751,35 @@ Copyright (c) 2015 Daniel Eden
   left: 0;
   top: 0; }
 
+.custom-toast-container {
+  width: 500px; }
+
+.custom-toast-container {
+  width: 500px; }
+
+.Toastify__toast-container--center, .Toastify__toast-container--top-center, .Toastify__toast-container--bottom-center {
+  margin-left: -250px; }
+
 .Toastify__toast-container--bottom-right {
   margin-bottom: 100px; }
+
+.Toastify__toast-container--bottom-right {
+  margin-bottom: 100px; }
+
+.Toastify__toast-body {
+  padding: 10px; }
+
+.custom-toast, .custom-error-toast, .custom-success-toast, .custom-info-toast {
+  min-height: 45px; }
+
+.custom-error-toast {
+  background: #e92d30; }
+
+.custom-success-toast {
+  background: #7fd129; }
+
+.custom-info-toast {
+  background: #0088ce; }
 
 .login-page .card-login {
   border-radius: 0.4285rem;
