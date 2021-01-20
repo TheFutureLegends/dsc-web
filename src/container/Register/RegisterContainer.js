@@ -197,7 +197,7 @@ const RegisterContainer__ = ({ ...props }) => {
                 src={require("../../assets/img/card-primary.png").default}
               />
               <CardTitle tag="h4" className="ml-2">
-                Container__
+                Register
               </CardTitle>
             </CardHeader>
             <CardBody>
