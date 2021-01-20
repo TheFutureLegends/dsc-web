@@ -34,7 +34,7 @@ const info = (message) =>
 const CustomToastContainer = (props) => {
   return (
     <ToastContainer
-      position="top-right"
+      position="bottom-right"
       autoClose={10000}
       newestOnTop
       draggable={false}
